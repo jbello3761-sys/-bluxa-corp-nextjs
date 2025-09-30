@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { api, amountUtils, validation, getErrorMessage, type BookingData, type BookingResponse, type PricingData } from '@/lib/api-corrected'
+import { api, amountUtils, validation, getErrorMessage, type BookingData, type BookingResponse, type PricingData } from '@/lib/api'
 import { useSession } from '@/components/auth/AuthProvider'
 import { SkeletonBookingForm, LoadingButton } from '@/components/LoadingStates'
 

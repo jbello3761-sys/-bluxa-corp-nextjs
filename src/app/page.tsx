@@ -1,15 +1,15 @@
-// BLuxA Corp Homepage - Preserving existing design
+// BLuxA Corp Homepage - Dynamic Image Carousel
+import { DynamicCarousel } from '@/components/DynamicCarousel'
+
 export default function Home() {
   return (
     <div>
-      {/* Hero Section - Preserving existing design */}
-      <section className="hero-gradient min-h-screen flex items-center justify-center relative overflow-hidden">
+      {/* Hero Section with Dynamic Carousel */}
+      <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <DynamicCarousel />
+        
         <div className="absolute inset-0 bg-black bg-opacity-40"></div>
         <div className="relative z-10 text-center text-white px-4 max-w-6xl mx-auto">
-          {/* NYC Indicator - Preserving existing element */}
-          <div className="absolute top-8 right-8 bg-white bg-opacity-20 backdrop-blur-sm rounded-full px-4 py-2">
-            <span className="text-sm font-medium">New York City - The city that never sleeps</span>
-          </div>
           
           <div className="animate-fade-in">
             <h1 className="hero-text mb-6">
