@@ -105,7 +105,7 @@ export function BookingPageClient() {
           <div>
             <h4 className="font-medium text-gray-900 mb-2">✉️ Email Support</h4>
             <p className="text-gray-600 text-sm mb-2">
-              Send us a message and we'll respond within 1 hour.
+              Send us a message and we&apos;ll respond within 1 hour.
             </p>
             <a 
               href="mailto:support@bluxacorp.com" 
