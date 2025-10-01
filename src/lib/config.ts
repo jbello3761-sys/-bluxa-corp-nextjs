@@ -1,12 +1,12 @@
 // Site-wide configuration for BLuxA Corp
 export const config = {
-  apiUrl: process.env.NEXT_PUBLIC_API_URL!,
+  apiUrl: process.env.NEXT_PUBLIC_API_URL || '',
   stripe: {
-    publishableKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
+    publishableKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || '',
   },
   supabase: {
-    url: process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    anonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    url: process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+    anonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '',
   },
   app: {
     env: process.env.NODE_ENV || 'development',

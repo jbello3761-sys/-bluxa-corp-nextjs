@@ -2,10 +2,12 @@ import { createClient } from '@supabase/supabase-js'
 import { config } from './config'
 
 // Create Supabase client for client-side operations
-// Only initialize if we're in the browser and have environment variables
+// Only initialize if we're in the browser and have valid environment variables
 export const supabase = typeof window !== 'undefined' && 
   config.supabase.url && 
-  config.supabase.anonKey 
+  config.supabase.anonKey &&
+  config.supabase.url.length > 0 &&
+  config.supabase.anonKey.length > 0
   ? createClient(
       config.supabase.url,
       config.supabase.anonKey,

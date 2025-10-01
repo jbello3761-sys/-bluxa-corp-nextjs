@@ -4,8 +4,9 @@ import { config } from './config'
 
 // Create Supabase client for server-side operations
 export async function createClient() {
-  // Return null if environment variables are not available
-  if (!config.supabase.url || !config.supabase.anonKey) {
+  // Return null if environment variables are not available or empty
+  if (!config.supabase.url || !config.supabase.anonKey || 
+      config.supabase.url.length === 0 || config.supabase.anonKey.length === 0) {
     return null as any
   }
 
