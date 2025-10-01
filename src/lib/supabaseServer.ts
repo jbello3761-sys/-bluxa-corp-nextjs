@@ -40,6 +40,12 @@ export async function createClient() {
 export async function getSession() {
   try {
     const supabase = await createClient()
+    
+    // Return null if Supabase client is not available
+    if (!supabase) {
+      return null
+    }
+    
     const { data: { session }, error } = await supabase.auth.getSession()
     
     if (error) {
@@ -58,6 +64,12 @@ export async function getSession() {
 export async function getUser() {
   try {
     const supabase = await createClient()
+    
+    // Return null if Supabase client is not available
+    if (!supabase) {
+      return null
+    }
+    
     const { data: { user }, error } = await supabase.auth.getUser()
     
     if (error) {
