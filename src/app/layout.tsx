@@ -29,10 +29,10 @@ function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4">Services</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-300 hover:text-white transition duration-300">Airport Transfer</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition duration-300">Corporate Travel</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition duration-300">Special Events</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition duration-300">Hourly Service</a></li>
+              <li><a href="/book" className="text-gray-300 hover:text-white transition duration-300">Airport Transfer</a></li>
+              <li><a href="/book" className="text-gray-300 hover:text-white transition duration-300">Corporate Travel</a></li>
+              <li><a href="/book" className="text-gray-300 hover:text-white transition duration-300">Special Events</a></li>
+              <li><a href="/book" className="text-gray-300 hover:text-white transition duration-300">Hourly Service</a></li>
             </ul>
           </div>
           <div>

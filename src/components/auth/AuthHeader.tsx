@@ -32,17 +32,14 @@ export function AuthHeader() {
                     <a href="/" className="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition duration-300">
                       Home
                     </a>
-                    <a href="/fleet" className="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition duration-300">
-                      Fleet
+                    <a href="/book" className="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition duration-300">
+                      Book Now
                     </a>
-                    <a href="/services" className="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition duration-300">
-                      Services
+                    <a href="/payment" className="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition duration-300">
+                      Payment
                     </a>
-                    <a href="/pricing" className="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition duration-300">
-                      Pricing
-                    </a>
-                    <a href="/contact" className="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition duration-300">
-                      Contact
+                    <a href="/env-check" className="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition duration-300">
+                      Debug
                     </a>
                   </div>
                 </div>
