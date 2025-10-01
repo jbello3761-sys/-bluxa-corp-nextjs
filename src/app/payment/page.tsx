@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, Suspense } from 'react'
-import { useRouter } from 'next/navigation'
+import { useSearchParams, useRouter } from 'next/navigation'
 import { PaymentForm } from '@/components/payment/PaymentForm'
 import { PaymentSuccess } from '@/components/payment/PaymentSuccess'
 import { PaymentErrorBoundary } from '@/components/ErrorBoundary'
@@ -9,25 +9,27 @@ import { api, type BookingResponse } from '@/lib/api'
 import { type PaymentIntent } from '@/lib/stripe'
 
 function PaymentPageContent() {
+  const searchParams = useSearchParams()
   const router = useRouter()
+  
   const [booking, setBooking] = useState<BookingResponse | null>(null)
   const [paymentIntent, setPaymentIntent] = useState<PaymentIntent | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string>('')
   const [paymentComplete, setPaymentComplete] = useState(false)
 
-  // Get booking ID from URL parameters using useEffect
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search)
-    const bookingId = urlParams.get('booking_id')
-    
-    if (!bookingId) {
-      setError('No booking ID provided')
-      setLoading(false)
-      return
-    }
+  // Get booking ID from URL parameters
+  const bookingId = searchParams.get('booking_id')
 
+  // Load booking data on component mount
+  useEffect(() => {
     const loadBooking = async () => {
+      if (!bookingId) {
+        setError('No booking ID provided')
+        setLoading(false)
+        return
+      }
+
       try {
         const bookingData = await api.getBooking(bookingId)
         setBooking(bookingData)
@@ -40,7 +42,7 @@ function PaymentPageContent() {
     }
 
     loadBooking()
-  }, [])
+  }, [bookingId])
 
   // Handle successful payment
   const handlePaymentSuccess = (intent: PaymentIntent) => {
@@ -218,21 +220,5 @@ function PaymentPageContent() {
 }
 
 export default function PaymentPage() {
-  return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-gray-50 py-12">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="card">
-            <div className="text-center py-8">
-              <div className="loading-spinner mx-auto mb-4"></div>
-              <h2 className="text-xl font-semibold text-gray-900 mb-2">Loading Payment Page</h2>
-              <p className="text-gray-600">Please wait...</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    }>
-      <PaymentPageContent />
-    </Suspense>
-  )
+  return <PaymentPageContent />
 }

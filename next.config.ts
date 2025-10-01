@@ -7,14 +7,6 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  // Temporarily disable static generation for problematic pages
-  experimental: {
-    missingSuspenseWithCSRBailout: false,
-  },
-  // Skip static generation for payment page during build
-  async generateStaticParams() {
-    return []
-  },
 };
 
 export default nextConfig;

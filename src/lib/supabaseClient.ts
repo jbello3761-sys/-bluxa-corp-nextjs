@@ -41,6 +41,9 @@ export interface Session {
 export const auth = {
   // Sign up with email and password
   async signUp(email: string, password: string, metadata?: { full_name?: string }) {
+    if (!supabase) {
+      return { data: null, error: new Error('Supabase not available') }
+    }
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -53,6 +56,9 @@ export const auth = {
 
   // Sign in with email and password
   async signIn(email: string, password: string) {
+    if (!supabase) {
+      return { data: null, error: new Error('Supabase not available') }
+    }
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password
@@ -62,18 +68,27 @@ export const auth = {
 
   // Sign out
   async signOut() {
+    if (!supabase) {
+      return { error: new Error('Supabase not available') }
+    }
     const { error } = await supabase.auth.signOut()
     return { error }
   },
 
   // Get current session
   async getSession() {
+    if (!supabase) {
+      return { session: null, error: new Error('Supabase not available') }
+    }
     const { data: { session }, error } = await supabase.auth.getSession()
     return { session, error }
   },
 
   // Get current user
   async getUser() {
+    if (!supabase) {
+      return { user: null, error: new Error('Supabase not available') }
+    }
     const { data: { user }, error } = await supabase.auth.getUser()
     return { user, error }
   }
