@@ -2,17 +2,22 @@ import { createClient } from '@supabase/supabase-js'
 import { config } from './config'
 
 // Create Supabase client for client-side operations
-export const supabase = createClient(
-  config.supabase.url,
-  config.supabase.anonKey,
-  {
-    auth: {
-      persistSession: true,
-      autoRefreshToken: true,
-      detectSessionInUrl: true
-    }
-  }
-)
+// Only initialize if we're in the browser and have environment variables
+export const supabase = typeof window !== 'undefined' && 
+  config.supabase.url && 
+  config.supabase.anonKey 
+  ? createClient(
+      config.supabase.url,
+      config.supabase.anonKey,
+      {
+        auth: {
+          persistSession: true,
+          autoRefreshToken: true,
+          detectSessionInUrl: true
+        }
+      }
+    )
+  : null as any
 
 // Types for authentication
 export interface User {

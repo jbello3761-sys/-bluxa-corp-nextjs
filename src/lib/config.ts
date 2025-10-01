@@ -78,7 +78,7 @@ ${missingVars.map(key => {
   }
 }
 
-// Only validate in browser/client-side
-if (typeof window !== 'undefined' && process.env.NODE_ENV === 'production') {
+// Only validate in browser/client-side and not during build
+if (typeof window !== 'undefined' && process.env.NODE_ENV === 'production' && !process.env.NEXT_PHASE) {
   validateEnvironment();
 }
