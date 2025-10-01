@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, Suspense } from 'react'
-import { useSearchParams, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { PaymentForm } from '@/components/payment/PaymentForm'
 import { PaymentSuccess } from '@/components/payment/PaymentSuccess'
 import { PaymentErrorBoundary } from '@/components/ErrorBoundary'
@@ -9,27 +9,25 @@ import { api, type BookingResponse } from '@/lib/api'
 import { type PaymentIntent } from '@/lib/stripe'
 
 function PaymentPageContent() {
-  const searchParams = useSearchParams()
   const router = useRouter()
-  
   const [booking, setBooking] = useState<BookingResponse | null>(null)
   const [paymentIntent, setPaymentIntent] = useState<PaymentIntent | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string>('')
   const [paymentComplete, setPaymentComplete] = useState(false)
 
-  // Get booking ID from URL parameters
-  const bookingId = searchParams.get('booking_id')
-
-  // Load booking data on component mount
+  // Get booking ID from URL parameters using useEffect
   useEffect(() => {
-    const loadBooking = async () => {
-      if (!bookingId) {
-        setError('No booking ID provided')
-        setLoading(false)
-        return
-      }
+    const urlParams = new URLSearchParams(window.location.search)
+    const bookingId = urlParams.get('booking_id')
+    
+    if (!bookingId) {
+      setError('No booking ID provided')
+      setLoading(false)
+      return
+    }
 
+    const loadBooking = async () => {
       try {
         const bookingData = await api.getBooking(bookingId)
         setBooking(bookingData)
@@ -42,7 +40,7 @@ function PaymentPageContent() {
     }
 
     loadBooking()
-  }, [bookingId])
+  }, [])
 
   // Handle successful payment
   const handlePaymentSuccess = (intent: PaymentIntent) => {
