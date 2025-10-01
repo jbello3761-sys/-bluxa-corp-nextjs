@@ -3,23 +3,44 @@ import { config } from './config'
 
 // Create Supabase client for client-side operations
 // Only initialize if we're in the browser and have valid environment variables
-export const supabase = typeof window !== 'undefined' && 
-  config.supabase.url && 
-  config.supabase.anonKey &&
-  config.supabase.url.length > 0 &&
-  config.supabase.anonKey.length > 0
-  ? createClient(
-      config.supabase.url,
-      config.supabase.anonKey,
-      {
-        auth: {
-          persistSession: true,
-          autoRefreshToken: true,
-          detectSessionInUrl: true
-        }
+export const supabase = (() => {
+  // Check if we're in the browser
+  if (typeof window === 'undefined') {
+    console.log('Supabase: Not in browser environment')
+    return null
+  }
+
+  // Check if we have valid configuration
+  if (!config.supabase.url || !config.supabase.anonKey) {
+    console.error('Supabase: Missing configuration', {
+      url: config.supabase.url,
+      anonKey: config.supabase.anonKey ? 'Present' : 'Missing'
+    })
+    return null
+  }
+
+  if (config.supabase.url.length === 0 || config.supabase.anonKey.length === 0) {
+    console.error('Supabase: Empty configuration', {
+      urlLength: config.supabase.url.length,
+      anonKeyLength: config.supabase.anonKey.length
+    })
+    return null
+  }
+
+  console.log('Supabase: Initializing client with URL:', config.supabase.url)
+  
+  return createClient(
+    config.supabase.url,
+    config.supabase.anonKey,
+    {
+      auth: {
+        persistSession: true,
+        autoRefreshToken: true,
+        detectSessionInUrl: true
       }
-    )
-  : null as any
+    }
+  )
+})()
 
 // Types for authentication
 export interface User {

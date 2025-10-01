@@ -23,16 +23,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     // Skip if Supabase is not available
     if (!supabase) {
+      console.warn('AuthProvider: Supabase client not available')
       setLoading(false)
       return
     }
 
     // Get initial session
     const getInitialSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession()
-      setSession(session)
-      setUser(session?.user ?? null)
-      setLoading(false)
+      try {
+        const { data: { session }, error } = await supabase.auth.getSession()
+        if (error) {
+          console.error('AuthProvider: Error getting session:', error)
+        }
+        setSession(session)
+        setUser(session?.user ?? null)
+        setLoading(false)
+      } catch (error) {
+        console.error('AuthProvider: Exception getting session:', error)
+        setLoading(false)
+      }
     }
 
     getInitialSession()
@@ -40,6 +49,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event: AuthChangeEvent, session) => {
+        console.log('AuthProvider: Auth state change:', event)
         setSession(session)
         setUser(session?.user ?? null)
         setLoading(false)
@@ -49,6 +59,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           console.log('User signed in:', session?.user?.email)
         } else if (event === 'SIGNED_OUT') {
           console.log('User signed out')
+        } else if (event === 'TOKEN_REFRESHED') {
+          console.log('Token refreshed')
         }
       }
     )

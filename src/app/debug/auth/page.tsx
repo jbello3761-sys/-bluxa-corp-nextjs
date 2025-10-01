@@ -1,5 +1,9 @@
 import { getSession, getUser } from '@/lib/supabaseServer'
 
+// Force this route to be dynamic since it uses cookies
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export default async function DebugAuth() {
   const session = await getSession()
   const user = await getUser()

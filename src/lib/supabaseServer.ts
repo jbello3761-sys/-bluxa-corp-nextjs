@@ -10,30 +10,35 @@ export async function createClient() {
     return null as any
   }
 
-  const cookieStore = await cookies()
+  try {
+    const cookieStore = await cookies()
 
-  return createServerClient(
-    config.supabase.url,
-    config.supabase.anonKey,
-    {
-      cookies: {
-        getAll() {
-          return cookieStore.getAll()
+    return createServerClient(
+      config.supabase.url,
+      config.supabase.anonKey,
+      {
+        cookies: {
+          getAll() {
+            return cookieStore.getAll()
+          },
+          setAll(cookiesToSet) {
+            try {
+              cookiesToSet.forEach(({ name, value, options }) =>
+                cookieStore.set(name, value, options)
+              )
+            } catch {
+              // The `setAll` method was called from a Server Component.
+              // This can be ignored if you have middleware refreshing
+              // user sessions.
+            }
+          },
         },
-        setAll(cookiesToSet) {
-          try {
-            cookiesToSet.forEach(({ name, value, options }) =>
-              cookieStore.set(name, value, options)
-            )
-          } catch {
-            // The `setAll` method was called from a Server Component.
-            // This can be ignored if you have middleware refreshing
-            // user sessions.
-          }
-        },
-      },
-    }
-  )
+      }
+    )
+  } catch (error) {
+    console.error('Error creating Supabase client:', error)
+    return null as any
+  }
 }
 
 // Helper function to get session in server components
