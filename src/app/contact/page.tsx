@@ -1,87 +1,142 @@
-// src/app/contact/page.tsx
 'use client'
 
 import React, { useState } from 'react'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
     phone: '',
-    subject: '',
-    message: '',
-    service_type: 'general'
+    serviceType: '',
+    message: ''
   })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [showSuccess, setShowSuccess] = useState(false)
+  const [showError, setShowError] = useState(false)
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value.replace(/\D/g, '')
+    if (value.length >= 6) {
+      value = `(${value.slice(0,3)}) ${value.slice(3,6)}-${value.slice(6,10)}`
+    } else if (value.length >= 3) {
+      value = `(${value.slice(0,3)}) ${value.slice(3)}`
+    }
+    setFormData(prev => ({
+      ...prev,
+      phone: value
+    }))
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setIsSubmitting(true)
     
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      setSubmitStatus('success')
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: '',
-        service_type: 'general'
-      })
-    } catch (error) {
-      setSubmitStatus('error')
-    } finally {
-      setIsSubmitting(false)
-    }
+    // Simulate form submission
+    setShowSuccess(true)
+    setShowError(false)
+    
+    // Reset form
+    setFormData({
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      serviceType: '',
+      message: ''
+    })
+    
+    // Hide success message after 5 seconds
+    setTimeout(() => {
+      setShowSuccess(false)
+    }, 5000)
   }
 
-  const contactInfo = [
-    {
-      icon: '📞',
-      title: 'Phone',
-      details: ['+1 (555) 123-4567', '24/7 Customer Support'],
-      action: 'tel:+15551234567'
-    },
-    {
-      icon: '✉️',
-      title: 'Email',
-      details: ['info@bluxacorp.com', 'Quick Response Guaranteed'],
-      action: 'mailto:info@bluxacorp.com'
-    },
-    {
-      icon: '📍',
-      title: 'Office',
-      details: ['123 Luxury Lane', 'New York, NY 10001'],
-      action: 'https://maps.google.com/?q=123+Luxury+Lane+New+York+NY'
-    },
-    {
-      icon: '⏰',
-      title: 'Hours',
-      details: ['24/7 Booking Available', 'Office: Mon-Fri 9AM-6PM'],
-      action: null
-    }
-  ]
-
-  const serviceAreas = [
-    'Manhattan', 'Brooklyn', 'Queens', 'The Bronx', 'Staten Island',
-    'JFK Airport', 'LaGuardia Airport', 'Newark Airport',
-    'Westchester County', 'Long Island', 'New Jersey'
-  ]
-
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="bg-gray-50">
+      <style jsx>{`
+        .btn-primary {
+          background: linear-gradient(135deg, #2563eb 0%, #dc2626 100%);
+          color: white;
+          font-weight: 600;
+          padding: 12px 24px;
+          border-radius: 8px;
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+          transition: all 0.3s ease;
+          border: none;
+          cursor: pointer;
+        }
+        
+        .btn-primary:hover {
+          background: linear-gradient(135deg, #1d4ed8 0%, #b91c1c 100%);
+          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+          transform: translateY(-1px);
+        }
+        
+        .card {
+          background: white;
+          border-radius: 12px;
+          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+          padding: 32px;
+          border: 1px solid #f3f4f6;
+          transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+          box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .input-field {
+          width: 100%;
+          padding: 12px 16px;
+          border: 2px solid #e5e7eb;
+          border-radius: 8px;
+          font-size: 16px;
+          transition: all 0.3s ease;
+          background: white;
+        }
+        
+        .input-field:focus {
+          outline: none;
+          border-color: #2563eb;
+          box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .hero-gradient {
+          background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 25%, #dc2626 100%);
+        }
+        
+        .fade-in {
+          animation: fadeIn 1s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .contact-icon {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.5rem;
+          margin: 0 auto 1rem;
+        }
+      `}</style>
+
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-blue-900 via-blue-700 to-red-600 text-white py-20">
+      <div className="hero-gradient text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
+          <div className="text-center fade-in">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
               Contact Us
             </h1>
@@ -93,141 +148,97 @@ export default function ContactPage() {
         </div>
       </div>
 
-      {/* Contact Info Cards */}
+      {/* Contact Form & Info */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {contactInfo.map((info, index) => (
-            <div key={index} className="card text-center hover:shadow-xl transition-all duration-300">
-              <div className="text-5xl mb-4">{info.icon}</div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">{info.title}</h3>
-              <div className="space-y-1">
-                {info.details.map((detail, detailIndex) => (
-                  <p key={detailIndex} className={`${detailIndex === 0 ? 'font-semibold text-gray-900' : 'text-gray-600 text-sm'}`}>
-                    {detail}
-                  </p>
-                ))}
-              </div>
-              {info.action && (
-                <a 
-                  href={info.action}
-                  className="inline-block mt-4 text-blue-600 hover:text-blue-800 font-medium"
-                >
-                  {info.title === 'Phone' ? 'Call Now' : 
-                   info.title === 'Email' ? 'Send Email' : 'View Map'}
-                </a>
-              )}
-            </div>
-          ))}
-        </div>
-
-        {/* Contact Form & Info */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}
           <div className="card">
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Send us a Message</h2>
-            
-            {submitStatus === 'success' && (
-              <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
-                <div className="flex items-center">
-                  <span className="text-green-500 mr-2">✓</span>
-                  <p className="text-green-800">Thank you! Your message has been sent successfully. We'll get back to you within 24 hours.</p>
-                </div>
-              </div>
-            )}
-
-            {submitStatus === 'error' && (
-              <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
-                <div className="flex items-center">
-                  <span className="text-red-500 mr-2">✗</span>
-                  <p className="text-red-800">Sorry, there was an error sending your message. Please try again or call us directly.</p>
-                </div>
-              </div>
-            )}
-
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                    Full Name *
+                  <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
+                    First Name *
                   </label>
                   <input
                     type="text"
-                    id="name"
-                    name="name"
+                    id="firstName"
+                    name="firstName"
                     required
-                    value={formData.name}
-                    onChange={handleInputChange}
                     className="input-field"
-                    placeholder="Your full name"
+                    placeholder="John"
+                    value={formData.firstName}
+                    onChange={handleInputChange}
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                    Email Address *
+                  <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
+                    Last Name *
                   </label>
                   <input
-                    type="email"
-                    id="email"
-                    name="email"
+                    type="text"
+                    id="lastName"
+                    name="lastName"
                     required
-                    value={formData.email}
-                    onChange={handleInputChange}
                     className="input-field"
-                    placeholder="your.email@example.com"
+                    placeholder="Doe"
+                    value={formData.lastName}
+                    onChange={handleInputChange}
                   />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    className="input-field"
-                    placeholder="(555) 123-4567"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="service_type" className="block text-sm font-medium text-gray-700 mb-2">
-                    Service Type
-                  </label>
-                  <select
-                    id="service_type"
-                    name="service_type"
-                    value={formData.service_type}
-                    onChange={handleInputChange}
-                    className="input-field"
-                  >
-                    <option value="general">General Inquiry</option>
-                    <option value="booking">New Booking</option>
-                    <option value="corporate">Corporate Account</option>
-                    <option value="wedding">Wedding/Event</option>
-                    <option value="airport">Airport Transfer</option>
-                    <option value="support">Customer Support</option>
-                  </select>
                 </div>
               </div>
 
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-                  Subject *
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                  Email Address *
                 </label>
                 <input
-                  type="text"
-                  id="subject"
-                  name="subject"
+                  type="email"
+                  id="email"
+                  name="email"
                   required
-                  value={formData.subject}
-                  onChange={handleInputChange}
                   className="input-field"
-                  placeholder="Brief description of your inquiry"
+                  placeholder="john@example.com"
+                  value={formData.email}
+                  onChange={handleInputChange}
                 />
+              </div>
+
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  className="input-field"
+                  placeholder="(555) 123-4567"
+                  value={formData.phone}
+                  onChange={handlePhoneChange}
+                />
+              </div>
+
+              <div>
+                <label htmlFor="serviceType" className="block text-sm font-medium text-gray-700 mb-2">
+                  Service Type
+                </label>
+                <select 
+                  id="serviceType" 
+                  name="serviceType" 
+                  className="input-field"
+                  value={formData.serviceType}
+                  onChange={handleInputChange}
+                >
+                  <option value="">Select a service</option>
+                  <option value="airport_transfer">Airport Transfer</option>
+                  <option value="corporate">Corporate Travel</option>
+                  <option value="special_events">Special Events</option>
+                  <option value="city_tours">City Tours</option>
+                  <option value="hourly">Hourly Service</option>
+                  <option value="long_distance">Long Distance</option>
+                  <option value="other">Other</option>
+                </select>
               </div>
 
               <div>
@@ -237,118 +248,166 @@ export default function ContactPage() {
                 <textarea
                   id="message"
                   name="message"
-                  required
                   rows={5}
+                  required
+                  className="input-field"
+                  placeholder="Tell us about your transportation needs..."
                   value={formData.message}
                   onChange={handleInputChange}
-                  className="input-field resize-none"
-                  placeholder="Please provide details about your transportation needs, dates, times, and any special requirements..."
-                />
+                ></textarea>
               </div>
 
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isSubmitting ? (
-                  <span className="flex items-center justify-center">
-                    <div className="loading-spinner mr-2"></div>
-                    Sending Message...
-                  </span>
-                ) : (
-                  'Send Message'
-                )}
+              <button type="submit" className="btn-primary w-full">
+                Send Message
               </button>
             </form>
+
+            {/* Success/Error Messages */}
+            {showSuccess && (
+              <div className="mt-6 bg-green-50 border border-green-200 rounded-lg p-4">
+                <p className="text-green-800">✓ Thank you! Your message has been sent successfully. We'll get back to you within 24 hours.</p>
+              </div>
+            )}
+
+            {showError && (
+              <div className="mt-6 bg-red-50 border border-red-200 rounded-lg p-4">
+                <p className="text-red-800">✗ Sorry, there was an error sending your message. Please try again or call us directly.</p>
+              </div>
+            )}
           </div>
 
-          {/* Additional Info */}
+          {/* Contact Information */}
           <div className="space-y-8">
-            {/* Quick Booking */}
-            <div className="card">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Need Immediate Service?</h3>
-              <p className="text-gray-600 mb-6">
-                For urgent bookings or immediate assistance, call us directly or use our online booking system.
-              </p>
-              <div className="space-y-3">
-                <a 
-                  href="tel:+15551234567"
-                  className="btn-primary w-full text-center block"
-                >
-                  📞 Call Now: (555) 123-4567
-                </a>
-                <button 
-                  onClick={() => window.location.href = '/book'}
-                  className="btn-secondary w-full"
-                >
-                  🚗 Book Online
-                </button>
+            <div className="card text-center">
+              <div className="contact-icon bg-blue-100 text-blue-600">
+                📞
               </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Phone</h3>
+              <p className="text-gray-600 mb-4">Available 24/7 for bookings and support</p>
+              <a href="tel:+15551234567" className="text-2xl font-bold text-blue-600 hover:text-blue-700">
+                (555) 123-4567
+              </a>
             </div>
 
-            {/* Service Areas */}
-            <div className="card">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Service Areas</h3>
-              <p className="text-gray-600 mb-4">We provide luxury transportation throughout:</p>
-              <div className="grid grid-cols-2 gap-2">
-                {serviceAreas.map((area, index) => (
-                  <div key={index} className="flex items-center text-sm text-gray-700">
-                    <span className="text-green-500 mr-2">✓</span>
-                    {area}
-                  </div>
-                ))}
+            <div className="card text-center">
+              <div className="contact-icon bg-red-100 text-red-600">
+                ✉️
               </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Email</h3>
+              <p className="text-gray-600 mb-4">Send us your questions or booking requests</p>
+              <a href="mailto:info@bluxacorp.com" className="text-xl font-bold text-blue-600 hover:text-blue-700">
+                info@bluxacorp.com
+              </a>
             </div>
 
-            {/* Business Hours */}
-            <div className="card">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Business Information</h3>
-              <div className="space-y-4">
-                <div>
-                  <h4 className="font-semibold text-gray-900">Booking Hours</h4>
-                  <p className="text-gray-600">24/7 Online & Phone Booking</p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900">Office Hours</h4>
-                  <p className="text-gray-600">Monday - Friday: 9:00 AM - 6:00 PM</p>
-                  <p className="text-gray-600">Saturday - Sunday: 10:00 AM - 4:00 PM</p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900">Response Time</h4>
-                  <p className="text-gray-600">Email: Within 2 hours during business hours</p>
-                  <p className="text-gray-600">Phone: Immediate assistance 24/7</p>
-                </div>
+            <div className="card text-center">
+              <div className="contact-icon bg-green-100 text-green-600">
+                📍
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Office</h3>
+              <p className="text-gray-600 mb-4">Visit us for corporate accounts and partnerships</p>
+              <address className="text-gray-900 not-italic">
+                123 Luxury Lane<br />
+                New York, NY 10001<br />
+                United States
+              </address>
+            </div>
+
+            <div className="card text-center">
+              <div className="contact-icon bg-purple-100 text-purple-600">
+                ⏰
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Hours</h3>
+              <p className="text-gray-600 mb-4">Transportation services available 24/7</p>
+              <div className="text-gray-900">
+                <p><strong>Service:</strong> 24/7</p>
+                <p><strong>Office:</strong> Mon-Fri 9AM-6PM</p>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* FAQ Section */}
+      {/* Service Areas */}
       <div className="bg-white py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Service Areas</h2>
+            <p className="text-xl text-gray-600">We provide luxury transportation throughout the New York metropolitan area</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="text-center p-6 bg-gray-50 rounded-lg">
+              <div className="text-4xl mb-4">🏙️</div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Manhattan</h3>
+              <p className="text-gray-600">All neighborhoods including Midtown, Financial District, Upper East/West Side</p>
+            </div>
+
+            <div className="text-center p-6 bg-gray-50 rounded-lg">
+              <div className="text-4xl mb-4">🌉</div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Outer Boroughs</h3>
+              <p className="text-gray-600">Brooklyn, Queens, Bronx, and Staten Island</p>
+            </div>
+
+            <div className="text-center p-6 bg-gray-50 rounded-lg">
+              <div className="text-4xl mb-4">✈️</div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Airports</h3>
+              <p className="text-gray-600">JFK, LaGuardia, Newark, Westchester</p>
+            </div>
+
+            <div className="text-center p-6 bg-gray-50 rounded-lg">
+              <div className="text-4xl mb-4">🏢</div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">New Jersey</h3>
+              <p className="text-gray-600">Jersey City, Hoboken, surrounding areas</p>
+            </div>
+
+            <div className="text-center p-6 bg-gray-50 rounded-lg">
+              <div className="text-4xl mb-4">🏡</div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Westchester</h3>
+              <p className="text-gray-600">White Plains, Yonkers, Westchester County</p>
+            </div>
+
+            <div className="text-center p-6 bg-gray-50 rounded-lg">
+              <div className="text-4xl mb-4">🌊</div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Long Island</h3>
+              <p className="text-gray-600">Nassau, Suffolk counties, the Hamptons</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* FAQ Section */}
+      <div className="bg-gray-50 py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
-          
-          <div className="space-y-6">
-            <div className="card">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+            <p className="text-xl text-gray-600">Quick answers to common questions</p>
+          </div>
+
+          <div className="space-y-8">
+            <div className="bg-white rounded-lg p-6 shadow-sm">
               <h3 className="text-lg font-semibold text-gray-900 mb-2">How far in advance should I book?</h3>
-              <p className="text-gray-600">We recommend booking at least 2 hours in advance for regular services. For special events, weddings, or corporate accounts, we suggest booking 24-48 hours ahead to ensure availability.</p>
+              <p className="text-gray-600">We recommend booking at least 2 hours in advance, but we can often accommodate last-minute requests. For special events or peak times, booking 24-48 hours ahead is preferred.</p>
             </div>
 
-            <div className="card">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Do you provide service outside NYC?</h3>
-              <p className="text-gray-600">Yes! We provide transportation throughout the tri-state area including New Jersey, Connecticut, and Long Island. Contact us for custom quotes on longer distance trips.</p>
+            <div className="bg-white rounded-lg p-6 shadow-sm">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Do you provide car seats for children?</h3>
+              <p className="text-gray-600">Yes, we provide complimentary car seats and booster seats upon request. Please specify the age and weight of children when booking to ensure we have the appropriate safety equipment.</p>
             </div>
 
-            <div className="card">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">What payment methods do you accept?</h3>
-              <p className="text-gray-600">We accept all major credit cards (Visa, MasterCard, American Express), corporate accounts, and cash payments. Payment can be processed online during booking or with your chauffeur.</p>
+            <div className="bg-white rounded-lg p-6 shadow-sm">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">What happens if my flight is delayed?</h3>
+              <p className="text-gray-600">We monitor all flights in real-time and adjust pickup times automatically. There's no additional charge for flight delays, and we include 60 minutes of complimentary wait time for airport pickups.</p>
             </div>
 
-            <div className="card">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Is gratuity included in the price?</h3>
-              <p className="text-gray-600">Gratuity is not included in our quoted prices. While not required, a 15-20% gratuity is customary for exceptional service and can be added to your payment or given directly to your chauffeur.</p>
+            <div className="bg-white rounded-lg p-6 shadow-sm">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Can I make changes to my reservation?</h3>
+              <p className="text-gray-600">Yes, you can modify or cancel your reservation up to 2 hours before pickup time without any fees. Changes can be made by calling our 24/7 customer service line.</p>
+            </div>
+
+            <div className="bg-white rounded-lg p-6 shadow-sm">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Do you offer corporate accounts?</h3>
+              <p className="text-gray-600">Absolutely! We offer corporate accounts with monthly billing, dedicated account managers, and volume discounts. Contact us to set up your corporate transportation program.</p>
             </div>
           </div>
         </div>
@@ -359,7 +418,7 @@ export default function ContactPage() {
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-white mb-4">Ready to Experience Luxury?</h2>
           <p className="text-xl text-blue-100 mb-8">
-            Contact us today to discuss your transportation needs or book your next ride
+            Book your premium transportation today or contact us for a custom quote
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button 
@@ -368,12 +427,12 @@ export default function ContactPage() {
             >
               Book Now
             </button>
-            <a 
-              href="tel:+15551234567"
+            <button 
+              onClick={() => window.location.href = 'tel:+15551234567'}
               className="border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-blue-600 transition-colors duration-300"
             >
               Call (555) 123-4567
-            </a>
+            </button>
           </div>
         </div>
       </div>
