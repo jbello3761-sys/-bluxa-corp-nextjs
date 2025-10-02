@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom styles for BLuxA Transportation - Preserving existing design */
+/* Custom styles for BLuxA Transportation - Mobile Optimized */
 body {
   margin: 0;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,6 +10,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Mobile optimizations */
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 code {
@@ -30,6 +34,21 @@ code {
   transform: scale(1);
   text-decoration: none;
   display: inline-block;
+  /* Mobile optimizations */
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Mobile button improvements */
+@media (max-width: 768px) {
+  .btn-primary {
+    padding: 16px 32px;
+    font-size: 18px;
+    border-radius: 12px;
+    min-height: 56px;
+  }
 }
 
 .btn-primary:hover {
@@ -75,6 +94,21 @@ code {
   line-height: 1.5;
   transition: all 0.2s ease;
   min-height: 56px;
+  /* Mobile optimizations */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+}
+
+/* Mobile-specific input improvements */
+@media (max-width: 768px) {
+  .input-field {
+    padding: 18px 20px;
+    font-size: 18px;
+    min-height: 60px;
+    border-radius: 16px;
+  }
 }
 
 .input-field:focus {
@@ -84,12 +118,20 @@ code {
 }
 
 .hero-text {
-  font-size: 4rem;
+  font-size: 2.5rem;
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.2;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 @media (min-width: 768px) {
+  .hero-text {
+    font-size: 4rem;
+    line-height: 1.1;
+  }
+}
+
+@media (min-width: 1024px) {
   .hero-text {
     font-size: 5rem;
   }
@@ -269,6 +311,46 @@ code {
 }
 
 /* Dynamic carousel uses JavaScript for animation - no CSS keyframes needed */
+
+/* Mobile-specific improvements */
+@media (max-width: 768px) {
+  .card {
+    margin: 16px;
+    padding: 20px;
+    border-radius: 16px;
+  }
+  
+  .section-title {
+    font-size: 1.75rem;
+    line-height: 1.3;
+  }
+  
+  /* Better spacing for mobile forms */
+  .space-y-6 > * + * {
+    margin-top: 24px;
+  }
+  
+  /* Mobile grid improvements */
+  .grid-cols-1 {
+    gap: 20px;
+  }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+  .card {
+    margin: 12px;
+    padding: 16px;
+  }
+  
+  .hero-text {
+    font-size: 1.875rem;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+  }
+}
 
 /* Print styles */
 @media print {
