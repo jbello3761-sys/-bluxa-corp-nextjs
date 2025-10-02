@@ -36,13 +36,32 @@ export function BookingForm({ onBookingSuccess, className = '' }: BookingFormPro
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({})
 
-  // Load pricing data on component mount
+  // Load pricing data on component mount with caching
   useEffect(() => {
     const loadPricing = async () => {
       try {
         setPricingLoading(true)
+        
+        // Check if pricing is already cached in localStorage
+        const cachedPricing = localStorage.getItem('bluxa-pricing-cache')
+        const cacheTimestamp = localStorage.getItem('bluxa-pricing-cache-timestamp')
+        const now = Date.now()
+        const cacheAge = cacheTimestamp ? now - parseInt(cacheTimestamp) : Infinity
+        const CACHE_DURATION = 5 * 60 * 1000 // 5 minutes
+        
+        if (cachedPricing && cacheAge < CACHE_DURATION) {
+          setPricing(JSON.parse(cachedPricing))
+          setPricingLoading(false)
+          return
+        }
+        
         const pricingData = await api.getPricing()
         setPricing(pricingData)
+        
+        // Cache the pricing data
+        localStorage.setItem('bluxa-pricing-cache', JSON.stringify(pricingData))
+        localStorage.setItem('bluxa-pricing-cache-timestamp', now.toString())
+        
       } catch (error) {
         console.error('Failed to load pricing:', error)
         setErrors({ pricing: 'Failed to load pricing information' })
@@ -51,37 +70,44 @@ export function BookingForm({ onBookingSuccess, className = '' }: BookingFormPro
       }
     }
     
+    // Load pricing in parallel with other operations
     loadPricing()
   }, [])
 
-  // Auto-save form data to localStorage
+  // Auto-save form data to localStorage (debounced)
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window === 'undefined') return
+    
+    const timeoutId = setTimeout(() => {
       localStorage.setItem('bluxa-booking-form', JSON.stringify(formData))
-    }
+    }, 500) // Debounce saves to avoid excessive localStorage writes
+    
+    return () => clearTimeout(timeoutId)
   }, [formData])
 
-  // Load saved form data on mount
+  // Load saved form data on mount (only once)
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('bluxa-booking-form')
-      if (saved) {
-        try {
-          const savedData = JSON.parse(saved)
-          setFormData(prev => ({
-            ...savedData,
-            customer_email: user?.email || savedData.customer_email, // Always use current user email
-          }))
-        } catch (error) {
-          console.warn('Failed to load saved form data:', error)
-        }
+    if (typeof window === 'undefined') return
+    
+    const saved = localStorage.getItem('bluxa-booking-form')
+    if (saved) {
+      try {
+        const savedData = JSON.parse(saved)
+        setFormData(prev => ({
+          ...savedData,
+          customer_email: user?.email || savedData.customer_email, // Always use current user email
+        }))
+      } catch (error) {
+        console.warn('Failed to load saved form data:', error)
       }
     }
-  }, [user?.email])
+  }, []) // Remove user?.email dependency to prevent re-loading
 
-  // Calculate estimated price when form data changes
+  // Calculate estimated price when form data changes (debounced)
   useEffect(() => {
-    if (pricing && formData.vehicle_type && formData.estimated_duration) {
+    if (!pricing || !formData.vehicle_type || !formData.estimated_duration) return
+    
+    const timeoutId = setTimeout(() => {
       const vehiclePricing = pricing.pricing[formData.vehicle_type]
       if (vehiclePricing) {
         const isAirportTransfer = 
@@ -98,7 +124,9 @@ export function BookingForm({ onBookingSuccess, className = '' }: BookingFormPro
         )
         setEstimatedPrice(price)
       }
-    }
+    }, 300) // Debounce price calculation to avoid excessive recalculations
+    
+    return () => clearTimeout(timeoutId)
   }, [pricing, formData.vehicle_type, formData.estimated_duration, formData.pickup_address, formData.destination])
 
   // Handle input changes

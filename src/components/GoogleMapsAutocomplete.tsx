@@ -3,18 +3,33 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { config } from '@/lib/config'
 
+// Google Maps type declarations
+declare global {
+  interface Window {
+    google: any
+  }
+}
+
 interface GoogleMapsAutocompleteProps {
   value: string
-  onChange: (value: string, placeDetails?: google.maps.places.PlaceResult) => void
+  onChange: (value: string, placeDetails?: any) => void
   placeholder?: string
   className?: string
   disabled?: boolean
-  onPlaceSelect?: (place: google.maps.places.PlaceResult) => void
+  onPlaceSelect?: (place: any) => void
 }
 
-// Load Google Maps API script
+// Global promise to prevent multiple script loads
+let googleMapsLoadPromise: Promise<void> | null = null
+
+// Load Google Maps API script with caching
 const loadGoogleMapsScript = (): Promise<void> => {
-  return new Promise((resolve, reject) => {
+  // Return existing promise if already loading/loaded
+  if (googleMapsLoadPromise) {
+    return googleMapsLoadPromise
+  }
+
+  googleMapsLoadPromise = new Promise((resolve, reject) => {
     if (typeof window === 'undefined') {
       reject(new Error('Google Maps can only be loaded in browser environment'))
       return
@@ -59,6 +74,8 @@ const loadGoogleMapsScript = (): Promise<void> => {
     
     document.head.appendChild(script)
   })
+
+  return googleMapsLoadPromise
 }
 
 export function GoogleMapsAutocomplete({
@@ -70,25 +87,28 @@ export function GoogleMapsAutocomplete({
   onPlaceSelect
 }: GoogleMapsAutocompleteProps) {
   const inputRef = useRef<HTMLInputElement>(null)
-  const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
+  const autocompleteRef = useRef<any>(null)
+  const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [isInitialized, setIsInitialized] = useState(false)
 
   useEffect(() => {
     if (!config.googleMaps.apiKey) {
       setError('Google Maps API key not configured')
-      setIsLoading(false)
       return
     }
 
     const initializeAutocomplete = async () => {
+      if (isInitialized || disabled) return
+      
       try {
+        setIsLoading(true)
         await loadGoogleMapsScript()
         
         if (!inputRef.current) return
 
         // Initialize autocomplete
-        autocompleteRef.current = new google.maps.places.Autocomplete(inputRef.current, {
+        autocompleteRef.current = new window.google.maps.places.Autocomplete(inputRef.current, {
           types: ['address'],
           componentRestrictions: { country: 'us' }, // Restrict to US addresses
           fields: ['formatted_address', 'geometry', 'name', 'place_id', 'types']
@@ -103,6 +123,7 @@ export function GoogleMapsAutocomplete({
           }
         })
 
+        setIsInitialized(true)
         setIsLoading(false)
       } catch (err) {
         console.error('Failed to initialize Google Maps Autocomplete:', err)
@@ -111,15 +132,18 @@ export function GoogleMapsAutocomplete({
       }
     }
 
-    initializeAutocomplete()
+    // Delay initialization to prevent blocking initial render
+    const timeoutId = setTimeout(initializeAutocomplete, 200)
 
     // Cleanup
     return () => {
-      if (autocompleteRef.current) {
-        google.maps.event.clearInstanceListeners(autocompleteRef.current)
+      clearTimeout(timeoutId)
+      if (autocompleteRef.current && window.google) {
+        window.google.maps.event.clearInstanceListeners(autocompleteRef.current)
+        autocompleteRef.current = null
       }
     }
-  }, [onChange, onPlaceSelect])
+  }, [onChange, onPlaceSelect, disabled, isInitialized])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value)
@@ -175,18 +199,18 @@ export const calculateDistance = async (
       throw new Error('Google Maps not loaded')
     }
 
-    const service = new google.maps.DistanceMatrixService()
+    const service = new window.google.maps.DistanceMatrixService()
     
     return new Promise((resolve, reject) => {
       service.getDistanceMatrix({
         origins: [origin],
         destinations: [destination],
-        travelMode: google.maps.TravelMode.DRIVING,
-        unitSystem: google.maps.UnitSystem.IMPERIAL,
+        travelMode: window.google.maps.TravelMode.DRIVING,
+        unitSystem: window.google.maps.UnitSystem.IMPERIAL,
         avoidHighways: false,
         avoidTolls: false
-      }, (response, status) => {
-        if (status === google.maps.DistanceMatrixStatus.OK && response) {
+      }, (response: any, status: any) => {
+        if (status === window.google.maps.DistanceMatrixStatus.OK && response) {
           const element = response.rows[0]?.elements[0]
           if (element && element.status === 'OK') {
             resolve({
@@ -210,7 +234,7 @@ export const calculateDistance = async (
 // Type declarations for Google Maps
 declare global {
   interface Window {
-    google: typeof google
+    google: any
   }
 }
 
