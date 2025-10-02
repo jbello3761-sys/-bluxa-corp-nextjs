@@ -369,7 +369,7 @@ export default function ServicesPage() {
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-white mb-4">Ready to Book Your Service?</h2>
           <p className="text-xl text-blue-100 mb-8">
-            Experience the difference with BLuxA Corp's premium transportation services
+            Experience the difference with BLuxA Transportation's premium transportation services
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button 

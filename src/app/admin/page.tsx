@@ -10,7 +10,7 @@ export default function AdminPortalPage() {
             font-family: 'Inter', sans-serif;
         }
         
-        /* Custom BLuxA Corp Styles */
+        /* Custom BLuxA Transportation Styles */
         .btn-primary {
             background: linear-gradient(135deg, #2563eb 0%, #dc2626 100%);
             color: white;
@@ -188,7 +188,7 @@ export default function AdminPortalPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center">
-              <h1 className="text-2xl font-bold gradient-text">BLuxA Corp</h1>
+              <h1 className="text-2xl font-bold gradient-text">BLuxA Transportation</h1>
               <span className="ml-4 text-gray-500">Admin Portal</span>
             </div>
             <div className="flex items-center space-x-4">
@@ -629,7 +629,7 @@ export default function AdminPortalPage() {
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Company Name</label>
-                    <input type="text" className="input-field" defaultValue="BLuxA Corp" />
+                    <input type="text" className="input-field" defaultValue="BLuxA Transportation" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Contact Phone</label>

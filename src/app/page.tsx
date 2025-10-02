@@ -1,4 +1,4 @@
-// BLuxA Corp Homepage - Dynamic Image Carousel
+// BLuxA Transportation Homepage - Dynamic Image Carousel
 import { DynamicCarousel } from '@/components/DynamicCarousel'
 
 export default function Home() {

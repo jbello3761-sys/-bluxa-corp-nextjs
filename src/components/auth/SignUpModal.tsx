@@ -72,7 +72,7 @@ export function SignUpModal({ isOpen, onClose, onSwitchToSignIn }: SignUpModalPr
         {/* Header */}
         <div className="text-center mb-6">
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Create Account</h2>
-          <p className="text-gray-600">Join BLuxA Corp for premium transportation</p>
+          <p className="text-gray-600">Join BLuxA Transportation for premium transportation</p>
         </div>
 
         {/* Error message */}

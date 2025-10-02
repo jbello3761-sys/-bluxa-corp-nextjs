@@ -10,7 +10,7 @@ export default function DriverPortalPage() {
             font-family: 'Inter', sans-serif;
         }
         
-        /* Custom BLuxA Corp Styles */
+        /* Custom BLuxA Transportation Styles */
         .btn-primary {
             background: linear-gradient(135deg, #2563eb 0%, #dc2626 100%);
             color: white;
@@ -167,7 +167,7 @@ export default function DriverPortalPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center">
-              <h1 className="text-2xl font-bold gradient-text">BLuxA Corp</h1>
+              <h1 className="text-2xl font-bold gradient-text">BLuxA Transportation</h1>
               <span className="ml-4 text-gray-500">Driver Portal</span>
             </div>
             <div className="flex items-center space-x-4">

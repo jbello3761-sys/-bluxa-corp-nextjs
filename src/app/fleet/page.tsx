@@ -323,7 +323,7 @@ export default function FleetPage() {
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-white mb-4">Ready to Experience Luxury?</h2>
           <p className="text-xl text-blue-100 mb-8">
-            Book your premium ride today and discover the BLuxA Corp difference
+            Book your premium ride today and discover the BLuxA Transportation difference
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button 

@@ -25,7 +25,7 @@ export function AuthHeader() {
             <div className="flex justify-between items-center h-16">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <h1 className="text-2xl font-bold text-gradient">BLuxA Corp</h1>
+                      <h1 className="text-2xl font-bold text-gradient">BLuxA Transportation</h1>
                 </div>
         <div className="hidden md:block">
           <div className="ml-10 flex items-baseline space-x-4">

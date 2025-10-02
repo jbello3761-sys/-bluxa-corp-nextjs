@@ -3,7 +3,7 @@ import { BookingPageClient } from './BookingPageClient'
 import { BookingErrorBoundary } from '@/components/ErrorBoundary'
 
 export const metadata: Metadata = {
-  title: 'Book Your Ride - BLuxA Corp',
+  title: 'Book Your Ride - BLuxA Transportation',
   description: 'Book premium luxury transportation in New York City. Executive sedans, luxury SUVs, and sprinter vans available 24/7.',
   keywords: 'book ride, luxury transportation, NYC booking, executive sedan booking, luxury SUV rental',
 }

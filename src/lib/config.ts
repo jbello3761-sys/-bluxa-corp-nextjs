@@ -1,4 +1,4 @@
-// Site-wide configuration for BLuxA Corp
+// Site-wide configuration for BLuxA Transportation
 export const config = {
   apiUrl: process.env.NEXT_PUBLIC_API_URL || 'https://bluxa-backend.onrender.com',
   stripe: {

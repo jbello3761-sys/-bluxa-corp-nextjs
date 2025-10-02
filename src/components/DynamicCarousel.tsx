@@ -36,7 +36,7 @@ const getDefaultInfo = (filename: string): { name: string; tagline: string; cate
     return { name: 'Luxury Vehicle', tagline: 'Premium Service', category: 'vehicle' }
   }
   
-  return { name: 'BLuxA Corp', tagline: 'Luxury Transportation', category: 'city' }
+  return { name: 'BLuxA Transportation', tagline: 'Luxury Transportation', category: 'city' }
 }
 
 export function DynamicCarousel() {
