@@ -1,372 +1,495 @@
-// src/app/driver/page.tsx
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { useSession, useRequireAuth } from '@/components/auth/AuthProvider'
-import { api } from '@/lib/api'
 
 export default function DriverPortalPage() {
-  // Require authentication and redirect if not logged in
-  useRequireAuth('/driver')
-  
-  const { user } = useSession()
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [loginData, setLoginData] = useState({ email: '', password: '' })
-  const [dashboardData, setDashboardData] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
 
-  // Check if user has driver role
+  // Mock authentication check
   useEffect(() => {
-    if (user?.user_metadata?.role === 'driver') {
+    const authStatus = localStorage.getItem('driverAuth')
+    if (authStatus === 'true') {
       setIsAuthenticated(true)
-      loadDashboardData()
     }
-  }, [user])
+  }, [])
 
-  const loadDashboardData = async () => {
-    try {
-      setLoading(true)
-      // This would call your backend API
-      const response = await api.get('/driver/dashboard')
-      setDashboardData(response.data)
-    } catch (error) {
-      console.error('Failed to load dashboard:', error)
-      setError('Failed to load dashboard data')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
-    setLoading(true)
-    setError('')
-
-    try {
-      // Demo login - in production this would use Supabase Auth
-      if (loginData.email === 'driver@bluxacorp.com' && loginData.password === 'Driver2024!') {
-        setIsAuthenticated(true)
-        // Load mock dashboard data
-        setDashboardData({
-          driver: {
-            name: 'John Smith',
-            rating: 4.9,
-            total_rides: 245,
-            status: 'available'
-          },
-          today: {
-            rides: 3,
-            earnings: 1250
-          },
-          rides: [
-            {
-              id: '1',
-              booking_code: 'BLX-2025-00123',
-              customer_name: 'John Doe',
-              pickup_address: 'JFK Airport',
-              destination: 'Manhattan Hotel',
-              pickup_time: '10:30 AM',
-              status: 'completed',
-              vehicle: 'Executive Sedan',
-              earnings: 450
-            },
-            {
-              id: '2',
-              booking_code: 'BLX-2025-00124',
-              customer_name: 'Jane Smith',
-              pickup_address: 'Manhattan',
-              destination: 'LaGuardia Airport',
-              pickup_time: '2:30 PM',
-              status: 'in_progress',
-              vehicle: 'Luxury SUV',
-              earnings: 520
-            },
-            {
-              id: '3',
-              booking_code: 'BLX-2025-00125',
-              customer_name: 'Corporate Group',
-              pickup_address: 'Hotel',
-              destination: 'Conference Center',
-              pickup_time: '6:00 PM',
-              status: 'upcoming',
-              vehicle: 'Sprinter Van',
-              earnings: 680
-            }
-          ]
-        })
-      } else {
-        setError('Invalid credentials')
-      }
-    } catch (error) {
-      setError('Login failed. Please try again.')
-    } finally {
-      setLoading(false)
+    // Demo credentials: driver@bluxacorp.com / Driver2024!
+    if (loginData.email === 'driver@bluxacorp.com' && loginData.password === 'Driver2024!') {
+      localStorage.setItem('driverAuth', 'true')
+      setIsAuthenticated(true)
+    } else {
+      alert('Invalid credentials. Use: driver@bluxacorp.com / Driver2024!')
     }
   }
 
-  const updateRideStatus = async (rideId: string, newStatus: string) => {
-    try {
-      // This would call your backend API
-      console.log(`Updating ride ${rideId} to ${newStatus}`)
-      
-      // Update local state
-      setDashboardData(prev => ({
-        ...prev,
-        rides: prev.rides.map(ride => 
-          ride.id === rideId ? { ...ride, status: newStatus } : ride
-        )
-      }))
-    } catch (error) {
-      console.error('Failed to update ride status:', error)
-    }
+  const handleLogout = () => {
+    localStorage.removeItem('driverAuth')
+    setIsAuthenticated(false)
   }
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'upcoming': return 'bg-blue-100 text-blue-800'
-      case 'in_progress': return 'bg-yellow-100 text-yellow-800'
-      case 'completed': return 'bg-green-100 text-green-800'
-      default: return 'bg-gray-100 text-gray-800'
-    }
+  const updateRideStatus = (rideId: string, newStatus: string) => {
+    console.log(`Updating ride ${rideId} to ${newStatus}`)
+    // In real app, this would make an API call
   }
 
-  const getStatusActions = (status: string, rideId: string) => {
-    switch (status) {
-      case 'upcoming':
-        return (
-          <button
-            onClick={() => updateRideStatus(rideId, 'in_progress')}
-            className="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600"
-          >
-            Start Ride
-          </button>
-        )
-      case 'in_progress':
-        return (
-          <button
-            onClick={() => updateRideStatus(rideId, 'completed')}
-            className="bg-green-500 text-white px-3 py-1 rounded text-sm hover:bg-green-600"
-          >
-            Complete
-          </button>
-        )
-      case 'completed':
-        return (
-          <span className="text-green-600 text-sm font-medium">✓ Completed</span>
-        )
-      default:
-        return null
-    }
-  }
-
-  // Login Form
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="max-w-md w-full">
-          <div className="card">
-            <div className="text-center mb-8">
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">Driver Portal</h1>
-              <p className="text-gray-600">Sign in to access your dashboard</p>
-            </div>
+        <style jsx>{`
+          .btn-primary {
+            background: linear-gradient(135deg, #2563eb 0%, #dc2626 100%);
+            color: white;
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+          }
+          
+          .btn-primary:hover {
+            background: linear-gradient(135deg, #1d4ed8 0%, #b91c1c 100%);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transform: translateY(-1px);
+          }
+          
+          .input-field {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: white;
+          }
+          
+          .input-field:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+          }
+          
+          .gradient-text {
+            background: linear-gradient(135deg, #2563eb 0%, #dc2626 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+          }
+        `}</style>
 
-            {error && (
-              <div className="bg-red-50 border border-red-200 rounded-lg p-3 mb-6">
-                <p className="text-red-800 text-sm">{error}</p>
-              </div>
-            )}
-
-            <form onSubmit={handleLogin} className="space-y-6">
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  required
-                  value={loginData.email}
-                  onChange={(e) => setLoginData(prev => ({ ...prev, email: e.target.value }))}
-                  className="input-field"
-                  placeholder="driver@bluxacorp.com"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  id="password"
-                  required
-                  value={loginData.password}
-                  onChange={(e) => setLoginData(prev => ({ ...prev, password: e.target.value }))}
-                  className="input-field"
-                  placeholder="Enter your password"
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={loading}
-                className="btn-primary w-full disabled:opacity-50"
-              >
-                {loading ? (
-                  <span className="flex items-center justify-center">
-                    <div className="loading-spinner mr-2"></div>
-                    Signing In...
-                  </span>
-                ) : (
-                  'Login to Driver Portal'
-                )}
-              </button>
-            </form>
-
-            <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-              <p className="text-sm text-blue-800">
-                <strong>Demo Credentials:</strong><br />
-                Email: driver@bluxacorp.com<br />
-                Password: Driver2024!
-              </p>
-            </div>
+        <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8">
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold gradient-text mb-2">BLuxA Corp</h1>
+            <h2 className="text-xl font-semibold text-gray-900">Driver Portal</h2>
+            <p className="text-gray-600 mt-2">Sign in to access your driver dashboard</p>
           </div>
-        </div>
-      </div>
-    )
-  }
 
-  // Dashboard
-  if (loading && !dashboardData) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="loading-spinner w-8 h-8 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading dashboard...</p>
+          <form onSubmit={handleLogin} className="space-y-6">
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                Email Address
+              </label>
+              <input
+                type="email"
+                id="email"
+                className="input-field"
+                placeholder="driver@bluxacorp.com"
+                value={loginData.email}
+                onChange={(e) => setLoginData(prev => ({ ...prev, email: e.target.value }))}
+                required
+              />
+            </div>
+
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                className="input-field"
+                placeholder="Enter your password"
+                value={loginData.password}
+                onChange={(e) => setLoginData(prev => ({ ...prev, password: e.target.value }))}
+                required
+              />
+            </div>
+
+            <button type="submit" className="btn-primary">
+              Sign In
+            </button>
+          </form>
+
+          <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+            <p className="text-sm text-blue-800">
+              <strong>Demo Credentials:</strong><br />
+              Email: driver@bluxacorp.com<br />
+              Password: Driver2024!
+            </p>
+          </div>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">Driver Dashboard</h1>
-              <p className="text-gray-600">Welcome back, {dashboardData?.driver?.name}</p>
+    <div className="bg-gray-50 min-h-screen">
+      <style jsx>{`
+        .btn-primary {
+          background: linear-gradient(135deg, #2563eb 0%, #dc2626 100%);
+          color: white;
+          font-weight: 600;
+          padding: 12px 24px;
+          border-radius: 8px;
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+          transition: all 0.3s ease;
+          border: none;
+          cursor: pointer;
+        }
+        
+        .btn-primary:hover {
+          background: linear-gradient(135deg, #1d4ed8 0%, #b91c1c 100%);
+          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+          transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+          background: white;
+          color: #374151;
+          border: 2px solid #d1d5db;
+          font-weight: 600;
+          padding: 8px 16px;
+          border-radius: 6px;
+          transition: all 0.3s ease;
+          cursor: pointer;
+          font-size: 14px;
+        }
+        
+        .btn-secondary:hover {
+          border-color: #9ca3af;
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-success {
+          background: #10b981;
+          color: white;
+          font-weight: 600;
+          padding: 8px 16px;
+          border-radius: 6px;
+          border: none;
+          cursor: pointer;
+          font-size: 14px;
+        }
+        
+        .btn-warning {
+          background: #f59e0b;
+          color: white;
+          font-weight: 600;
+          padding: 8px 16px;
+          border-radius: 6px;
+          border: none;
+          cursor: pointer;
+          font-size: 14px;
+        }
+        
+        .card {
+          background: white;
+          border-radius: 12px;
+          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+          padding: 24px;
+          border: 1px solid #f3f4f6;
+          transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+          box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gradient-text {
+          background: linear-gradient(135deg, #2563eb 0%, #dc2626 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+        
+        .status-badge {
+          padding: 4px 12px;
+          border-radius: 20px;
+          font-size: 12px;
+          font-weight: 600;
+          text-transform: uppercase;
+        }
+        
+        .status-upcoming {
+          background: #dbeafe;
+          color: #1e40af;
+        }
+        
+        .status-in-progress {
+          background: #fef3c7;
+          color: #d97706;
+        }
+        
+        .status-completed {
+          background: #d1fae5;
+          color: #065f46;
+        }
+        
+        .metric-card {
+          background: white;
+          border-radius: 12px;
+          padding: 24px;
+          text-align: center;
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+          border: 1px solid #f3f4f6;
+        }
+        
+        .metric-value {
+          font-size: 2.5rem;
+          font-weight: 800;
+          margin-bottom: 8px;
+        }
+        
+        .metric-label {
+          color: #6b7280;
+          font-size: 14px;
+          font-weight: 500;
+        }
+      `}</style>
+
+      {/* Navigation */}
+      <nav className="bg-white shadow-sm border-b sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-4">
+            <div className="flex items-center">
+              <h1 className="text-2xl font-bold gradient-text">BLuxA Corp</h1>
+              <span className="ml-4 text-gray-500">Driver Portal</span>
             </div>
             <div className="flex items-center space-x-4">
-              <div className="text-right">
-                <p className="text-sm text-gray-600">Status</p>
-                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                  Available
-                </span>
-              </div>
-              <button
-                onClick={() => setIsAuthenticated(false)}
-                className="btn-secondary"
-              >
-                Sign Out
-              </button>
+              <span className="text-gray-700">Welcome, <strong>Michael Johnson</strong></span>
+              <button className="btn-secondary" onClick={handleLogout}>Sign Out</button>
             </div>
           </div>
         </div>
-      </div>
+      </nav>
 
+      {/* Dashboard Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Stats Cards */}
+        <div className="mb-8">
+          <h2 className="text-3xl font-bold text-gray-900 mb-2">Driver Dashboard</h2>
+          <p className="text-gray-600">Manage your rides and track your performance</p>
+        </div>
+
+        {/* Today's Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div className="card text-center">
-            <div className="text-3xl mb-2">🚗</div>
-            <div className="text-2xl font-bold text-gray-900">{dashboardData?.today?.rides || 0}</div>
-            <p className="text-gray-600">Today's Rides</p>
+          <div className="metric-card">
+            <div className="metric-value text-blue-600">3</div>
+            <div className="metric-label">Rides Scheduled</div>
           </div>
-
-          <div className="card text-center">
-            <div className="text-3xl mb-2">📊</div>
-            <div className="text-2xl font-bold text-gray-900">{dashboardData?.driver?.total_rides || 0}</div>
-            <p className="text-gray-600">Total Rides</p>
+          <div className="metric-card">
+            <div className="metric-value text-green-600">245</div>
+            <div className="metric-label">Total Rides Completed</div>
           </div>
-
-          <div className="card text-center">
-            <div className="text-3xl mb-2">⭐</div>
-            <div className="text-2xl font-bold text-gray-900">{dashboardData?.driver?.rating || 0}</div>
-            <p className="text-gray-600">Rating</p>
+          <div className="metric-card">
+            <div className="metric-value text-yellow-600">4.9</div>
+            <div className="metric-label">Current Rating</div>
           </div>
-
-          <div className="card text-center">
-            <div className="text-3xl mb-2">💰</div>
-            <div className="text-2xl font-bold text-gray-900">${dashboardData?.today?.earnings || 0}</div>
-            <p className="text-gray-600">This Week</p>
+          <div className="metric-card">
+            <div className="metric-value text-purple-600">$1,250</div>
+            <div className="metric-label">Weekly Earnings</div>
           </div>
         </div>
 
-        {/* Today's Schedule */}
-        <div className="card">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-gray-900">Today's Schedule</h2>
-            <button 
-              onClick={loadDashboardData}
-              className="btn-secondary"
-            >
-              Refresh
-            </button>
-          </div>
-
-          {dashboardData?.rides?.length > 0 ? (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Today's Schedule */}
+          <div className="card">
+            <h3 className="text-xl font-bold text-gray-900 mb-6">Today's Schedule</h3>
+            
             <div className="space-y-4">
-              {dashboardData.rides.map((ride) => (
-                <div key={ride.id} className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center space-x-3">
-                      <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(ride.status)}`}>
-                        {ride.status.replace('_', ' ').toUpperCase()}
-                      </span>
-                      <span className="text-sm text-gray-500">{ride.booking_code}</span>
+              {[
+                {
+                  id: 'BLX-2025-001',
+                  time: '14:30',
+                  customer: 'John Smith',
+                  pickup: '123 Park Avenue, NYC',
+                  destination: 'JFK Airport',
+                  status: 'upcoming',
+                  duration: '45 min'
+                },
+                {
+                  id: 'BLX-2025-002',
+                  time: '16:00',
+                  customer: 'Sarah Davis',
+                  pickup: 'Corporate Plaza, Manhattan',
+                  destination: 'LaGuardia Airport',
+                  status: 'in-progress',
+                  duration: '35 min'
+                },
+                {
+                  id: 'BLX-2025-003',
+                  time: '18:30',
+                  customer: 'Robert Wilson',
+                  pickup: 'Grand Central Terminal',
+                  destination: '456 Broadway, NYC',
+                  status: 'upcoming',
+                  duration: '25 min'
+                }
+              ].map((ride) => (
+                <div key={ride.id} className="border rounded-lg p-4 hover:bg-gray-50">
+                  <div className="flex justify-between items-start mb-3">
+                    <div>
+                      <div className="flex items-center space-x-2">
+                        <span className="font-bold text-lg text-blue-600">{ride.time}</span>
+                        <span className={`status-badge status-${ride.status}`}>
+                          {ride.status.replace('-', ' ')}
+                        </span>
+                      </div>
+                      <p className="text-sm text-gray-600">Booking ID: {ride.id}</p>
                     </div>
-                    <div className="text-right">
-                      <p className="text-lg font-semibold text-gray-900">${ride.earnings}</p>
-                      <p className="text-sm text-gray-600">{ride.pickup_time}</p>
+                    <span className="text-sm text-gray-500">{ride.duration}</span>
+                  </div>
+                  
+                  <div className="mb-3">
+                    <p className="font-semibold text-gray-900">{ride.customer}</p>
+                  </div>
+                  
+                  <div className="space-y-2 mb-4">
+                    <div className="flex items-start">
+                      <span className="text-green-600 mr-2">📍</span>
+                      <div>
+                        <p className="text-sm font-medium text-gray-900">Pickup:</p>
+                        <p className="text-sm text-gray-600">{ride.pickup}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <span className="text-red-600 mr-2">🎯</span>
+                      <div>
+                        <p className="text-sm font-medium text-gray-900">Destination:</p>
+                        <p className="text-sm text-gray-600">{ride.destination}</p>
+                      </div>
                     </div>
                   </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                    <div>
-                      <p className="text-sm font-medium text-gray-700">Customer</p>
-                      <p className="text-gray-900">{ride.customer_name}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium text-gray-700">Pickup</p>
-                      <p className="text-gray-900">{ride.pickup_address}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium text-gray-700">Destination</p>
-                      <p className="text-gray-900">{ride.destination}</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                      <span className="text-sm text-gray-600">Vehicle: {ride.vehicle}</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      {getStatusActions(ride.status, ride.id)}
-                    </div>
+                  
+                  <div className="flex space-x-2">
+                    {ride.status === 'upcoming' && (
+                      <>
+                        <button 
+                          className="btn-success flex-1"
+                          onClick={() => updateRideStatus(ride.id, 'in-progress')}
+                        >
+                          Start Ride
+                        </button>
+                        <button className="btn-secondary">Contact Customer</button>
+                      </>
+                    )}
+                    {ride.status === 'in-progress' && (
+                      <>
+                        <button 
+                          className="btn-primary flex-1"
+                          onClick={() => updateRideStatus(ride.id, 'completed')}
+                        >
+                          Complete Ride
+                        </button>
+                        <button className="btn-warning">Update Status</button>
+                      </>
+                    )}
                   </div>
                 </div>
               ))}
             </div>
-          ) : (
-            <div className="text-center py-12">
-              <div className="text-6xl mb-4">📅</div>
-              <h3 className="text-xl font-medium text-gray-900 mb-2">No rides scheduled</h3>
-              <p className="text-gray-600">Check back later for new assignments</p>
+          </div>
+
+          {/* Performance Tracking */}
+          <div className="card">
+            <h3 className="text-xl font-bold text-gray-900 mb-6">Performance Tracking</h3>
+            
+            <div className="space-y-6">
+              {/* Rating Breakdown */}
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-3">Rating Breakdown</h4>
+                <div className="space-y-2">
+                  {[
+                    { stars: 5, count: 198, percentage: 81 },
+                    { stars: 4, count: 35, percentage: 14 },
+                    { stars: 3, count: 8, percentage: 3 },
+                    { stars: 2, count: 3, percentage: 1 },
+                    { stars: 1, count: 1, percentage: 1 }
+                  ].map((rating) => (
+                    <div key={rating.stars} className="flex items-center space-x-3">
+                      <span className="text-sm w-8">{rating.stars}⭐</span>
+                      <div className="flex-1 bg-gray-200 rounded-full h-2">
+                        <div 
+                          className="bg-yellow-400 h-2 rounded-full" 
+                          style={{ width: `${rating.percentage}%` }}
+                        ></div>
+                      </div>
+                      <span className="text-sm text-gray-600 w-12">{rating.count}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Weekly Stats */}
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-3">This Week's Stats</h4>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="text-center p-3 bg-blue-50 rounded-lg">
+                    <div className="text-2xl font-bold text-blue-600">18</div>
+                    <div className="text-sm text-blue-800">Rides Completed</div>
+                  </div>
+                  <div className="text-center p-3 bg-green-50 rounded-lg">
+                    <div className="text-2xl font-bold text-green-600">$1,250</div>
+                    <div className="text-sm text-green-800">Earnings</div>
+                  </div>
+                  <div className="text-center p-3 bg-purple-50 rounded-lg">
+                    <div className="text-2xl font-bold text-purple-600">42h</div>
+                    <div className="text-sm text-purple-800">Hours Worked</div>
+                  </div>
+                  <div className="text-center p-3 bg-yellow-50 rounded-lg">
+                    <div className="text-2xl font-bold text-yellow-600">4.9</div>
+                    <div className="text-sm text-yellow-800">Avg Rating</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Recent Feedback */}
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-3">Recent Customer Feedback</h4>
+                <div className="space-y-3">
+                  {[
+                    { customer: 'John S.', rating: 5, comment: 'Excellent service! Very professional and punctual.' },
+                    { customer: 'Sarah D.', rating: 5, comment: 'Smooth ride and great conversation. Highly recommend!' },
+                    { customer: 'Robert W.', rating: 4, comment: 'Good service, clean vehicle. Thank you!' }
+                  ].map((feedback, index) => (
+                    <div key={index} className="border-l-4 border-blue-500 pl-4 py-2">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="font-medium text-gray-900">{feedback.customer}</span>
+                        <span className="text-yellow-500">{'⭐'.repeat(feedback.rating)}</span>
+                      </div>
+                      <p className="text-sm text-gray-600">"{feedback.comment}"</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-          )}
+          </div>
+        </div>
+
+        {/* Quick Actions */}
+        <div className="mt-8">
+          <div className="card">
+            <h3 className="text-xl font-bold text-gray-900 mb-4">Quick Actions</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <button className="btn-primary">Report Issue</button>
+              <button className="btn-secondary">Update Availability</button>
+              <button className="btn-secondary">View Earnings Report</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
