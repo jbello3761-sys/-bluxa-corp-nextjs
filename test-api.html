@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .success { color: green; }
+        .error { color: red; }
+        .warning { color: orange; }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover { background: #0056b3; }
+        pre { background: #f5f5f5; padding: 10px; border-radius: 4px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>BLuxA API Connection Test</h1>
+    
+    <div class="test-section">
+        <h3>Test 1: Direct Fetch (No CORS)</h3>
+        <button onclick="testDirectFetch()">Test Direct Fetch</button>
+        <div id="direct-result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Test 2: Fetch with CORS Headers</h3>
+        <button onclick="testCorsFetch()">Test CORS Fetch</button>
+        <div id="cors-result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Test 3: Health Check</h3>
+        <button onclick="testHealth()">Test Health</button>
+        <div id="health-result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Test 4: Pricing Endpoint</h3>
+        <button onclick="testPricing()">Test Pricing</button>
+        <div id="pricing-result"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'https://bluxa-backend.onrender.com';
+        
+        function showResult(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            element.innerHTML = `<div class="${type}">${message}</div>`;
+        }
+        
+        async function testDirectFetch() {
+            try {
+                const response = await fetch(`${API_BASE}/health`);
+                const data = await response.json();
+                showResult('direct-result', 
+                    `<strong>Success!</strong><br>Status: ${response.status}<br><pre>${JSON.stringify(data, null, 2)}</pre>`, 
+                    'success'
+                );
+            } catch (error) {
+                showResult('direct-result', 
+                    `<strong>Error:</strong> ${error.message}`, 
+                    'error'
+                );
+            }
+        }
+        
+        async function testCorsFetch() {
+            try {
+                const response = await fetch(`${API_BASE}/health`, {
+                    method: 'GET',
+                    mode: 'cors',
+                    credentials: 'omit',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    }
+                });
+                const data = await response.json();
+                showResult('cors-result', 
+                    `<strong>Success!</strong><br>Status: ${response.status}<br><pre>${JSON.stringify(data, null, 2)}</pre>`, 
+                    'success'
+                );
+            } catch (error) {
+                showResult('cors-result', 
+                    `<strong>Error:</strong> ${error.message}<br><br>This is likely a CORS issue. The backend needs to return proper CORS headers.`, 
+                    'error'
+                );
+            }
+        }
+        
+        async function testHealth() {
+            try {
+                const response = await fetch(`${API_BASE}/health`, {
+                    method: 'GET',
+                    mode: 'cors',
+                    credentials: 'omit',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    }
+                });
+                const data = await response.json();
+                showResult('health-result', 
+                    `<strong>Health Check Success!</strong><br>Status: ${response.status}<br><pre>${JSON.stringify(data, null, 2)}</pre>`, 
+                    'success'
+                );
+            } catch (error) {
+                showResult('health-result', 
+                    `<strong>Health Check Failed:</strong> ${error.message}`, 
+                    'error'
+                );
+            }
+        }
+        
+        async function testPricing() {
+            try {
+                const response = await fetch(`${API_BASE}/pricing`, {
+                    method: 'GET',
+                    mode: 'cors',
+                    credentials: 'omit',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    }
+                });
+                const data = await response.json();
+                showResult('pricing-result', 
+                    `<strong>Pricing Success!</strong><br>Status: ${response.status}<br><pre>${JSON.stringify(data, null, 2)}</pre>`, 
+                    'success'
+                );
+            } catch (error) {
+                showResult('pricing-result', 
+                    `<strong>Pricing Failed:</strong> ${error.message}<br><br>This is the same error you're seeing in the booking form.`, 
+                    'error'
+                );
+            }
+        }
+        
+        // Auto-run tests on load
+        window.onload = function() {
+            setTimeout(() => {
+                testDirectFetch();
+                setTimeout(() => testCorsFetch(), 1000);
+                setTimeout(() => testHealth(), 2000);
+                setTimeout(() => testPricing(), 3000);
+            }, 500);
+        };
+    </script>
+</body>
+</html>

@@ -86,7 +86,12 @@ async function apiRequest<T>(
   endpoint: string,
   options: RequestInit = {}
 ): Promise<T> {
-  const url = `${config.apiUrl}${endpoint}`
+  // Use Next.js API proxy to avoid CORS issues
+  const isClient = typeof window !== 'undefined'
+  const url = isClient 
+    ? `/api/proxy?endpoint=${encodeURIComponent(endpoint)}`
+    : `${config.apiUrl}${endpoint}`
+  
   const token = getAuthToken()
   
   const defaultHeaders: Record<string, string> = {
@@ -100,8 +105,6 @@ async function apiRequest<T>(
   
   const requestOptions: RequestInit = {
     ...options,
-    mode: 'cors',
-    credentials: 'omit',
     headers: {
       ...defaultHeaders,
       ...options.headers,
