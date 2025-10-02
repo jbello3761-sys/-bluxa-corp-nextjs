@@ -44,6 +44,15 @@ export function AuthHeader() {
                     <a href="/contact" className="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition duration-300">
                       Contact
                     </a>
+                    <a href="/book" className="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition duration-300">
+                      Book Now
+                    </a>
+                    <a href="/admin" className="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition duration-300">
+                      Admin
+                    </a>
+                    <a href="/driver" className="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition duration-300">
+                      Driver
+                    </a>
                   </div>
                 </div>
               </div>
@@ -89,6 +98,20 @@ export function AuthHeader() {
                     </a>
                   </div>
                 )}
+              </div>
+            </div>
+            
+            {/* Mobile menu */}
+            <div className="md:hidden">
+              <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
+                <a href="/" className="text-gray-900 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="/fleet" className="text-gray-900 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Fleet</a>
+                <a href="/services" className="text-gray-900 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Services</a>
+                <a href="/pricing" className="text-gray-900 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Pricing</a>
+                <a href="/contact" className="text-gray-900 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+                <a href="/book" className="text-gray-900 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Book Now</a>
+                <a href="/admin" className="text-gray-900 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Admin Portal</a>
+                <a href="/driver" className="text-gray-900 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Driver Portal</a>
               </div>
             </div>
           </nav>
