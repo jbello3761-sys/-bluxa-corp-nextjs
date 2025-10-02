@@ -58,42 +58,10 @@ export function AuthHeader() {
                   </button>
                 </div>
                 
-                {/* Book Now Button */}
+                {/* Book Now Button - Single instance */}
                 <a href="/book" className="bg-gradient-to-r from-blue-600 to-red-600 text-white font-semibold px-6 py-2 rounded-lg hover:from-blue-700 hover:to-red-700 transition duration-300">
                   Book Now
                 </a>
-
-                {/* Auth Section */}
-                {user ? (
-                  // Signed in state
-                  <div className="flex items-center space-x-4">
-                    <span className="text-sm text-gray-700">
-                      {user.user_metadata?.full_name || user.email}
-                    </span>
-                    <button
-                      onClick={handleSignOut}
-                      className="text-sm text-gray-700 hover:text-blue-600 transition duration-300"
-                    >
-                      Sign Out
-                    </button>
-                    <a href="/book" className="btn-primary">
-                      Book Now
-                    </a>
-                  </div>
-                ) : (
-                  // Signed out state
-                  <div className="flex items-center space-x-4">
-                    <button
-                      onClick={() => setShowSignIn(true)}
-                      className="text-sm text-gray-700 hover:text-blue-600 transition duration-300"
-                    >
-                      Sign In
-                    </button>
-                    <a href="/book" className="btn-primary">
-                      Book Now
-                    </a>
-                  </div>
-                )}
               </div>
             </div>
             
