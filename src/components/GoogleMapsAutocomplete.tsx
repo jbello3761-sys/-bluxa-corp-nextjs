@@ -191,7 +191,7 @@ export function GoogleMapsAutocomplete({
           value={value}
           onChange={handleInputChange}
           placeholder={placeholder}
-          className={className}
+          className={`input-field ${className}`}
           disabled={disabled}
         />
         <p className="text-xs text-yellow-600 mt-1">
@@ -215,7 +215,7 @@ export function GoogleMapsAutocomplete({
         value={value}
         onChange={handleInputChange}
         placeholder={placeholder}
-        className={className}
+        className={`input-field ${className}`}
         disabled={disabled || isLoading}
       />
       {isLoading && (
