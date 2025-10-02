@@ -98,6 +98,11 @@ export function GoogleMapsAutocomplete({
       return
     }
 
+    // Check if we're in development and API key might be restricted
+    if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+      console.warn('GoogleMapsAutocomplete: Running on localhost - API key restrictions may apply')
+    }
+
     const initializeAutocomplete = async () => {
       if (isInitialized || disabled) return
       
@@ -105,24 +110,24 @@ export function GoogleMapsAutocomplete({
         setIsLoading(true)
         setError(null)
         
-        console.log('Loading Google Maps script...')
+        console.log('GoogleMapsAutocomplete: Loading Google Maps script...')
         await loadGoogleMapsScript()
         
         if (!inputRef.current) {
-          console.error('Input ref not available')
+          console.error('GoogleMapsAutocomplete: Input ref not available')
           setError('Input element not available')
           setIsLoading(false)
           return
         }
 
         if (!window.google || !window.google.maps || !window.google.maps.places) {
-          console.error('Google Maps API not available after loading')
+          console.error('GoogleMapsAutocomplete: Google Maps API not available after loading')
           setError('Google Maps API not available')
           setIsLoading(false)
           return
         }
 
-        console.log('Initializing autocomplete...')
+        console.log('GoogleMapsAutocomplete: Initializing autocomplete...')
         // Initialize autocomplete
         autocompleteRef.current = new window.google.maps.places.Autocomplete(inputRef.current, {
           types: ['address'],
@@ -133,25 +138,34 @@ export function GoogleMapsAutocomplete({
         // Add place changed listener
         autocompleteRef.current.addListener('place_changed', () => {
           const place = autocompleteRef.current?.getPlace()
-          console.log('Place selected:', place)
+          console.log('GoogleMapsAutocomplete: Place selected:', place)
           if (place && place.formatted_address) {
             onChange(place.formatted_address, place)
             onPlaceSelect?.(place)
           }
         })
 
-        console.log('Autocomplete initialized successfully')
+        console.log('GoogleMapsAutocomplete: Autocomplete initialized successfully')
         setIsInitialized(true)
         setIsLoading(false)
       } catch (err) {
-        console.error('Failed to initialize Google Maps Autocomplete:', err)
-        setError(`Failed to load address suggestions: ${err.message}`)
+        console.error('GoogleMapsAutocomplete: Failed to initialize:', err)
+        
+        // Check for specific Google Maps errors
+        if (err.message.includes('RefererNotAllowedMapError')) {
+          setError('Google Maps API key restrictions prevent localhost access. Please update API key settings in Google Cloud Console.')
+        } else if (err.message.includes('InvalidKeyMapError')) {
+          setError('Invalid Google Maps API key. Please check your configuration.')
+        } else {
+          setError(`Failed to load address suggestions: ${err.message}`)
+        }
+        
         setIsLoading(false)
       }
     }
 
     // Delay initialization to prevent blocking initial render
-    const timeoutId = setTimeout(initializeAutocomplete, 200)
+    const timeoutId = setTimeout(initializeAutocomplete, 500)
 
     // Cleanup
     return () => {
@@ -185,6 +199,9 @@ export function GoogleMapsAutocomplete({
         </p>
         <p className="text-xs text-red-600 mt-1">
           Error: {error}
+        </p>
+        <p className="text-xs text-blue-600 mt-1">
+          <strong>Fix:</strong> Update Google Maps API key restrictions in Google Cloud Console to allow localhost:3000
         </p>
       </div>
     )

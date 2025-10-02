@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Google Maps Autocomplete</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .error { color: red; }
+        .success { color: green; }
+        .info { color: blue; }
+        #console { 
+            background: #f5f5f5; 
+            padding: 10px; 
+            border-radius: 4px; 
+            max-height: 300px; 
+            overflow-y: auto; 
+            font-family: monospace; 
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Google Maps Autocomplete Debug</h1>
+    
+    <div id="status">Initializing...</div>
+    
+    <div>
+        <label for="autocomplete">Test Address Input:</label>
+        <input id="autocomplete" type="text" placeholder="Enter an address">
+    </div>
+    
+    <div id="results"></div>
+    
+    <h3>Console Log:</h3>
+    <div id="console"></div>
+
+    <script>
+        const API_KEY = 'AIzaSyCzyXWiRxjbZNteNxIhpEw2_M8u8VCDlug';
+        const statusDiv = document.getElementById('status');
+        const resultsDiv = document.getElementById('results');
+        const consoleDiv = document.getElementById('console');
+        
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.className = type;
+            logEntry.textContent = `[${timestamp}] ${message}`;
+            consoleDiv.appendChild(logEntry);
+            consoleDiv.scrollTop = consoleDiv.scrollHeight;
+            console.log(message);
+        }
+        
+        function updateStatus(message, isError = false) {
+            statusDiv.innerHTML = `<div class="${isError ? 'error' : 'success'}">${message}</div>`;
+        }
+        
+        function initAutocomplete() {
+            try {
+                log('Checking Google Maps API availability...');
+                
+                if (!window.google) {
+                    throw new Error('window.google is not defined');
+                }
+                
+                if (!window.google.maps) {
+                    throw new Error('window.google.maps is not defined');
+                }
+                
+                if (!window.google.maps.places) {
+                    throw new Error('window.google.maps.places is not defined');
+                }
+                
+                log('Google Maps API is available');
+                
+                const input = document.getElementById('autocomplete');
+                if (!input) {
+                    throw new Error('Input element not found');
+                }
+                
+                log('Initializing autocomplete...');
+                const autocomplete = new google.maps.places.Autocomplete(input, {
+                    types: ['address'],
+                    componentRestrictions: { country: 'us' },
+                    fields: ['formatted_address', 'geometry', 'name', 'place_id', 'types']
+                });
+                
+                log('Autocomplete created successfully');
+                
+                autocomplete.addListener('place_changed', function() {
+                    log('Place changed event triggered');
+                    const place = autocomplete.getPlace();
+                    log(`Place object: ${JSON.stringify(place, null, 2)}`);
+                    
+                    if (place && place.formatted_address) {
+                        resultsDiv.innerHTML = `
+                            <div class="success">
+                                <strong>Selected Address:</strong> ${place.formatted_address}
+                                <br><strong>Place ID:</strong> ${place.place_id || 'N/A'}
+                                <br><strong>Types:</strong> ${place.types ? place.types.join(', ') : 'N/A'}
+                            </div>
+                        `;
+                        log(`Address selected: ${place.formatted_address}`);
+                    } else {
+                        log('No valid place selected', 'error');
+                        resultsDiv.innerHTML = '<div class="error">No valid place selected</div>';
+                    }
+                });
+                
+                // Test typing
+                input.addEventListener('input', function(e) {
+                    log(`User typing: "${e.target.value}"`);
+                });
+                
+                updateStatus('Google Maps Autocomplete initialized successfully!');
+                log('Initialization complete');
+                
+            } catch (error) {
+                log(`Error: ${error.message}`, 'error');
+                updateStatus(`Error: ${error.message}`, true);
+            }
+        }
+        
+        function loadGoogleMaps() {
+            log('Starting Google Maps script load...');
+            
+            // Check if already loaded
+            if (window.google && window.google.maps && window.google.maps.places) {
+                log('Google Maps already loaded');
+                initAutocomplete();
+                return;
+            }
+            
+            const script = document.createElement('script');
+            script.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places&callback=initAutocomplete`;
+            script.async = true;
+            script.defer = true;
+            
+            script.onload = function() {
+                log('Script loaded successfully');
+            };
+            
+            script.onerror = function() {
+                log('Failed to load Google Maps script', 'error');
+                updateStatus('Failed to load Google Maps API script', true);
+            };
+            
+            document.head.appendChild(script);
+            log('Script element added to head');
+        }
+        
+        // Start loading
+        log('Starting Google Maps initialization...');
+        loadGoogleMaps();
+    </script>
+</body>
+</html>
