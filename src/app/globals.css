@@ -334,6 +334,15 @@ code {
   .grid-cols-1 {
     gap: 20px;
   }
+  
+  /* Mobile navigation improvements */
+  header {
+    padding: 0;
+  }
+  
+  nav {
+    padding: 0 16px;
+  }
 }
 
 /* Extra small mobile devices */

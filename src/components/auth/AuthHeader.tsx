@@ -22,10 +22,10 @@ export function AuthHeader() {
       ) : (
         <header className="bg-white shadow-lg">
           <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center h-16">
+            <div className="flex justify-between items-center h-14 md:h-16">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                      <h1 className="text-2xl font-bold text-gradient">BLuxA Transportation</h1>
+                  <h1 className="text-lg md:text-2xl font-bold text-gradient">BLuxA Transportation</h1>
                 </div>
         {/* Desktop Navigation */}
         <div className="hidden md:block">
@@ -49,20 +49,20 @@ export function AuthHeader() {
         </div>
 
         {/* Mobile Navigation */}
-        <div className="md:hidden">
-          <div className="flex items-center space-x-2">
-            <a href="/book" className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition duration-300">
-              Book Now
-            </a>
-            <button className="text-gray-900 hover:text-blue-600 p-2 rounded-md">
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
-          </div>
+        <div className="md:hidden flex items-center space-x-3">
+          <a href="/book" className="bg-blue-600 text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition duration-300">
+            Book Now
+          </a>
+          <button className="text-gray-600 hover:text-gray-900 p-1 rounded-md">
+            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
         </div>
               </div>
-              <div className="flex items-center space-x-4">
+              
+              {/* Desktop Right Side */}
+              <div className="hidden md:flex items-center space-x-4">
                 {/* Language Toggle */}
                 <div className="flex space-x-2">
                   <button className="px-3 py-1 text-sm font-medium bg-gray-100 hover:bg-gray-200 rounded transition duration-300">
@@ -73,23 +73,12 @@ export function AuthHeader() {
                   </button>
                 </div>
                 
-                {/* Book Now Button - Single instance */}
+                {/* Book Now Button - Desktop only */}
                 <a href="/book" className="bg-gradient-to-r from-blue-600 to-red-600 text-white font-semibold px-6 py-2 rounded-lg hover:from-blue-700 hover:to-red-700 transition duration-300">
                   Book Now
                 </a>
               </div>
             </div>
-            
-        {/* Mobile menu */}
-        <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
-            <a href="/" className="text-gray-900 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Home</a>
-            <a href="/fleet" className="text-gray-900 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Fleet</a>
-            <a href="/services" className="text-gray-900 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Services</a>
-            <a href="/pricing" className="text-gray-900 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Pricing</a>
-            <a href="/contact" className="text-gray-900 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
-          </div>
-        </div>
           </nav>
         </header>
       )}
