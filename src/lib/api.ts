@@ -91,6 +91,7 @@ async function apiRequest<T>(
   
   const defaultHeaders: Record<string, string> = {
     'Content-Type': 'application/json',
+    'Accept': 'application/json',
   }
   
   if (token) {
@@ -99,6 +100,8 @@ async function apiRequest<T>(
   
   const requestOptions: RequestInit = {
     ...options,
+    mode: 'cors',
+    credentials: 'omit',
     headers: {
       ...defaultHeaders,
       ...options.headers,

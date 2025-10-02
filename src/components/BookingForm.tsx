@@ -36,7 +36,7 @@ export function BookingForm({ onBookingSuccess, className = '' }: BookingFormPro
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({})
 
-  // Load pricing data on component mount with caching
+  // Load pricing data on component mount with caching and fallback
   useEffect(() => {
     const loadPricing = async () => {
       try {
@@ -55,12 +55,44 @@ export function BookingForm({ onBookingSuccess, className = '' }: BookingFormPro
           return
         }
         
-        const pricingData = await api.getPricing()
-        setPricing(pricingData)
-        
-        // Cache the pricing data
-        localStorage.setItem('bluxa-pricing-cache', JSON.stringify(pricingData))
-        localStorage.setItem('bluxa-pricing-cache-timestamp', now.toString())
+        try {
+          const pricingData = await api.getPricing()
+          setPricing(pricingData)
+          
+          // Cache the pricing data
+          localStorage.setItem('bluxa-pricing-cache', JSON.stringify(pricingData))
+          localStorage.setItem('bluxa-pricing-cache-timestamp', now.toString())
+        } catch (apiError) {
+          console.error('API pricing failed, using fallback:', apiError)
+          
+          // Fallback pricing data
+          const fallbackPricing = {
+            pricing: {
+              executive_sedan: {
+                base_rate: 2500, // $25.00 in cents
+                per_hour_rate: 6500, // $65.00 in cents
+                minimum_charge: 5000, // $50.00 in cents
+                airport_transfer_rate: 7500 // $75.00 in cents
+              },
+              luxury_suv: {
+                base_rate: 2500,
+                per_hour_rate: 6500,
+                minimum_charge: 5000,
+                airport_transfer_rate: 7500
+              },
+              sprinter_van: {
+                base_rate: 2500,
+                per_hour_rate: 6500,
+                minimum_charge: 5000,
+                airport_transfer_rate: 7500
+              }
+            },
+            currency: 'USD'
+          }
+          
+          setPricing(fallbackPricing)
+          setErrors({ pricing: 'Using offline pricing - rates may not be current' })
+        }
         
       } catch (error) {
         console.error('Failed to load pricing:', error)
