@@ -13,20 +13,13 @@ export const config = {
   },
 } as const;
 
-// Validate required environment variables (only in browser, not during build)
+// Debug environment variables
 if (typeof window !== 'undefined') {
-  const requiredEnvVars = [
-    'NEXT_PUBLIC_API_URL',
-    'NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY', 
-    'NEXT_PUBLIC_SUPABASE_URL',
-    'NEXT_PUBLIC_SUPABASE_ANON_KEY',
-    'NEXT_PUBLIC_GOOGLE_MAPS_API_KEY',
-  ] as const;
-
-  const missingVars = requiredEnvVars.filter(envVar => !process.env[envVar]);
-  
-  if (missingVars.length > 0) {
-    console.warn('Missing environment variables:', missingVars);
-    console.warn('Using fallback values from config');
-  }
+  console.log('Environment variables check:');
+  console.log('NEXT_PUBLIC_API_URL:', process.env.NEXT_PUBLIC_API_URL ? 'SET' : 'MISSING');
+  console.log('NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:', process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ? 'SET' : 'MISSING');
+  console.log('NEXT_PUBLIC_SUPABASE_URL:', process.env.NEXT_PUBLIC_SUPABASE_URL ? 'SET' : 'MISSING');
+  console.log('NEXT_PUBLIC_SUPABASE_ANON_KEY:', process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? 'SET' : 'MISSING');
+  console.log('NEXT_PUBLIC_GOOGLE_MAPS_API_KEY:', process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ? 'SET' : 'MISSING');
+  console.log('Config object:', config);
 }
