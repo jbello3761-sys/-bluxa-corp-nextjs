@@ -8,6 +8,9 @@ export const config = {
     url: process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://uhpcgbkknsnrgyxseawp.supabase.co',
     anonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '',
   },
+  googleMaps: {
+    apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || '',
+  },
 } as const;
 
 // Validate required environment variables (only in browser, not during build)
@@ -17,6 +20,7 @@ if (typeof window !== 'undefined') {
     'NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY', 
     'NEXT_PUBLIC_SUPABASE_URL',
     'NEXT_PUBLIC_SUPABASE_ANON_KEY',
+    'NEXT_PUBLIC_GOOGLE_MAPS_API_KEY',
   ] as const;
 
   const missingVars = requiredEnvVars.filter(envVar => !process.env[envVar]);

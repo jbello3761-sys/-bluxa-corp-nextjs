@@ -1,0 +1,216 @@
+'use client'
+
+import React, { useEffect, useRef, useState } from 'react'
+import { config } from '@/lib/config'
+
+interface GoogleMapsAutocompleteProps {
+  value: string
+  onChange: (value: string, placeDetails?: google.maps.places.PlaceResult) => void
+  placeholder?: string
+  className?: string
+  disabled?: boolean
+  onPlaceSelect?: (place: google.maps.places.PlaceResult) => void
+}
+
+// Load Google Maps API script
+const loadGoogleMapsScript = (): Promise<void> => {
+  return new Promise((resolve, reject) => {
+    if (typeof window === 'undefined') {
+      reject(new Error('Google Maps can only be loaded in browser environment'))
+      return
+    }
+
+    // Check if already loaded
+    if (window.google && window.google.maps && window.google.maps.places) {
+      resolve()
+      return
+    }
+
+    // Check if script is already being loaded
+    if (document.querySelector('script[src*="maps.googleapis.com"]')) {
+      // Wait for it to load
+      const checkLoaded = () => {
+        if (window.google && window.google.maps && window.google.maps.places) {
+          resolve()
+        } else {
+          setTimeout(checkLoaded, 100)
+        }
+      }
+      checkLoaded()
+      return
+    }
+
+    const script = document.createElement('script')
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${config.googleMaps.apiKey}&libraries=places`
+    script.async = true
+    script.defer = true
+    
+    script.onload = () => {
+      if (window.google && window.google.maps && window.google.maps.places) {
+        resolve()
+      } else {
+        reject(new Error('Google Maps API failed to load properly'))
+      }
+    }
+    
+    script.onerror = () => {
+      reject(new Error('Failed to load Google Maps API'))
+    }
+    
+    document.head.appendChild(script)
+  })
+}
+
+export function GoogleMapsAutocomplete({
+  value,
+  onChange,
+  placeholder = 'Enter address',
+  className = '',
+  disabled = false,
+  onPlaceSelect
+}: GoogleMapsAutocompleteProps) {
+  const inputRef = useRef<HTMLInputElement>(null)
+  const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (!config.googleMaps.apiKey) {
+      setError('Google Maps API key not configured')
+      setIsLoading(false)
+      return
+    }
+
+    const initializeAutocomplete = async () => {
+      try {
+        await loadGoogleMapsScript()
+        
+        if (!inputRef.current) return
+
+        // Initialize autocomplete
+        autocompleteRef.current = new google.maps.places.Autocomplete(inputRef.current, {
+          types: ['address'],
+          componentRestrictions: { country: 'us' }, // Restrict to US addresses
+          fields: ['formatted_address', 'geometry', 'name', 'place_id', 'types']
+        })
+
+        // Add place changed listener
+        autocompleteRef.current.addListener('place_changed', () => {
+          const place = autocompleteRef.current?.getPlace()
+          if (place && place.formatted_address) {
+            onChange(place.formatted_address, place)
+            onPlaceSelect?.(place)
+          }
+        })
+
+        setIsLoading(false)
+      } catch (err) {
+        console.error('Failed to initialize Google Maps Autocomplete:', err)
+        setError('Failed to load address suggestions')
+        setIsLoading(false)
+      }
+    }
+
+    initializeAutocomplete()
+
+    // Cleanup
+    return () => {
+      if (autocompleteRef.current) {
+        google.maps.event.clearInstanceListeners(autocompleteRef.current)
+      }
+    }
+  }, [onChange, onPlaceSelect])
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(e.target.value)
+  }
+
+  if (error) {
+    // Fallback to regular input if Google Maps fails
+    return (
+      <div>
+        <input
+          ref={inputRef}
+          type="text"
+          value={value}
+          onChange={handleInputChange}
+          placeholder={placeholder}
+          className={className}
+          disabled={disabled}
+        />
+        <p className="text-xs text-yellow-600 mt-1">
+          Address suggestions unavailable - using manual entry
+        </p>
+      </div>
+    )
+  }
+
+  return (
+    <div className="relative">
+      <input
+        ref={inputRef}
+        type="text"
+        value={value}
+        onChange={handleInputChange}
+        placeholder={placeholder}
+        className={className}
+        disabled={disabled || isLoading}
+      />
+      {isLoading && (
+        <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+// Utility function to calculate distance between two places
+export const calculateDistance = async (
+  origin: string,
+  destination: string
+): Promise<{ distance: number; duration: number } | null> => {
+  try {
+    if (!window.google || !window.google.maps) {
+      throw new Error('Google Maps not loaded')
+    }
+
+    const service = new google.maps.DistanceMatrixService()
+    
+    return new Promise((resolve, reject) => {
+      service.getDistanceMatrix({
+        origins: [origin],
+        destinations: [destination],
+        travelMode: google.maps.TravelMode.DRIVING,
+        unitSystem: google.maps.UnitSystem.IMPERIAL,
+        avoidHighways: false,
+        avoidTolls: false
+      }, (response, status) => {
+        if (status === google.maps.DistanceMatrixStatus.OK && response) {
+          const element = response.rows[0]?.elements[0]
+          if (element && element.status === 'OK') {
+            resolve({
+              distance: element.distance?.value || 0, // in meters
+              duration: element.duration?.value || 0  // in seconds
+            })
+          } else {
+            resolve(null)
+          }
+        } else {
+          reject(new Error(`Distance calculation failed: ${status}`))
+        }
+      })
+    })
+  } catch (error) {
+    console.error('Distance calculation error:', error)
+    return null
+  }
+}
+
+// Type declarations for Google Maps
+declare global {
+  interface Window {
+    google: typeof google
+  }
+}
+

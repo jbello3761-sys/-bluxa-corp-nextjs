@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { api, amountUtils, validation, getErrorMessage, type BookingData, type BookingResponse, type PricingData } from '@/lib/api'
 import { useSession } from '@/components/auth/AuthProvider'
 import { SkeletonBookingForm, LoadingButton } from '@/components/LoadingStates'
+import { GoogleMapsAutocomplete, calculateDistance } from '@/components/GoogleMapsAutocomplete'
 
 interface BookingFormProps {
   onBookingSuccess?: (booking: BookingResponse) => void
@@ -307,13 +308,25 @@ export function BookingForm({ onBookingSuccess, className = '' }: BookingFormPro
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Pickup Address *
               </label>
-              <input
-                type="text"
+              <GoogleMapsAutocomplete
                 value={formData.pickup_address}
-                onChange={(e) => handleInputChange('pickup_address', e.target.value)}
-                className={`input-field ${fieldErrors.pickup_address ? 'border-red-500' : ''}`}
+                onChange={(value) => handleInputChange('pickup_address', value)}
+                onPlaceSelect={(place) => {
+                  handleInputChange('pickup_address', place.formatted_address)
+                  // Calculate distance and update duration if destination is also set
+                  if (formData.destination) {
+                    calculateDistance(place.formatted_address, formData.destination)
+                      .then(result => {
+                        if (result && result.duration) {
+                          handleInputChange('estimated_duration', Math.ceil(result.duration / 60))
+                        }
+                      })
+                      .catch(error => console.warn('Distance calculation failed:', error))
+                  }
+                }}
                 placeholder="Enter pickup address"
                 disabled={loading}
+                className={fieldErrors.pickup_address ? 'border-red-500' : ''}
               />
               {fieldErrors.pickup_address && (
                 <p className="text-sm text-red-600 mt-1">{fieldErrors.pickup_address}</p>
@@ -324,13 +337,25 @@ export function BookingForm({ onBookingSuccess, className = '' }: BookingFormPro
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Destination *
               </label>
-              <input
-                type="text"
+              <GoogleMapsAutocomplete
                 value={formData.destination}
-                onChange={(e) => handleInputChange('destination', e.target.value)}
-                className={`input-field ${fieldErrors.destination ? 'border-red-500' : ''}`}
+                onChange={(value) => handleInputChange('destination', value)}
+                onPlaceSelect={(place) => {
+                  handleInputChange('destination', place.formatted_address)
+                  // Calculate distance and update duration if pickup is also set
+                  if (formData.pickup_address) {
+                    calculateDistance(formData.pickup_address, place.formatted_address)
+                      .then(result => {
+                        if (result && result.duration) {
+                          handleInputChange('estimated_duration', Math.ceil(result.duration / 60))
+                        }
+                      })
+                      .catch(error => console.warn('Distance calculation failed:', error))
+                  }
+                }}
                 placeholder="Enter destination"
                 disabled={loading}
+                className={fieldErrors.destination ? 'border-red-500' : ''}
               />
               {fieldErrors.destination && (
                 <p className="text-sm text-red-600 mt-1">{fieldErrors.destination}</p>
