@@ -103,10 +103,26 @@ export function GoogleMapsAutocomplete({
       
       try {
         setIsLoading(true)
+        setError(null)
+        
+        console.log('Loading Google Maps script...')
         await loadGoogleMapsScript()
         
-        if (!inputRef.current) return
+        if (!inputRef.current) {
+          console.error('Input ref not available')
+          setError('Input element not available')
+          setIsLoading(false)
+          return
+        }
 
+        if (!window.google || !window.google.maps || !window.google.maps.places) {
+          console.error('Google Maps API not available after loading')
+          setError('Google Maps API not available')
+          setIsLoading(false)
+          return
+        }
+
+        console.log('Initializing autocomplete...')
         // Initialize autocomplete
         autocompleteRef.current = new window.google.maps.places.Autocomplete(inputRef.current, {
           types: ['address'],
@@ -117,17 +133,19 @@ export function GoogleMapsAutocomplete({
         // Add place changed listener
         autocompleteRef.current.addListener('place_changed', () => {
           const place = autocompleteRef.current?.getPlace()
+          console.log('Place selected:', place)
           if (place && place.formatted_address) {
             onChange(place.formatted_address, place)
             onPlaceSelect?.(place)
           }
         })
 
+        console.log('Autocomplete initialized successfully')
         setIsInitialized(true)
         setIsLoading(false)
       } catch (err) {
         console.error('Failed to initialize Google Maps Autocomplete:', err)
-        setError('Failed to load address suggestions')
+        setError(`Failed to load address suggestions: ${err.message}`)
         setIsLoading(false)
       }
     }
@@ -164,6 +182,9 @@ export function GoogleMapsAutocomplete({
         />
         <p className="text-xs text-yellow-600 mt-1">
           Address suggestions unavailable - using manual entry
+        </p>
+        <p className="text-xs text-red-600 mt-1">
+          Error: {error}
         </p>
       </div>
     )
