@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { api, amountUtils, validation, getErrorMessage, type BookingData, type BookingResponse, type PricingData } from '@/lib/api'
 import { useSession } from '@/components/auth/AuthProvider'
 import { SkeletonBookingForm, LoadingButton } from '@/components/LoadingStates'
-import { GoogleMapsAutocomplete, calculateDistance } from '@/components/GoogleMapsAutocomplete'
+import { GoogleMapsAutocomplete, calculateDistance } from '@/components/GoogleMapsAutocompleteOptimized'
 
 interface BookingFormProps {
   onBookingSuccess?: (booking: BookingResponse) => void
@@ -56,7 +56,13 @@ export function BookingForm({ onBookingSuccess, className = '' }: BookingFormPro
         }
         
         try {
-          const pricingData = await api.getPricing()
+          // Add timeout to pricing API call
+          const pricingPromise = api.getPricing()
+          const timeoutPromise = new Promise((_, reject) => 
+            setTimeout(() => reject(new Error('Pricing API timeout')), 5000)
+          )
+          
+          const pricingData = await Promise.race([pricingPromise, timeoutPromise]) as PricingData
           setPricing(pricingData)
           
           // Cache the pricing data
@@ -329,7 +335,15 @@ export function BookingForm({ onBookingSuccess, className = '' }: BookingFormPro
 
   // Show skeleton loader while pricing is loading
   if (pricingLoading) {
-    return <SkeletonBookingForm className={className} />
+    return (
+      <div className={`space-y-6 ${className}`}>
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading booking form...</p>
+        </div>
+        <SkeletonBookingForm />
+      </div>
+    )
   }
 
   return (
