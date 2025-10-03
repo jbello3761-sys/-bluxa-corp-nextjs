@@ -155,8 +155,17 @@ export function BookingForm({ onBookingSuccess, className = '' }: BookingFormPro
           formData.pickup_address.toLowerCase().includes('lga') ||
           formData.pickup_address.toLowerCase().includes('ewr')
         
+        // Temporary fix: Ensure pricing values are in cents
+        const correctedPricing = {
+          ...vehiclePricing,
+          base_rate: vehiclePricing.base_rate < 100 ? vehiclePricing.base_rate * 100 : vehiclePricing.base_rate,
+          per_hour_rate: vehiclePricing.per_hour_rate < 100 ? vehiclePricing.per_hour_rate * 100 : vehiclePricing.per_hour_rate,
+          minimum_charge: vehiclePricing.minimum_charge < 100 ? vehiclePricing.minimum_charge * 100 : vehiclePricing.minimum_charge,
+          airport_transfer_rate: vehiclePricing.airport_transfer_rate < 100 ? vehiclePricing.airport_transfer_rate * 100 : vehiclePricing.airport_transfer_rate,
+        }
+        
         const price = amountUtils.calculatePrice(
-          vehiclePricing,
+          correctedPricing,
           formData.estimated_duration,
           isAirportTransfer
         )
@@ -355,13 +364,19 @@ export function BookingForm({ onBookingSuccess, className = '' }: BookingFormPro
         <div className="mb-6 p-4 bg-blue-50 rounded-lg">
           <h3 className="font-semibold text-blue-900 mb-2">Current Pricing</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-            {Object.entries(pricing.pricing).map(([type, rates]) => (
-              <div key={type} className="text-blue-800">
-                <p className="font-medium capitalize">{type.replace('_', ' ')}</p>
-                <p>From {amountUtils.formatCents(rates.minimum_charge)}</p>
-                <p className="text-xs">{amountUtils.formatCents(rates.per_hour_rate)}/hour</p>
-              </div>
-            ))}
+            {Object.entries(pricing.pricing).map(([type, rates]) => {
+              // Temporary fix: Convert backend decimal values to cents if they're still in dollars
+              const minimumCharge = rates.minimum_charge < 100 ? rates.minimum_charge * 100 : rates.minimum_charge;
+              const perHourRate = rates.per_hour_rate < 100 ? rates.per_hour_rate * 100 : rates.per_hour_rate;
+              
+              return (
+                <div key={type} className="text-blue-800">
+                  <p className="font-medium capitalize">{type.replace('_', ' ')}</p>
+                  <p>From {amountUtils.formatCents(minimumCharge)}</p>
+                  <p className="text-xs">{amountUtils.formatCents(perHourRate)}/hour</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       )}
