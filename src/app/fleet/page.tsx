@@ -81,7 +81,20 @@ export default function FleetPage() {
           {/* Executive Sedan */}
           <div className="card">
             <div className="relative h-64 bg-gray-200 rounded-lg mb-6 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-red-500/20 flex items-center justify-center">
+              <img 
+                src="/images/fleet/executive-sedan.jpg" 
+                alt="Executive Sedan" 
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  const fallback = target.nextElementSibling as HTMLElement;
+                  if (fallback) {
+                    target.style.display = 'none';
+                    fallback.style.display = 'flex';
+                  }
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-red-500/20 flex items-center justify-center hidden">
                 <div className="text-center">
                   <div className="text-6xl mb-2">🚗</div>
                   <p className="text-gray-600 font-medium">Executive Sedan</p>
@@ -149,7 +162,20 @@ export default function FleetPage() {
             </div>
 
             <div className="relative h-64 bg-gray-200 rounded-lg mb-6 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-red-500/20 flex items-center justify-center">
+              <img 
+                src="/images/fleet/luxury-suv.jpg" 
+                alt="Luxury SUV" 
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  const fallback = target.nextElementSibling as HTMLElement;
+                  if (fallback) {
+                    target.style.display = 'none';
+                    fallback.style.display = 'flex';
+                  }
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-red-500/20 flex items-center justify-center hidden">
                 <div className="text-center">
                   <div className="text-6xl mb-2">🚙</div>
                   <p className="text-gray-600 font-medium">Luxury SUV</p>
@@ -211,7 +237,20 @@ export default function FleetPage() {
           {/* Sprinter Van */}
           <div className="card">
             <div className="relative h-64 bg-gray-200 rounded-lg mb-6 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-red-500/20 flex items-center justify-center">
+              <img 
+                src="/images/fleet/sprinter-van.jpg" 
+                alt="Sprinter Van" 
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  const fallback = target.nextElementSibling as HTMLElement;
+                  if (fallback) {
+                    target.style.display = 'none';
+                    fallback.style.display = 'flex';
+                  }
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-red-500/20 flex items-center justify-center hidden">
                 <div className="text-center">
                   <div className="text-6xl mb-2">🚐</div>
                   <p className="text-gray-600 font-medium">Sprinter Van</p>

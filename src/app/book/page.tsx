@@ -59,10 +59,25 @@ export default function BookPage() {
           <h2 className="section-title">Choose Your Vehicle</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="feature-card">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                </svg>
+              <div className="w-full h-48 bg-gray-200 rounded-lg mb-4 overflow-hidden">
+                <img 
+                  src="/images/fleet/executive-sedan.jpg" 
+                  alt="Executive Sedan" 
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    const fallback = target.nextElementSibling as HTMLElement;
+                    if (fallback) {
+                      target.style.display = 'none';
+                      fallback.style.display = 'flex';
+                    }
+                  }}
+                />
+                <div className="w-full h-full bg-blue-100 rounded-lg flex items-center justify-center hidden">
+                  <svg className="w-16 h-16 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  </svg>
+                </div>
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-4">Executive Sedan</h3>
               <p className="text-gray-600 mb-4">
@@ -72,10 +87,25 @@ export default function BookPage() {
             </div>
             
             <div className="feature-card">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-                </svg>
+              <div className="w-full h-48 bg-gray-200 rounded-lg mb-4 overflow-hidden">
+                <img 
+                  src="/images/fleet/luxury-suv.jpg" 
+                  alt="Luxury SUV" 
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    const fallback = target.nextElementSibling as HTMLElement;
+                    if (fallback) {
+                      target.style.display = 'none';
+                      fallback.style.display = 'flex';
+                    }
+                  }}
+                />
+                <div className="w-full h-full bg-green-100 rounded-lg flex items-center justify-center hidden">
+                  <svg className="w-16 h-16 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                  </svg>
+                </div>
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-4">Luxury SUV</h3>
               <p className="text-gray-600 mb-4">
@@ -85,10 +115,25 @@ export default function BookPage() {
             </div>
             
             <div className="feature-card">
-              <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
+              <div className="w-full h-48 bg-gray-200 rounded-lg mb-4 overflow-hidden">
+                <img 
+                  src="/images/fleet/sprinter-van.jpg" 
+                  alt="Sprinter Van" 
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    const fallback = target.nextElementSibling as HTMLElement;
+                    if (fallback) {
+                      target.style.display = 'none';
+                      fallback.style.display = 'flex';
+                    }
+                  }}
+                />
+                <div className="w-full h-full bg-yellow-100 rounded-lg flex items-center justify-center hidden">
+                  <svg className="w-16 h-16 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                </div>
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-4">Sprinter Van</h3>
               <p className="text-gray-600 mb-4">
