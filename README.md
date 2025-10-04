@@ -254,4 +254,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
   <a href="https://bluxacorp.com">Website</a> •
   <a href="https://github.com/yourusername/bluxa-corp-nextjs/issues">Report Bug</a> •
   <a href="https://github.com/yourusername/bluxa-corp-nextjs/issues">Request Feature</a>
-</div>
+</div># Deployment trigger
