@@ -82,7 +82,7 @@ export default function FleetPage() {
           <div className="card">
             <div className="relative h-64 bg-gray-200 rounded-lg mb-6 overflow-hidden">
               <img 
-                src="/images/fleet/executive-sedan.jpg" 
+                src="/images/suv.jpg" 
                 alt="Executive Sedan" 
                 className="w-full h-full object-cover"
                 onError={(e) => {
@@ -163,7 +163,7 @@ export default function FleetPage() {
 
             <div className="relative h-64 bg-gray-200 rounded-lg mb-6 overflow-hidden">
               <img 
-                src="/images/fleet/luxury-suv.jpg" 
+                src="/images/black-sprinter.webp" 
                 alt="Luxury SUV" 
                 className="w-full h-full object-cover"
                 onError={(e) => {
@@ -238,7 +238,7 @@ export default function FleetPage() {
           <div className="card">
             <div className="relative h-64 bg-gray-200 rounded-lg mb-6 overflow-hidden">
               <img 
-                src="/images/fleet/sprinter-van.jpg" 
+                src="/images/black-sprinter.webp" 
                 alt="Sprinter Van" 
                 className="w-full h-full object-cover"
                 onError={(e) => {
