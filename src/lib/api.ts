@@ -19,7 +19,8 @@ export interface BookingData {
   destination: string
   pickup_date: string          // YYYY-MM-DD format
   pickup_time: string          // HH:mm format
-  vehicle_type: 'executive_sedan' | 'luxury_suv' | 'sprinter_van'
+  vehicle_type: 'executive_sedan' | 'luxury_suv' | 'sprinter_van' | 'stretch_limo'
+  service_type?: 'hourly' | 'airport_transfer' | 'corporate' | 'special_events' | 'city_tours' | 'long_distance'
   customer_name: string
   customer_email: string
   customer_phone: string
@@ -41,6 +42,7 @@ export interface PricingData {
     executive_sedan: VehiclePricing
     luxury_suv: VehiclePricing
     sprinter_van: VehiclePricing
+    stretch_limo: VehiclePricing
   }
   currency: string
 }

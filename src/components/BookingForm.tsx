@@ -81,16 +81,22 @@ export function BookingForm({ onBookingSuccess, className = '' }: BookingFormPro
                 airport_transfer_rate: 7500 // $75.00 in cents
               },
               luxury_suv: {
-                base_rate: 2500,
-                per_hour_rate: 6500,
-                minimum_charge: 5000,
-                airport_transfer_rate: 7500
+                base_rate: 3500, // $35.00 in cents
+                per_hour_rate: 9500, // $95.00 in cents
+                minimum_charge: 7000, // $70.00 in cents
+                airport_transfer_rate: 10500 // $105.00 in cents
               },
               sprinter_van: {
-                base_rate: 2500,
-                per_hour_rate: 6500,
-                minimum_charge: 5000,
-                airport_transfer_rate: 7500
+                base_rate: 5000, // $50.00 in cents
+                per_hour_rate: 12000, // $120.00 in cents
+                minimum_charge: 10000, // $100.00 in cents
+                airport_transfer_rate: 15000 // $150.00 in cents
+              },
+              stretch_limo: {
+                base_rate: 6000, // $60.00 in cents
+                per_hour_rate: 15000, // $150.00 in cents
+                minimum_charge: 12000, // $120.00 in cents
+                airport_transfer_rate: 18000 // $180.00 in cents
               }
             },
             currency: 'USD'
@@ -486,6 +492,28 @@ export function BookingForm({ onBookingSuccess, className = '' }: BookingFormPro
             
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
+                Service Type *
+              </label>
+              <select
+                value={formData.service_type || 'hourly'}
+                onChange={(e) => handleInputChange('service_type', e.target.value)}
+                className={`input-field ${fieldErrors.service_type ? 'border-red-500' : ''}`}
+                disabled={loading}
+              >
+                <option value="hourly">Hourly Service</option>
+                <option value="airport_transfer">Airport Transfer</option>
+                <option value="corporate">Corporate Travel</option>
+                <option value="special_events">Special Events</option>
+                <option value="city_tours">City Tours</option>
+                <option value="long_distance">Long Distance</option>
+              </select>
+              {fieldErrors.service_type && (
+                <p className="text-sm text-red-600 mt-1">{fieldErrors.service_type}</p>
+              )}
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Vehicle Type *
               </label>
               <select
@@ -595,28 +623,163 @@ export function BookingForm({ onBookingSuccess, className = '' }: BookingFormPro
 
         {/* Price Estimate */}
         {estimatedPrice > 0 && (
-          <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-            <div className="flex items-center justify-between">
-              <span className="text-green-800 font-medium">Estimated Price:</span>
-              <span className="text-2xl font-bold text-green-900">
-                {amountUtils.formatCents(estimatedPrice)}
-              </span>
+          <div className="bg-gradient-to-r from-blue-50 to-green-50 border border-blue-200 rounded-lg p-6">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Booking Summary</h3>
+            
+            {/* Pricing Breakdown */}
+            <div className="space-y-3 mb-4">
+              <div className="flex justify-between items-center">
+                <span className="text-gray-700">Base Rate:</span>
+                <span className="font-medium">{amountUtils.formatCents(pricing?.pricing[formData.vehicle_type]?.base_rate || 0)}</span>
+              </div>
+              
+              <div className="flex justify-between items-center">
+                <span className="text-gray-700">Duration ({formData.estimated_duration} min):</span>
+                <span className="font-medium">{amountUtils.formatCents(Math.ceil((formData.estimated_duration / 60) * (pricing?.pricing[formData.vehicle_type]?.per_hour_rate || 0)))}</span>
+              </div>
+              
+              <div className="flex justify-between items-center">
+                <span className="text-gray-700">Vehicle:</span>
+                <span className="font-medium capitalize">{formData.vehicle_type.replace('_', ' ')}</span>
+              </div>
+              
+              <div className="border-t border-gray-300 pt-2">
+                <div className="flex justify-between items-center">
+                  <span className="text-lg font-semibold text-gray-900">Estimated Total:</span>
+                  <span className="text-2xl font-bold text-green-600">
+                    {amountUtils.formatCents(estimatedPrice)}
+                  </span>
+                </div>
+              </div>
             </div>
-            <p className="text-sm text-green-700 mt-1">
-              Final price may vary based on actual duration and route
-            </p>
+            
+            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
+              <p className="text-sm text-yellow-800">
+                <span className="font-medium">Note:</span> Final price may vary based on actual duration, route, and any additional services requested.
+              </p>
+            </div>
           </div>
         )}
+
+        {/* Payment Method Selection */}
+        <div className="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Payment Method</h3>
+          
+          <div className="space-y-3">
+            <label className="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+              <input
+                type="radio"
+                name="payment_method"
+                value="card"
+                defaultChecked
+                className="mr-3 text-blue-600 focus:ring-blue-500"
+              />
+              <div className="flex items-center">
+                <div className="w-8 h-8 bg-blue-100 rounded flex items-center justify-center mr-3">
+                  <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                  </svg>
+                </div>
+                <div>
+                  <div className="font-medium text-gray-900">Credit/Debit Card</div>
+                  <div className="text-sm text-gray-500">Pay securely with Visa, Mastercard, or American Express</div>
+                </div>
+              </div>
+            </label>
+            
+            <label className="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+              <input
+                type="radio"
+                name="payment_method"
+                value="cash"
+                className="mr-3 text-blue-600 focus:ring-blue-500"
+              />
+              <div className="flex items-center">
+                <div className="w-8 h-8 bg-green-100 rounded flex items-center justify-center mr-3">
+                  <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                  </svg>
+                </div>
+                <div>
+                  <div className="font-medium text-gray-900">Cash Payment</div>
+                  <div className="text-sm text-gray-500">Pay directly to your chauffeur upon completion</div>
+                </div>
+              </div>
+            </label>
+            
+            <label className="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+              <input
+                type="radio"
+                name="payment_method"
+                value="corporate"
+                className="mr-3 text-blue-600 focus:ring-blue-500"
+              />
+              <div className="flex items-center">
+                <div className="w-8 h-8 bg-purple-100 rounded flex items-center justify-center mr-3">
+                  <svg className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  </svg>
+                </div>
+                <div>
+                  <div className="font-medium text-gray-900">Corporate Account</div>
+                  <div className="text-sm text-gray-500">Invoice billing for corporate clients</div>
+                </div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        {/* Terms and Conditions */}
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+          <div className="flex items-start">
+            <input
+              type="checkbox"
+              id="terms"
+              required
+              className="mt-1 mr-3 text-blue-600 focus:ring-blue-500"
+            />
+            <label htmlFor="terms" className="text-sm text-gray-700">
+              I agree to the{' '}
+              <a href="/terms" className="text-blue-600 hover:text-blue-800 underline">
+                Terms of Service
+              </a>{' '}
+              and{' '}
+              <a href="/privacy" className="text-blue-600 hover:text-blue-800 underline">
+                Privacy Policy
+              </a>
+              . I understand that final pricing may vary based on actual trip duration and route.
+            </label>
+          </div>
+        </div>
 
         {/* Submit Button */}
         <div className="text-center">
           <LoadingButton
             type="submit"
             loading={loading}
-            className="text-lg px-12 py-4 mx-auto"
+            className="bg-gradient-to-r from-blue-600 to-red-600 hover:from-blue-700 hover:to-red-700 text-white font-bold py-4 px-12 rounded-lg text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
           >
-            {loading ? 'Creating Booking...' : 'Create Booking'}
+            {loading ? (
+              <div className="flex items-center">
+                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Creating Your Booking...
+              </div>
+            ) : (
+              <div className="flex items-center">
+                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Complete Booking
+              </div>
+            )}
           </LoadingButton>
+          
+          <p className="text-sm text-gray-500 mt-3">
+            You'll receive a confirmation email with your booking details
+          </p>
         </div>
       </form>
     </div>
