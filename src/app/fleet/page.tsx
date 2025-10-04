@@ -7,6 +7,53 @@ export default function FleetPage() {
     window.location.href = `/book?vehicle=${vehicleType}`
   }
 
+  const vehicles = [
+    {
+      id: 'executive_sedan',
+      name: 'Executive Sedan',
+      description: 'Perfect for business meetings and airport transfers',
+      image: '/images/executive-sedan.jpg',
+      passengers: '1-3',
+      bags: '3-4',
+      features: ['Leather seats', 'Wi-Fi', 'Phone chargers', 'Water bottles'],
+      price: '$65/hour',
+      popular: false
+    },
+    {
+      id: 'luxury_suv',
+      name: 'Luxury SUV',
+      description: 'Spacious comfort for groups and families',
+      image: '/images/luxury-suv.jpg',
+      passengers: '1-6',
+      bags: '6-8',
+      features: ['Premium sound system', 'Climate control', 'Tinted windows', 'Refreshments'],
+      price: '$95/hour',
+      popular: true
+    },
+    {
+      id: 'sprinter_van',
+      name: 'Sprinter Van',
+      description: 'Ultimate luxury for large groups and events',
+      image: '/images/sprinter-van.jpg',
+      passengers: '1-14',
+      bags: '10+',
+      features: ['Reclining seats', 'Entertainment system', 'Mini bar', 'Privacy partition'],
+      price: '$120/hour',
+      popular: false
+    },
+    {
+      id: 'stretch_limo',
+      name: 'Stretch Limousine',
+      description: 'Ultimate luxury experience for special occasions',
+      image: '/images/stretch-limo.jpg',
+      passengers: '1-8',
+      bags: '6-8',
+      features: ['Premium bar', 'LED lighting', 'Sound system', 'Privacy partition'],
+      price: '$150/hour',
+      popular: false
+    }
+  ]
+
   return (
     <div className="bg-gray-50">
       <style jsx>{`
@@ -39,6 +86,7 @@ export default function FleetPage() {
         
         .card:hover {
           box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+          transform: translateY(-2px);
         }
         
         .hero-gradient {
@@ -77,213 +125,66 @@ export default function FleetPage() {
           <p className="text-xl text-gray-600">Choose the perfect vehicle for your needs</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Executive Sedan */}
-          <div className="card">
-            <div className="relative h-64 bg-gray-200 rounded-lg mb-6 overflow-hidden">
-              <img 
-                src="/images/nyc.jpg" 
-                alt="Executive Sedan" 
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-red-500/20 flex items-center justify-center hidden">
-                <div className="text-center">
-                  <div className="text-6xl mb-2">🚗</div>
-                  <p className="text-gray-600 font-medium">Executive Sedan</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {vehicles.map((vehicle) => (
+            <div key={vehicle.id} className={`card ${vehicle.popular ? 'ring-2 ring-blue-500 transform scale-105 relative' : ''}`}>
+              {vehicle.popular && (
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                  <span className="bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-medium">
+                    Most Popular
+                  </span>
+                </div>
+              )}
+
+              <div className="relative h-64 bg-gray-200 rounded-lg mb-6 overflow-hidden">
+                <img 
+                  src={vehicle.image} 
+                  alt={vehicle.name} 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{vehicle.name}</h3>
+                  <p className="text-gray-600">{vehicle.description}</p>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="text-center p-3 bg-blue-50 rounded-lg">
+                    <div className="text-2xl mb-1">👥</div>
+                    <p className="text-sm font-medium text-blue-900">{vehicle.passengers} passengers</p>
+                  </div>
+                  <div className="text-center p-3 bg-red-50 rounded-lg">
+                    <div className="text-2xl mb-1">🧳</div>
+                    <p className="text-sm font-medium text-red-900">{vehicle.bags} bags</p>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2">Features:</h4>
+                  <ul className="space-y-1">
+                    {vehicle.features.map((feature, index) => (
+                      <li key={index} className="flex items-center text-sm text-gray-600">
+                        <span className="text-green-500 mr-2">✓</span>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="border-t pt-4">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-2xl font-bold text-gray-900">From {vehicle.price}</span>
+                    <span className="text-sm text-gray-500">+ taxes & fees</span>
+                  </div>
+                  <button className="btn-primary w-full" onClick={() => bookVehicle(vehicle.id)}>
+                    Book This Vehicle
+                  </button>
                 </div>
               </div>
             </div>
-
-            <div className="space-y-4">
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Executive Sedan</h3>
-                <p className="text-gray-600">Perfect for business meetings and airport transfers</p>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="text-center p-3 bg-blue-50 rounded-lg">
-                  <div className="text-2xl mb-1">👥</div>
-                  <p className="text-sm font-medium text-blue-900">1-3 passengers</p>
-                </div>
-                <div className="text-center p-3 bg-red-50 rounded-lg">
-                  <div className="text-2xl mb-1">🧳</div>
-                  <p className="text-sm font-medium text-red-900">3-4 bags</p>
-                </div>
-              </div>
-
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-2">Features:</h4>
-                <ul className="space-y-1">
-                  <li className="flex items-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
-                    Leather seats
-                  </li>
-                  <li className="flex items-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
-                    Wi-Fi
-                  </li>
-                  <li className="flex items-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
-                    Phone chargers
-                  </li>
-                  <li className="flex items-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
-                    Water bottles
-                  </li>
-                </ul>
-              </div>
-
-              <div className="border-t pt-4">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-2xl font-bold text-gray-900">From $65/hour</span>
-                  <span className="text-sm text-gray-500">+ taxes & fees</span>
-                </div>
-                <button className="btn-primary w-full" onClick={() => bookVehicle('executive_sedan')}>
-                  Book This Vehicle
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Luxury SUV */}
-          <div className="card ring-2 ring-blue-500 transform scale-105 relative">
-            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-              <span className="bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-medium">
-                Most Popular
-              </span>
-            </div>
-
-            <div className="relative h-64 bg-gray-200 rounded-lg mb-6 overflow-hidden">
-              <img 
-                src="/images/city.jpg" 
-                alt="Luxury SUV" 
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-red-500/20 flex items-center justify-center hidden">
-                <div className="text-center">
-                  <div className="text-6xl mb-2">🚙</div>
-                  <p className="text-gray-600 font-medium">Luxury SUV</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Luxury SUV</h3>
-                <p className="text-gray-600">Spacious comfort for groups and families</p>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="text-center p-3 bg-blue-50 rounded-lg">
-                  <div className="text-2xl mb-1">👥</div>
-                  <p className="text-sm font-medium text-blue-900">1-6 passengers</p>
-                </div>
-                <div className="text-center p-3 bg-red-50 rounded-lg">
-                  <div className="text-2xl mb-1">🧳</div>
-                  <p className="text-sm font-medium text-red-900">6-8 bags</p>
-                </div>
-              </div>
-
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-2">Features:</h4>
-                <ul className="space-y-1">
-                  <li className="flex items-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
-                    Premium sound system
-                  </li>
-                  <li className="flex items-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
-                    Climate control
-                  </li>
-                  <li className="flex items-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
-                    Tinted windows
-                  </li>
-                  <li className="flex items-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
-                    Refreshments
-                  </li>
-                </ul>
-              </div>
-
-              <div className="border-t pt-4">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-2xl font-bold text-gray-900">From $95/hour</span>
-                  <span className="text-sm text-gray-500">+ taxes & fees</span>
-                </div>
-                <button className="btn-primary w-full" onClick={() => bookVehicle('luxury_suv')}>
-                  Book This Vehicle
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Sprinter Van */}
-          <div className="card">
-            <div className="relative h-64 bg-gray-200 rounded-lg mb-6 overflow-hidden">
-              <img 
-                src="/images/black-sprinter.webp" 
-                alt="Sprinter Van" 
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-red-500/20 flex items-center justify-center hidden">
-                <div className="text-center">
-                  <div className="text-6xl mb-2">🚐</div>
-                  <p className="text-gray-600 font-medium">Sprinter Van</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Sprinter Van</h3>
-                <p className="text-gray-600">Ultimate luxury for large groups and events</p>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="text-center p-3 bg-blue-50 rounded-lg">
-                  <div className="text-2xl mb-1">👥</div>
-                  <p className="text-sm font-medium text-blue-900">1-14 passengers</p>
-                </div>
-                <div className="text-center p-3 bg-red-50 rounded-lg">
-                  <div className="text-2xl mb-1">🧳</div>
-                  <p className="text-sm font-medium text-red-900">10+ bags</p>
-                </div>
-              </div>
-
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-2">Features:</h4>
-                <ul className="space-y-1">
-                  <li className="flex items-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
-                    Reclining seats
-                  </li>
-                  <li className="flex items-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
-                    Entertainment system
-                  </li>
-                  <li className="flex items-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
-                    Mini bar
-                  </li>
-                  <li className="flex items-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
-                    Privacy partition
-                  </li>
-                </ul>
-              </div>
-
-              <div className="border-t pt-4">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-2xl font-bold text-gray-900">From $120/hour</span>
-                  <span className="text-sm text-gray-500">+ taxes & fees</span>
-                </div>
-                <button className="btn-primary w-full" onClick={() => bookVehicle('sprinter_van')}>
-                  Book This Vehicle
-                </button>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 

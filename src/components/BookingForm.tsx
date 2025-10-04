@@ -497,6 +497,7 @@ export function BookingForm({ onBookingSuccess, className = '' }: BookingFormPro
                 <option value="executive_sedan">Executive Sedan</option>
                 <option value="luxury_suv">Luxury SUV</option>
                 <option value="sprinter_van">Sprinter Van</option>
+                <option value="stretch_limo">Stretch Limousine</option>
               </select>
               {fieldErrors.vehicle_type && (
                 <p className="text-sm text-red-600 mt-1">{fieldErrors.vehicle_type}</p>
