@@ -64,14 +64,6 @@ export default function BookPage() {
                   src="/images/executive-sedan.jpg" 
                   alt="Executive Sedan" 
                   className="w-full h-full object-cover"
-                  onError={(e) => {
-                    const target = e.currentTarget;
-                    const fallback = target.nextElementSibling as HTMLElement;
-                    if (fallback) {
-                      target.style.display = 'none';
-                      fallback.style.display = 'flex';
-                    }
-                  }}
                 />
                 <div className="w-full h-full bg-blue-100 rounded-lg flex items-center justify-center hidden">
                   <svg className="w-16 h-16 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -92,14 +84,6 @@ export default function BookPage() {
                   src="/images/luxury-suv.jpg" 
                   alt="Luxury SUV" 
                   className="w-full h-full object-cover"
-                  onError={(e) => {
-                    const target = e.currentTarget;
-                    const fallback = target.nextElementSibling as HTMLElement;
-                    if (fallback) {
-                      target.style.display = 'none';
-                      fallback.style.display = 'flex';
-                    }
-                  }}
                 />
                 <div className="w-full h-full bg-green-100 rounded-lg flex items-center justify-center hidden">
                   <svg className="w-16 h-16 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -120,14 +104,6 @@ export default function BookPage() {
                   src="/images/sprinter-van.jpg" 
                   alt="Sprinter Van" 
                   className="w-full h-full object-cover"
-                  onError={(e) => {
-                    const target = e.currentTarget;
-                    const fallback = target.nextElementSibling as HTMLElement;
-                    if (fallback) {
-                      target.style.display = 'none';
-                      fallback.style.display = 'flex';
-                    }
-                  }}
                 />
                 <div className="w-full h-full bg-yellow-100 rounded-lg flex items-center justify-center hidden">
                   <svg className="w-16 h-16 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">

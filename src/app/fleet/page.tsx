@@ -85,14 +85,6 @@ export default function FleetPage() {
                 src="/images/nyc.jpg" 
                 alt="Executive Sedan" 
                 className="w-full h-full object-cover"
-                onError={(e) => {
-                  const target = e.currentTarget;
-                  const fallback = target.nextElementSibling as HTMLElement;
-                  if (fallback) {
-                    target.style.display = 'none';
-                    fallback.style.display = 'flex';
-                  }
-                }}
               />
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-red-500/20 flex items-center justify-center hidden">
                 <div className="text-center">
@@ -166,14 +158,6 @@ export default function FleetPage() {
                 src="/images/city.jpg" 
                 alt="Luxury SUV" 
                 className="w-full h-full object-cover"
-                onError={(e) => {
-                  const target = e.currentTarget;
-                  const fallback = target.nextElementSibling as HTMLElement;
-                  if (fallback) {
-                    target.style.display = 'none';
-                    fallback.style.display = 'flex';
-                  }
-                }}
               />
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-red-500/20 flex items-center justify-center hidden">
                 <div className="text-center">
@@ -241,14 +225,6 @@ export default function FleetPage() {
                 src="/images/black-sprinter.webp" 
                 alt="Sprinter Van" 
                 className="w-full h-full object-cover"
-                onError={(e) => {
-                  const target = e.currentTarget;
-                  const fallback = target.nextElementSibling as HTMLElement;
-                  if (fallback) {
-                    target.style.display = 'none';
-                    fallback.style.display = 'flex';
-                  }
-                }}
               />
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-red-500/20 flex items-center justify-center hidden">
                 <div className="text-center">
