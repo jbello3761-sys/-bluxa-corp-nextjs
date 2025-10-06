@@ -115,7 +115,13 @@ export default function PricingPage() {
           {/* Executive Sedan */}
           <div className="pricing-card">
             <div className="text-center mb-8">
-              <div className="text-6xl mb-4">🚗</div>
+              <div className="relative h-32 w-full mb-4 rounded-lg overflow-hidden">
+                <img 
+                  src="/images/executive-sedan.jpg" 
+                  alt="Executive Sedan" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-2">Executive Sedan</h3>
               <p className="text-gray-600">Perfect for business and airport transfers</p>
             </div>
@@ -164,7 +170,13 @@ export default function PricingPage() {
           {/* Luxury SUV */}
           <div className="pricing-card featured">
             <div className="text-center mb-8">
-              <div className="text-6xl mb-4">🚙</div>
+              <div className="relative h-32 w-full mb-4 rounded-lg overflow-hidden">
+                <img 
+                  src="/images/luxury-suv.jpg" 
+                  alt="Luxury SUV" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-2">Luxury SUV</h3>
               <p className="text-gray-600">Spacious comfort for groups and families</p>
             </div>
@@ -213,7 +225,13 @@ export default function PricingPage() {
           {/* Sprinter Van */}
           <div className="pricing-card">
             <div className="text-center mb-8">
-              <div className="text-6xl mb-4">🚐</div>
+              <div className="relative h-32 w-full mb-4 rounded-lg overflow-hidden">
+                <img 
+                  src="/images/sprinter-van.jpg" 
+                  alt="Sprinter Van" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-2">Sprinter Van</h3>
               <p className="text-gray-600">Ultimate luxury for large groups</p>
             </div>
@@ -285,7 +303,18 @@ export default function PricingPage() {
                   <td className="px-6 py-4 text-right font-semibold text-gray-900">$25</td>
                 </tr>
                 <tr className="hover:bg-gray-50">
-                  <td className="px-6 py-4 font-medium text-gray-900">Wedding Package</td>
+                  <td className="px-6 py-4 font-medium text-gray-900">
+                    <div className="flex items-center">
+                      <div className="w-16 h-12 mr-4 rounded-lg overflow-hidden">
+                        <img 
+                          src="/images/stretch-limo.jpg" 
+                          alt="Wedding Package - Stretch Limo" 
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      Wedding Package
+                    </div>
+                  </td>
                   <td className="px-6 py-4 text-gray-600">Decorations, red carpet service, and champagne</td>
                   <td className="px-6 py-4 text-right font-semibold text-gray-900">$150</td>
                 </tr>
@@ -321,12 +350,44 @@ export default function PricingPage() {
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">What's Included</h2>
             <p className="text-xl text-gray-600">Every ride includes these premium features at no extra cost</p>
+            
+            {/* Fleet Showcase */}
+            <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+              <div className="relative h-20 rounded-lg overflow-hidden">
+                <img 
+                  src="/images/executive-sedan.jpg" 
+                  alt="Executive Sedan" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="relative h-20 rounded-lg overflow-hidden">
+                <img 
+                  src="/images/luxury-suv.jpg" 
+                  alt="Luxury SUV" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="relative h-20 rounded-lg overflow-hidden">
+                <img 
+                  src="/images/sprinter-van.jpg" 
+                  alt="Sprinter Van" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="relative h-20 rounded-lg overflow-hidden">
+                <img 
+                  src="/images/stretch-limo.jpg" 
+                  alt="Stretch Limo" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">✓</span>
+                <span className="text-2xl font-bold text-green-600">✓</span>
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">All Taxes & Fees</h3>
               <p className="text-gray-600">No hidden charges or surprise fees</p>
@@ -334,7 +395,7 @@ export default function PricingPage() {
 
             <div className="text-center">
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">💰</span>
+                <span className="text-2xl font-bold text-blue-600">$</span>
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Gratuity Included</h3>
               <p className="text-gray-600">20% gratuity included in all rates</p>
@@ -342,7 +403,7 @@ export default function PricingPage() {
 
             <div className="text-center">
               <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">📱</span>
+                <span className="text-2xl font-bold text-purple-600">GPS</span>
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Real-time Tracking</h3>
               <p className="text-gray-600">Track your vehicle in real-time</p>
@@ -350,7 +411,7 @@ export default function PricingPage() {
 
             <div className="text-center">
               <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🛡️</span>
+                <span className="text-2xl font-bold text-red-600">INS</span>
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Full Insurance</h3>
               <p className="text-gray-600">Comprehensive coverage included</p>
@@ -365,6 +426,38 @@ export default function PricingPage() {
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Pricing FAQ</h2>
             <p className="text-xl text-gray-600">Common questions about our rates and billing</p>
+            
+            {/* Fleet Preview */}
+            <div className="mt-8 flex justify-center items-center space-x-4">
+              <div className="relative h-16 w-24 rounded-lg overflow-hidden">
+                <img 
+                  src="/images/executive-sedan.jpg" 
+                  alt="Executive Sedan" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="relative h-16 w-24 rounded-lg overflow-hidden">
+                <img 
+                  src="/images/luxury-suv.jpg" 
+                  alt="Luxury SUV" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="relative h-16 w-24 rounded-lg overflow-hidden">
+                <img 
+                  src="/images/sprinter-van.jpg" 
+                  alt="Sprinter Van" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="relative h-16 w-24 rounded-lg overflow-hidden">
+                <img 
+                  src="/images/stretch-limo.jpg" 
+                  alt="Stretch Limo" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
           </div>
 
           <div className="space-y-8">

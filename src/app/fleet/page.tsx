@@ -79,7 +79,7 @@ export default function FleetPage() {
           background: white;
           border-radius: 12px;
           box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-          padding: 32px;
+          padding: 40px;
           border: 1px solid #f3f4f6;
           transition: all 0.3s ease;
         }
@@ -125,7 +125,7 @@ export default function FleetPage() {
           <p className="text-xl text-gray-600">Choose the perfect vehicle for your needs</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-12">
           {vehicles.map((vehicle) => (
             <div key={vehicle.id} className={`card ${vehicle.popular ? 'ring-2 ring-blue-500 transform scale-105 relative' : ''}`}>
               {vehicle.popular && (
@@ -144,26 +144,26 @@ export default function FleetPage() {
                 />
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-6">
                 <div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">{vehicle.name}</h3>
                   <p className="text-gray-600">{vehicle.description}</p>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="text-center p-3 bg-blue-50 rounded-lg">
-                    <div className="text-2xl mb-1">👥</div>
+                <div className="grid grid-cols-2 gap-6">
+                  <div className="text-center p-4 bg-blue-50 rounded-lg">
+                    <div className="text-2xl mb-2">👥</div>
                     <p className="text-sm font-medium text-blue-900">{vehicle.passengers} passengers</p>
                   </div>
-                  <div className="text-center p-3 bg-red-50 rounded-lg">
-                    <div className="text-2xl mb-1">🧳</div>
+                  <div className="text-center p-4 bg-red-50 rounded-lg">
+                    <div className="text-2xl mb-2">🧳</div>
                     <p className="text-sm font-medium text-red-900">{vehicle.bags} bags</p>
                   </div>
                 </div>
 
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-2">Features:</h4>
-                  <ul className="space-y-1">
+                  <ul className="space-y-2">
                     {vehicle.features.map((feature, index) => (
                       <li key={index} className="flex items-center text-sm text-gray-600">
                         <span className="text-green-500 mr-2">✓</span>
@@ -173,8 +173,8 @@ export default function FleetPage() {
                   </ul>
                 </div>
 
-                <div className="border-t pt-4">
-                  <div className="flex items-center justify-between mb-4">
+                <div className="border-t pt-6">
+                  <div className="flex items-center justify-between mb-6">
                     <span className="text-2xl font-bold text-gray-900">From {vehicle.price}</span>
                     <span className="text-sm text-gray-500">+ taxes & fees</span>
                   </div>
