@@ -51,9 +51,9 @@ function PaymentFormInner({ booking, onPaymentSuccess, onPaymentError, onCancel 
   const [cardComplete, setCardComplete] = useState(false)
   const [stripeLoading, setStripeLoading] = useState(true)
   const [billingDetails, setBillingDetails] = useState({
-    name: user?.user_metadata?.full_name || '',
-    email: user?.email || '',
-    phone: '',
+    name: user?.user_metadata?.full_name || booking?.contact_info?.name || '',
+    email: user?.email || booking?.contact_info?.email || '',
+    phone: booking?.contact_info?.phone || '',
     address: {
       line1: '',
       city: '',
@@ -62,6 +62,18 @@ function PaymentFormInner({ booking, onPaymentSuccess, onPaymentError, onCancel 
       country: 'US'
     }
   })
+
+  // Update billing details when booking data is available
+  useEffect(() => {
+    if (booking?.contact_info) {
+      setBillingDetails(prev => ({
+        ...prev,
+        name: prev.name || booking.contact_info.name || '',
+        email: prev.email || booking.contact_info.email || '',
+        phone: prev.phone || booking.contact_info.phone || ''
+      }))
+    }
+  }, [booking?.contact_info])
 
   // Create payment intent when component mounts
   useEffect(() => {

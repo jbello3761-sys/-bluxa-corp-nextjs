@@ -40,6 +40,17 @@ export interface BookingResponse {
   estimated_price: number      // In cents
   currency: string
   created_at: string
+  contact_info?: {
+    name: string
+    email: string
+    phone: string
+  }
+  pickup_location?: string
+  dropoff_location?: string
+  pickup_datetime?: string
+  vehicle_type?: string
+  passenger_count?: number
+  special_requests?: string
 }
 
 export interface PricingData {
