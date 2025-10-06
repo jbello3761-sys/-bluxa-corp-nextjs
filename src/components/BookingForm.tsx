@@ -6,6 +6,21 @@ import { useSession } from '@/components/auth/AuthProvider'
 import { SkeletonBookingForm, LoadingButton } from '@/components/LoadingStates'
 import { GoogleMapsAutocomplete, calculateDistance } from '@/components/GoogleMapsAutocompleteOptimized'
 
+// Form data interface (different from API interface)
+interface FormData {
+  pickup_address: string
+  destination: string
+  pickup_date: string
+  pickup_time: string
+  vehicle_type: 'executive_sedan' | 'luxury_suv' | 'sprinter_van' | 'stretch_limo'
+  service_type?: 'hourly' | 'airport_transfer' | 'corporate' | 'special_events' | 'city_tours' | 'long_distance'
+  customer_name: string
+  customer_email: string
+  customer_phone: string
+  estimated_duration: number
+  special_requests?: string
+}
+
 interface BookingFormProps {
   onBookingSuccess?: (booking: BookingResponse) => void
   className?: string
@@ -15,7 +30,7 @@ export function BookingForm({ onBookingSuccess, className = '' }: BookingFormPro
   const { user } = useSession()
   
   // Form state with exact field mapping
-  const [formData, setFormData] = useState<BookingData>({
+  const [formData, setFormData] = useState<FormData>({
     pickup_address: '',           // Corrected from pickup_location
     destination: '',
     pickup_date: '',
@@ -193,7 +208,7 @@ export function BookingForm({ onBookingSuccess, className = '' }: BookingFormPro
   }
 
   // Validate individual fields
-  const validateField = (field: keyof BookingData, value: any): string => {
+  const validateField = (field: keyof FormData, value: any): string => {
     switch (field) {
       case 'pickup_address':
         return !value || value.trim().length < 3 ? 'Pickup address is required (minimum 3 characters)' : ''
@@ -214,7 +229,7 @@ export function BookingForm({ onBookingSuccess, className = '' }: BookingFormPro
         return !value ? 'Phone number is required' : 
                !validation.isValidPhone(value) ? 'Please enter a valid phone number' : ''
       case 'vehicle_type':
-        return !validation.isValidVehicleType(value) ? 'Please select a valid vehicle type' : ''
+        return !['executive_sedan', 'luxury_suv', 'sprinter_van', 'stretch_limo'].includes(value) ? 'Please select a valid vehicle type' : ''
       default:
         return ''
     }
@@ -225,7 +240,7 @@ export function BookingForm({ onBookingSuccess, className = '' }: BookingFormPro
     const newFieldErrors: Record<string, string> = {}
     
     Object.keys(formData).forEach(key => {
-      const field = key as keyof BookingData
+      const field = key as keyof FormData
       if (field !== 'special_requests') { // special_requests is optional
         const error = validateField(field, formData[field])
         if (error) {
@@ -251,7 +266,27 @@ export function BookingForm({ onBookingSuccess, className = '' }: BookingFormPro
     setErrors({})
     
     try {
-      const booking = await api.createBooking(formData)
+      // Transform form data to match backend API format
+      const bookingData = {
+        pickup_location: formData.pickup_address,
+        dropoff_location: formData.destination,
+        pickup_datetime: `${formData.pickup_date}T${formData.pickup_time}:00`,
+        vehicle_type: formData.vehicle_type,
+        service_type: formData.service_type,
+        customer_name: formData.customer_name,
+        customer_email: formData.customer_email,
+        customer_phone: formData.customer_phone,
+        estimated_duration: formData.estimated_duration,
+        special_requests: formData.special_requests,
+        passenger_count: 1,
+        contact_info: {
+          name: formData.customer_name,
+          email: formData.customer_email,
+          phone: formData.customer_phone
+        }
+      }
+      
+      const booking = await api.createBooking(bookingData)
       setSuccess(booking)
       
       // Clear saved form data on success

@@ -15,17 +15,22 @@ export class APIError extends Error {
 
 // Exact types matching backend specification
 export interface BookingData {
-  pickup_address: string        // Corrected from pickup_location
-  destination: string
-  pickup_date: string          // YYYY-MM-DD format
-  pickup_time: string          // HH:mm format
+  pickup_location: string      // Backend expects this field name
+  dropoff_location: string    // Backend expects this field name
+  pickup_datetime: string     // Backend expects combined date/time
   vehicle_type: 'executive_sedan' | 'luxury_suv' | 'sprinter_van' | 'stretch_limo'
   service_type?: 'hourly' | 'airport_transfer' | 'corporate' | 'special_events' | 'city_tours' | 'long_distance'
   customer_name: string
   customer_email: string
   customer_phone: string
   estimated_duration: number   // in minutes
-  special_requests?: string    // Corrected from special_instructions
+  special_requests?: string
+  passenger_count?: number
+  contact_info?: {
+    name: string
+    email: string
+    phone: string
+  }
 }
 
 export interface BookingResponse {
