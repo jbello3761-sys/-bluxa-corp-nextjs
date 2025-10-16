@@ -700,7 +700,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="service-icon">
                     <img 
-                      src="/images/airport-transfer-service.jpg" 
+                      src="/images/executive-sedan.jpg" 
                       alt="Manhattan"
                     />
                   </div>
@@ -711,7 +711,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="service-icon">
                     <img 
-                      src="/images/business-travel-service.jpg" 
+                      src="/images/luxury-suv.jpg" 
                       alt="Outer Boroughs"
                     />
                   </div>
@@ -722,7 +722,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="service-icon">
                     <img 
-                      src="/images/special-events-service.jpg" 
+                      src="/images/sprinter-van.jpg" 
                       alt="Airports"
                     />
                   </div>
@@ -733,7 +733,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="service-icon">
                     <img 
-                      src="/images/city-tours-service.jpg" 
+                      src="/images/stretch-limo.jpg" 
                       alt="New Jersey"
                     />
                   </div>
@@ -744,7 +744,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="service-icon">
                     <img 
-                      src="/images/resort-transfer-service.jpg" 
+                      src="/images/executive-sedan.jpg" 
                       alt="Westchester"
                     />
                   </div>
@@ -755,7 +755,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="service-icon">
                     <img 
-                      src="/images/wedding-events-service.jpg" 
+                      src="/images/luxury-suv.jpg" 
                       alt="Long Island"
                     />
                   </div>
