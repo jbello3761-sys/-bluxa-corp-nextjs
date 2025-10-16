@@ -430,13 +430,10 @@ export default function ServicesPage() {
               {/* DR Airport Transfers */}
               <div className="card text-center relative">
                 <div className="location-badge">DR</div>
-                <div className="service-icon bg-blue-100 text-blue-600">
-                  <Image 
-                    src="/images/terminal.jpg" 
+                <div className="service-icon">
+                  <img 
+                    src="/images/airport-walking.jpg" 
                     alt="DR Airport Transfer Service"
-                    width={64}
-                    height={64}
-                    className="rounded-lg object-cover"
                   />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Airport Transfers</h3>
@@ -467,15 +464,11 @@ export default function ServicesPage() {
               {/* DR Resort Transfers */}
               <div className="card text-center relative">
                 <div className="location-badge">DR</div>
-                <div className="service-icon bg-orange-100 text-orange-600">
-                    <Image 
-                      src="/images/resort-transfer-service.jpg" 
-                      alt="Resort Transfer Service"
-                      width={414}
-                      height={322}
-                      className="w-full h-full object-cover"
-                      style={{ borderRadius: '24px' }}
-                    />
+                <div className="service-icon">
+                  <img 
+                    src="/images/miami-beach.jpg" 
+                    alt="Resort Transfer Service"
+                  />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Resort Transfers</h3>
                 <p className="text-gray-600 mb-6">
@@ -505,8 +498,11 @@ export default function ServicesPage() {
               {/* DR City Tours */}
               <div className="card text-center relative">
                 <div className="location-badge">DR</div>
-                <div className="service-icon bg-green-100 text-green-600">
-                  <BuildingIcon size={32} />
+                <div className="service-icon">
+                  <img 
+                    src="/images/city.jpg" 
+                    alt="City Tours Service"
+                  />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">City Tours</h3>
                 <p className="text-gray-600 mb-6">
@@ -536,8 +532,11 @@ export default function ServicesPage() {
               {/* DR Group Transportation */}
               <div className="card text-center relative">
                 <div className="location-badge">DR</div>
-                <div className="service-icon bg-yellow-100 text-yellow-600">
-                  <GroupIcon size={32} />
+                <div className="service-icon">
+                  <img 
+                    src="/images/sprinter-van.jpg" 
+                    alt="Group Transportation Service"
+                  />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Group Transportation</h3>
                 <p className="text-gray-600 mb-6">
@@ -567,14 +566,10 @@ export default function ServicesPage() {
               {/* DR Special Events */}
               <div className="card text-center relative">
                 <div className="location-badge">DR</div>
-                <div className="service-icon bg-purple-100 text-purple-600">
-                  <Image 
-                    src="/images/wedding-events-service.jpg" 
+                <div className="service-icon">
+                  <img 
+                    src="/images/stretch-limo.jpg" 
                     alt="Wedding & Events Service"
-                    width={300}
-                    height={300}
-                    className="w-full h-full object-cover"
-                    style={{ borderRadius: '24px' }}
                   />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Wedding & Events</h3>
@@ -605,8 +600,11 @@ export default function ServicesPage() {
               {/* DR Hourly Service */}
               <div className="card text-center relative">
                 <div className="location-badge">DR</div>
-                <div className="service-icon bg-indigo-100 text-indigo-600">
-                  <ClockIcon size={32} />
+                <div className="service-icon">
+                  <img 
+                    src="/images/luxury-sedan.jpg" 
+                    alt="Hourly Service"
+                  />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Hourly Service</h3>
                 <p className="text-gray-600 mb-6">
@@ -768,7 +766,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="service-icon">
                     <img 
-                      src="/images/santo-domingo-new.jpg" 
+                      src="/images/santo-domingo-area.jpg" 
                       alt="Santo Domingo"
                     />
                   </div>
@@ -779,7 +777,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="service-icon">
                     <img 
-                      src="/images/nyc.jpg" 
+                      src="/images/punta-cana-new.webp" 
                       alt="Punta Cana"
                     />
                   </div>
@@ -805,7 +803,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="service-icon">
                     <img 
-                      src="/images/city.jpg" 
+                      src="/images/santiago-new.webp" 
                       alt="Santiago"
                     />
                   </div>
@@ -827,7 +825,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="service-icon">
                     <img 
-                      src="/images/miami-beach.jpg" 
+                      src="/images/la-romana-new.webp" 
                       alt="La Romana"
                     />
                   </div>
