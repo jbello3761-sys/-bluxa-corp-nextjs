@@ -1,17 +1,12 @@
 'use client'
 
 import React, { useState } from 'react'
+import Image from 'next/image'
 import { 
-  AirportIcon, 
-  BusinessIcon, 
-  EventIcon, 
-  TourIcon, 
   ClockIcon, 
   RoadIcon,
-  BeachIcon,
   BuildingIcon,
   GroupIcon,
-  WeddingIcon,
   CityIcon,
   BridgeIcon,
   HomeIcon,
@@ -197,7 +192,13 @@ export default function ServicesPage() {
               <div className="card text-center relative">
                 <div className="location-badge">NYC</div>
                 <div className="service-icon bg-blue-100 text-blue-600">
-                  <AirportIcon size={32} />
+                  <Image 
+                    src="/images/airport walking.jpg" 
+                    alt="Airport Transfer Service"
+                    width={64}
+                    height={64}
+                    className="rounded-lg object-cover"
+                  />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Airport Transfers</h3>
                 <p className="text-gray-600 mb-6">
@@ -228,7 +229,13 @@ export default function ServicesPage() {
               <div className="card text-center relative">
                 <div className="location-badge">NYC</div>
                 <div className="service-icon bg-red-100 text-red-600">
-                  <BusinessIcon size={32} />
+                  <Image 
+                    src="/images/luxarysedan.jpg" 
+                    alt="Business Travel Service"
+                    width={64}
+                    height={64}
+                    className="rounded-lg object-cover"
+                  />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Corporate Travel</h3>
                 <p className="text-gray-600 mb-6">
@@ -259,7 +266,13 @@ export default function ServicesPage() {
               <div className="card text-center relative">
                 <div className="location-badge">NYC</div>
                 <div className="service-icon bg-purple-100 text-purple-600">
-                  <EventIcon size={32} />
+                  <Image 
+                    src="/images/strech limo.jpg" 
+                    alt="Special Events Service"
+                    width={64}
+                    height={64}
+                    className="rounded-lg object-cover"
+                  />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Special Events</h3>
                 <p className="text-gray-600 mb-6">
@@ -290,7 +303,13 @@ export default function ServicesPage() {
               <div className="card text-center relative">
                 <div className="location-badge">NYC</div>
                 <div className="service-icon bg-green-100 text-green-600">
-                  <TourIcon size={32} />
+                  <Image 
+                    src="/images/nyc.jpg" 
+                    alt="City Tours Service"
+                    width={64}
+                    height={64}
+                    className="rounded-lg object-cover"
+                  />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">City Tours</h3>
                 <p className="text-gray-600 mb-6">
@@ -385,7 +404,13 @@ export default function ServicesPage() {
               <div className="card text-center relative">
                 <div className="location-badge">DR</div>
                 <div className="service-icon bg-blue-100 text-blue-600">
-                  <AirportIcon size={32} />
+                  <Image 
+                    src="/images/terminal.jpg" 
+                    alt="DR Airport Transfer Service"
+                    width={64}
+                    height={64}
+                    className="rounded-lg object-cover"
+                  />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Airport Transfers</h3>
                 <p className="text-gray-600 mb-6">
@@ -416,7 +441,13 @@ export default function ServicesPage() {
               <div className="card text-center relative">
                 <div className="location-badge">DR</div>
                 <div className="service-icon bg-orange-100 text-orange-600">
-                  <BeachIcon size={32} />
+                  <Image 
+                    src="/images/miami beach.jpg" 
+                    alt="Resort Transfer Service"
+                    width={64}
+                    height={64}
+                    className="rounded-lg object-cover"
+                  />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Resort Transfers</h3>
                 <p className="text-gray-600 mb-6">
@@ -509,7 +540,13 @@ export default function ServicesPage() {
               <div className="card text-center relative">
                 <div className="location-badge">DR</div>
                 <div className="service-icon bg-purple-100 text-purple-600">
-                  <WeddingIcon size={32} />
+                  <Image 
+                    src="/images/strech limo.jpg" 
+                    alt="Wedding & Events Service"
+                    width={64}
+                    height={64}
+                    className="rounded-lg object-cover"
+                  />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Wedding & Events</h3>
                 <p className="text-gray-600 mb-6">
@@ -633,7 +670,13 @@ export default function ServicesPage() {
               <>
                 <div className="card text-center">
                   <div className="text-4xl mb-4 text-blue-600">
-                    <CityIcon size={48} />
+                    <Image 
+                      src="/images/nyc 2.jpg" 
+                      alt="Manhattan"
+                      width={64}
+                      height={64}
+                      className="rounded-lg object-cover"
+                    />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Manhattan</h3>
                   <p className="text-gray-600">All neighborhoods including Midtown, Financial District, Upper East/West Side</p>
@@ -641,7 +684,13 @@ export default function ServicesPage() {
 
                 <div className="card text-center">
                   <div className="text-4xl mb-4 text-blue-600">
-                    <BridgeIcon size={48} />
+                    <Image 
+                      src="/images/city.jpg" 
+                      alt="Outer Boroughs"
+                      width={64}
+                      height={64}
+                      className="rounded-lg object-cover"
+                    />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Outer Boroughs</h3>
                   <p className="text-gray-600">Brooklyn, Queens, Bronx, and Staten Island with full coverage</p>
@@ -649,7 +698,13 @@ export default function ServicesPage() {
 
                 <div className="card text-center">
                   <div className="text-4xl mb-4 text-blue-600">
-                    <AirportIcon size={48} />
+                    <Image 
+                      src="/images/airport walking.jpg" 
+                      alt="Airports"
+                      width={64}
+                      height={64}
+                      className="rounded-lg object-cover"
+                    />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Airports</h3>
                   <p className="text-gray-600">JFK, LaGuardia, Newark, and Westchester County Airport</p>
@@ -657,7 +712,13 @@ export default function ServicesPage() {
 
                 <div className="card text-center">
                   <div className="text-4xl mb-4 text-blue-600">
-                    <BuildingIcon size={48} />
+                    <Image 
+                      src="/images/downtownla.jpg" 
+                      alt="New Jersey"
+                      width={64}
+                      height={64}
+                      className="rounded-lg object-cover"
+                    />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">New Jersey</h3>
                   <p className="text-gray-600">Jersey City, Hoboken, and surrounding areas</p>
@@ -665,7 +726,13 @@ export default function ServicesPage() {
 
                 <div className="card text-center">
                   <div className="text-4xl mb-4 text-blue-600">
-                    <HomeIcon size={48} />
+                    <Image 
+                      src="/images/city2.jpg" 
+                      alt="Westchester"
+                      width={64}
+                      height={64}
+                      className="rounded-lg object-cover"
+                    />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Westchester</h3>
                   <p className="text-gray-600">White Plains, Yonkers, and Westchester County</p>
@@ -673,7 +740,13 @@ export default function ServicesPage() {
 
                 <div className="card text-center">
                   <div className="text-4xl mb-4 text-blue-600">
-                    <WaterIcon size={48} />
+                    <Image 
+                      src="/images/miami beach.jpg" 
+                      alt="Long Island"
+                      width={64}
+                      height={64}
+                      className="rounded-lg object-cover"
+                    />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Long Island</h3>
                   <p className="text-gray-600">Nassau and Suffolk counties including the Hamptons</p>
@@ -683,7 +756,13 @@ export default function ServicesPage() {
               <>
                 <div className="card text-center">
                   <div className="text-4xl mb-4 text-blue-600">
-                    <BuildingIcon size={48} />
+                    <Image 
+                      src="/images/lasvegas.jpg" 
+                      alt="Santo Domingo"
+                      width={64}
+                      height={64}
+                      className="rounded-lg object-cover"
+                    />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Santo Domingo</h3>
                   <p className="text-gray-600">Capital city including Colonial Zone, business districts, and residential areas</p>
@@ -691,7 +770,13 @@ export default function ServicesPage() {
 
                 <div className="card text-center">
                   <div className="text-4xl mb-4 text-blue-600">
-                    <BeachIcon size={48} />
+                    <Image 
+                      src="/images/miami beach.jpg" 
+                      alt="Punta Cana"
+                      width={64}
+                      height={64}
+                      className="rounded-lg object-cover"
+                    />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Punta Cana</h3>
                   <p className="text-gray-600">Resort area with luxury hotels, beaches, and entertainment venues</p>
@@ -699,7 +784,13 @@ export default function ServicesPage() {
 
                 <div className="card text-center">
                   <div className="text-4xl mb-4 text-blue-600">
-                    <AirportIcon size={48} />
+                    <Image 
+                      src="/images/terminal.jpg" 
+                      alt="DR Airports"
+                      width={64}
+                      height={64}
+                      className="rounded-lg object-cover"
+                    />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Airports</h3>
                   <p className="text-gray-600">SDQ (Santo Domingo), PUJ (Punta Cana), STI (Santiago)</p>
@@ -707,7 +798,13 @@ export default function ServicesPage() {
 
                 <div className="card text-center">
                   <div className="text-4xl mb-4 text-blue-600">
-                    <MountainIcon size={48} />
+                    <Image 
+                      src="/images/city2.jpg" 
+                      alt="Santiago"
+                      width={64}
+                      height={64}
+                      className="rounded-lg object-cover"
+                    />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Santiago</h3>
                   <p className="text-gray-600">Second largest city with business districts and cultural attractions</p>
@@ -715,7 +812,13 @@ export default function ServicesPage() {
 
                 <div className="card text-center">
                   <div className="text-4xl mb-4 text-blue-600">
-                    <WaterIcon size={48} />
+                    <Image 
+                      src="/images/miami beach.jpg" 
+                      alt="Puerto Plata"
+                      width={64}
+                      height={64}
+                      className="rounded-lg object-cover"
+                    />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Puerto Plata</h3>
                   <p className="text-gray-600">Northern coast with resorts, beaches, and historical sites</p>
@@ -723,7 +826,13 @@ export default function ServicesPage() {
 
                 <div className="card text-center">
                   <div className="text-4xl mb-4 text-blue-600">
-                    <IslandIcon size={48} />
+                    <Image 
+                      src="/images/miami beach.jpg" 
+                      alt="La Romana"
+                      width={64}
+                      height={64}
+                      className="rounded-lg object-cover"
+                    />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">La Romana</h3>
                   <p className="text-gray-600">Southeastern region with luxury resorts and Casa de Campo</p>

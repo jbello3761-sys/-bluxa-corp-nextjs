@@ -134,23 +134,23 @@ export default function PricingPage() {
 
             <div className="space-y-4 mb-8">
               <div className="flex items-center">
-                <span className="text-green-500 mr-3">✓</span>
+                <span className="text-green-500 mr-3">•</span>
                 <span className="text-gray-700">1-3 passengers</span>
               </div>
               <div className="flex items-center">
-                <span className="text-green-500 mr-3">✓</span>
+                <span className="text-green-500 mr-3">•</span>
                 <span className="text-gray-700">3-4 bags</span>
               </div>
               <div className="flex items-center">
-                <span className="text-green-500 mr-3">✓</span>
+                <span className="text-green-500 mr-3">•</span>
                 <span className="text-gray-700">Leather seats</span>
               </div>
               <div className="flex items-center">
-                <span className="text-green-500 mr-3">✓</span>
+                <span className="text-green-500 mr-3">•</span>
                 <span className="text-gray-700">Wi-Fi & charging</span>
               </div>
               <div className="flex items-center">
-                <span className="text-green-500 mr-3">✓</span>
+                <span className="text-green-500 mr-3">•</span>
                 <span className="text-gray-700">Water bottles</span>
               </div>
             </div>
@@ -189,23 +189,23 @@ export default function PricingPage() {
 
             <div className="space-y-4 mb-8">
               <div className="flex items-center">
-                <span className="text-green-500 mr-3">✓</span>
+                <span className="text-green-500 mr-3">•</span>
                 <span className="text-gray-700">1-6 passengers</span>
               </div>
               <div className="flex items-center">
-                <span className="text-green-500 mr-3">✓</span>
+                <span className="text-green-500 mr-3">•</span>
                 <span className="text-gray-700">6-8 bags</span>
               </div>
               <div className="flex items-center">
-                <span className="text-green-500 mr-3">✓</span>
+                <span className="text-green-500 mr-3">•</span>
                 <span className="text-gray-700">Premium sound system</span>
               </div>
               <div className="flex items-center">
-                <span className="text-green-500 mr-3">✓</span>
+                <span className="text-green-500 mr-3">•</span>
                 <span className="text-gray-700">Climate control</span>
               </div>
               <div className="flex items-center">
-                <span className="text-green-500 mr-3">✓</span>
+                <span className="text-green-500 mr-3">•</span>
                 <span className="text-gray-700">Refreshments</span>
               </div>
             </div>
@@ -244,23 +244,23 @@ export default function PricingPage() {
 
             <div className="space-y-4 mb-8">
               <div className="flex items-center">
-                <span className="text-green-500 mr-3">✓</span>
+                <span className="text-green-500 mr-3">•</span>
                 <span className="text-gray-700">1-14 passengers</span>
               </div>
               <div className="flex items-center">
-                <span className="text-green-500 mr-3">✓</span>
+                <span className="text-green-500 mr-3">•</span>
                 <span className="text-gray-700">10+ bags</span>
               </div>
               <div className="flex items-center">
-                <span className="text-green-500 mr-3">✓</span>
+                <span className="text-green-500 mr-3">•</span>
                 <span className="text-gray-700">Reclining seats</span>
               </div>
               <div className="flex items-center">
-                <span className="text-green-500 mr-3">✓</span>
+                <span className="text-green-500 mr-3">•</span>
                 <span className="text-gray-700">Entertainment system</span>
               </div>
               <div className="flex items-center">
-                <span className="text-green-500 mr-3">✓</span>
+                <span className="text-green-500 mr-3">•</span>
                 <span className="text-gray-700">Mini bar</span>
               </div>
             </div>
@@ -387,7 +387,7 @@ export default function PricingPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-green-600">✓</span>
+                <span className="text-2xl font-bold text-green-600">•</span>
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">All Taxes & Fees</h3>
               <p className="text-gray-600">No hidden charges or surprise fees</p>

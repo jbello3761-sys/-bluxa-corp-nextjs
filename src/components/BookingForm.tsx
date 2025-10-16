@@ -465,7 +465,7 @@ export function BookingForm({ onBookingSuccess, className = '', initialLocation 
                 }`}
                 disabled={loading}
               >
-                🇺🇸 New York City
+                NYC New York City
               </button>
               <button
                 type="button"
@@ -477,7 +477,7 @@ export function BookingForm({ onBookingSuccess, className = '', initialLocation 
                 }`}
                 disabled={loading}
               >
-                🇩🇴 Dominican Republic
+                DR Dominican Republic
               </button>
             </div>
           </div>
@@ -648,7 +648,7 @@ export function BookingForm({ onBookingSuccess, className = '', initialLocation 
           {/* DR-Specific Fields */}
           {formData.location === 'dr' && (
             <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-              <h4 className="text-md font-semibold text-blue-900 mb-4">🇩🇴 Dominican Republic Details</h4>
+              <h4 className="text-md font-semibold text-blue-900 mb-4">DR Dominican Republic Details</h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">

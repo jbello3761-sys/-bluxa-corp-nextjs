@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import Image from 'next/image'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -265,7 +266,7 @@ export default function ContactPage() {
             {/* Success/Error Messages */}
             {showSuccess && (
               <div className="mt-6 bg-green-50 border border-green-200 rounded-lg p-4">
-                <p className="text-green-800">✓ Thank you! Your message has been sent successfully. We'll get back to you within 24 hours.</p>
+                <p className="text-green-800">Success: Thank you! Your message has been sent successfully. We'll get back to you within 24 hours.</p>
               </div>
             )}
 
@@ -280,7 +281,13 @@ export default function ContactPage() {
           <div className="space-y-8">
             <div className="card text-center">
               <div className="contact-icon bg-blue-100 text-blue-600">
-                📞
+                <Image 
+                  src="/images/terminal.jpg" 
+                  alt="Phone Contact"
+                  width={48}
+                  height={48}
+                  className="rounded-lg object-cover"
+                />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">Phone</h3>
               <p className="text-gray-600 mb-4">Available 24/7 for bookings and support</p>
@@ -291,7 +298,13 @@ export default function ContactPage() {
 
             <div className="card text-center">
               <div className="contact-icon bg-red-100 text-red-600">
-                ✉️
+                <Image 
+                  src="/images/luxarysedan.jpg" 
+                  alt="Email Contact"
+                  width={48}
+                  height={48}
+                  className="rounded-lg object-cover"
+                />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">Email</h3>
               <p className="text-gray-600 mb-4">Send us your questions or booking requests</p>
@@ -302,7 +315,13 @@ export default function ContactPage() {
 
             <div className="card text-center">
               <div className="contact-icon bg-green-100 text-green-600">
-                📍
+                <Image 
+                  src="/images/nyc.jpg" 
+                  alt="Office Location"
+                  width={48}
+                  height={48}
+                  className="rounded-lg object-cover"
+                />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">Office</h3>
               <p className="text-gray-600 mb-4">Visit us for corporate accounts and partnerships</p>
@@ -315,7 +334,13 @@ export default function ContactPage() {
 
             <div className="card text-center">
               <div className="contact-icon bg-purple-100 text-purple-600">
-                ⏰
+                <Image 
+                  src="/images/city.jpg" 
+                  alt="Service Hours"
+                  width={48}
+                  height={48}
+                  className="rounded-lg object-cover"
+                />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">Hours</h3>
               <p className="text-gray-600 mb-4">Transportation services available 24/7</p>
@@ -338,37 +363,85 @@ export default function ContactPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="text-center p-6 bg-gray-50 rounded-lg">
-              <div className="text-4xl mb-4">🏙️</div>
+              <div className="text-4xl mb-4">
+                <Image 
+                  src="/images/nyc 2.jpg" 
+                  alt="Manhattan"
+                  width={64}
+                  height={64}
+                  className="rounded-lg object-cover mx-auto"
+                />
+              </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Manhattan</h3>
               <p className="text-gray-600">All neighborhoods including Midtown, Financial District, Upper East/West Side</p>
             </div>
 
             <div className="text-center p-6 bg-gray-50 rounded-lg">
-              <div className="text-4xl mb-4">🌉</div>
+              <div className="text-4xl mb-4">
+                <Image 
+                  src="/images/city.jpg" 
+                  alt="Outer Boroughs"
+                  width={64}
+                  height={64}
+                  className="rounded-lg object-cover mx-auto"
+                />
+              </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Outer Boroughs</h3>
               <p className="text-gray-600">Brooklyn, Queens, Bronx, and Staten Island</p>
             </div>
 
             <div className="text-center p-6 bg-gray-50 rounded-lg">
-              <div className="text-4xl mb-4">✈️</div>
+              <div className="text-4xl mb-4">
+                <Image 
+                  src="/images/airport walking.jpg" 
+                  alt="Airports"
+                  width={64}
+                  height={64}
+                  className="rounded-lg object-cover mx-auto"
+                />
+              </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Airports</h3>
               <p className="text-gray-600">JFK, LaGuardia, Newark, Westchester</p>
             </div>
 
             <div className="text-center p-6 bg-gray-50 rounded-lg">
-              <div className="text-4xl mb-4">🏢</div>
+              <div className="text-4xl mb-4">
+                <Image 
+                  src="/images/downtownla.jpg" 
+                  alt="New Jersey"
+                  width={64}
+                  height={64}
+                  className="rounded-lg object-cover mx-auto"
+                />
+              </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">New Jersey</h3>
               <p className="text-gray-600">Jersey City, Hoboken, surrounding areas</p>
             </div>
 
             <div className="text-center p-6 bg-gray-50 rounded-lg">
-              <div className="text-4xl mb-4">🏡</div>
+              <div className="text-4xl mb-4">
+                <Image 
+                  src="/images/city2.jpg" 
+                  alt="Westchester"
+                  width={64}
+                  height={64}
+                  className="rounded-lg object-cover mx-auto"
+                />
+              </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Westchester</h3>
               <p className="text-gray-600">White Plains, Yonkers, Westchester County</p>
             </div>
 
             <div className="text-center p-6 bg-gray-50 rounded-lg">
-              <div className="text-4xl mb-4">🌊</div>
+              <div className="text-4xl mb-4">
+                <Image 
+                  src="/images/miami beach.jpg" 
+                  alt="Long Island"
+                  width={64}
+                  height={64}
+                  className="rounded-lg object-cover mx-auto"
+                />
+              </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Long Island</h3>
               <p className="text-gray-600">Nassau, Suffolk counties, the Hamptons</p>
             </div>

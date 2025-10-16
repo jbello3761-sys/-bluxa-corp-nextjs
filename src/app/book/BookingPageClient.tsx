@@ -56,7 +56,7 @@ export function BookingPageClient() {
       {currentBooking && (
         <div className="bg-green-50 border border-green-200 rounded-lg p-6">
           <h3 className="text-lg font-semibold text-green-900 mb-4">
-            🎉 Booking Confirmed!
+            Booking Confirmed!
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
             <div>
@@ -104,7 +104,7 @@ export function BookingPageClient() {
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Need Help?</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <h4 className="font-medium text-gray-900 mb-2">📞 Call Us</h4>
+            <h4 className="font-medium text-gray-900 mb-2">Call Us</h4>
             <p className="text-gray-600 text-sm mb-2">
               Speak with our customer service team for immediate assistance.
             </p>
@@ -117,7 +117,7 @@ export function BookingPageClient() {
           </div>
           
           <div>
-            <h4 className="font-medium text-gray-900 mb-2">✉️ Email Support</h4>
+            <h4 className="font-medium text-gray-900 mb-2">Email Support</h4>
             <p className="text-gray-600 text-sm mb-2">
               Send us a message and we&apos;ll respond within 1 hour.
             </p>

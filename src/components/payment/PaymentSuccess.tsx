@@ -63,7 +63,7 @@ export function PaymentSuccess({ paymentIntent, booking, onNewBooking }: Payment
         
         <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
           <p className="text-green-800 font-medium">
-            🎉 Confirmation details have been sent to your email address.
+            Confirmation details have been sent to your email address.
           </p>
         </div>
       </div>
@@ -182,7 +182,7 @@ export function PaymentSuccess({ paymentIntent, booking, onNewBooking }: Payment
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <h3 className="font-medium text-gray-900 mb-2">📞 Customer Support</h3>
+            <h3 className="font-medium text-gray-900 mb-2">Customer Support</h3>
             <p className="text-sm text-gray-600 mb-2">
               Available 24/7 for any questions or changes to your booking.
             </p>
@@ -195,7 +195,7 @@ export function PaymentSuccess({ paymentIntent, booking, onNewBooking }: Payment
           </div>
           
           <div>
-            <h3 className="font-medium text-gray-900 mb-2">✉️ Email Support</h3>
+            <h3 className="font-medium text-gray-900 mb-2">Email Support</h3>
             <p className="text-sm text-gray-600 mb-2">
               Send us your booking ID for quick assistance.
             </p>
