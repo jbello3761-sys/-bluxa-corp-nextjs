@@ -89,8 +89,12 @@ export default function ServicesPage() {
         }
         
         .service-icon img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
           border-radius: 24px;
         }
+        
         
         .location-switcher {
           display: flex;
@@ -698,8 +702,6 @@ export default function ServicesPage() {
                     <img 
                       src="/images/nyc.jpg" 
                       alt="Manhattan"
-                      className="w-full h-full object-cover"
-                      style={{ borderRadius: '24px' }}
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Manhattan</h3>
@@ -711,8 +713,6 @@ export default function ServicesPage() {
                     <img 
                       src="/images/city.jpg" 
                       alt="Outer Boroughs"
-                      className="w-full h-full object-cover"
-                      style={{ borderRadius: '24px' }}
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Outer Boroughs</h3>
@@ -724,8 +724,6 @@ export default function ServicesPage() {
                     <img 
                       src="/images/airport-walking.jpg" 
                       alt="Airports"
-                      className="w-full h-full object-cover"
-                      style={{ borderRadius: '24px' }}
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Airports</h3>
@@ -737,8 +735,6 @@ export default function ServicesPage() {
                     <img 
                       src="/images/downtownla.jpg" 
                       alt="New Jersey"
-                      className="w-full h-full object-cover"
-                      style={{ borderRadius: '24px' }}
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">New Jersey</h3>
@@ -750,8 +746,6 @@ export default function ServicesPage() {
                     <img 
                       src="/images/city2.jpg" 
                       alt="Westchester"
-                      className="w-full h-full object-cover"
-                      style={{ borderRadius: '24px' }}
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Westchester</h3>
@@ -763,8 +757,6 @@ export default function ServicesPage() {
                     <img 
                       src="/images/miami-beach.jpg" 
                       alt="Long Island"
-                      className="w-full h-full object-cover"
-                      style={{ borderRadius: '24px' }}
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Long Island</h3>
@@ -775,13 +767,9 @@ export default function ServicesPage() {
               <>
                 <div className="card text-center">
                   <div className="service-icon">
-                    <Image 
+                    <img 
                       src="/images/santo-domingo-new.webp" 
                       alt="Santo Domingo"
-                      width={414}
-                      height={322}
-                      className="w-full h-full object-cover"
-                      style={{ borderRadius: '24px' }}
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Santo Domingo</h3>
@@ -790,13 +778,9 @@ export default function ServicesPage() {
 
                 <div className="card text-center">
                   <div className="service-icon">
-                    <Image 
+                    <img 
                       src="/images/punta-cana-new.webp" 
                       alt="Punta Cana"
-                      width={414}
-                      height={322}
-                      className="w-full h-full object-cover"
-                      style={{ borderRadius: '24px' }}
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Punta Cana</h3>
@@ -820,13 +804,9 @@ export default function ServicesPage() {
 
                 <div className="card text-center">
                   <div className="service-icon">
-                    <Image 
+                    <img 
                       src="/images/santiago-new.webp" 
                       alt="Santiago"
-                      width={414}
-                      height={322}
-                      className="w-full h-full object-cover"
-                      style={{ borderRadius: '24px' }}
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Santiago</h3>
@@ -835,13 +815,9 @@ export default function ServicesPage() {
 
                 <div className="card text-center">
                   <div className="service-icon">
-                    <Image 
+                    <img 
                       src="/images/puerto-plata-new.jpg" 
                       alt="Puerto Plata"
-                      width={414}
-                      height={322}
-                      className="w-full h-full object-cover"
-                      style={{ borderRadius: '24px' }}
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Puerto Plata</h3>
@@ -850,13 +826,9 @@ export default function ServicesPage() {
 
                 <div className="card text-center">
                   <div className="service-icon">
-                    <Image 
+                    <img 
                       src="/images/la-romana-new.webp" 
                       alt="La Romana"
-                      width={414}
-                      height={322}
-                      className="w-full h-full object-cover"
-                      style={{ borderRadius: '24px' }}
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">La Romana</h3>
