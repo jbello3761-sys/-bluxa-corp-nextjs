@@ -451,7 +451,8 @@ export default function ServicesPage() {
                       alt="Resort Transfer Service"
                       width={400}
                       height={300}
-                      className="w-full h-full object-cover rounded-3xl"
+                      className="w-full h-full object-cover"
+                      style={{ borderRadius: '24px' }}
                     />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Resort Transfers</h3>
@@ -680,7 +681,8 @@ export default function ServicesPage() {
                       alt="Manhattan"
                       width={400}
                       height={300}
-                      className="w-full h-full object-cover rounded-3xl"
+                      className="w-full h-full object-cover"
+                      style={{ borderRadius: '24px' }}
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Manhattan</h3>
@@ -694,7 +696,8 @@ export default function ServicesPage() {
                       alt="Outer Boroughs"
                       width={400}
                       height={300}
-                      className="w-full h-full object-cover rounded-3xl"
+                      className="w-full h-full object-cover"
+                      style={{ borderRadius: '24px' }}
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Outer Boroughs</h3>
@@ -708,7 +711,8 @@ export default function ServicesPage() {
                       alt="Airports"
                       width={400}
                       height={300}
-                      className="w-full h-full object-cover rounded-3xl"
+                      className="w-full h-full object-cover"
+                      style={{ borderRadius: '24px' }}
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Airports</h3>
@@ -722,7 +726,8 @@ export default function ServicesPage() {
                       alt="New Jersey"
                       width={400}
                       height={300}
-                      className="w-full h-full object-cover rounded-3xl"
+                      className="w-full h-full object-cover"
+                      style={{ borderRadius: '24px' }}
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">New Jersey</h3>
@@ -736,7 +741,8 @@ export default function ServicesPage() {
                       alt="Westchester"
                       width={400}
                       height={300}
-                      className="w-full h-full object-cover rounded-3xl"
+                      className="w-full h-full object-cover"
+                      style={{ borderRadius: '24px' }}
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Westchester</h3>
@@ -750,7 +756,8 @@ export default function ServicesPage() {
                       alt="Long Island"
                       width={400}
                       height={300}
-                      className="w-full h-full object-cover rounded-3xl"
+                      className="w-full h-full object-cover"
+                      style={{ borderRadius: '24px' }}
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Long Island</h3>
@@ -766,7 +773,8 @@ export default function ServicesPage() {
                       alt="Santo Domingo"
                       width={400}
                       height={300}
-                      className="w-full h-full object-cover rounded-3xl"
+                      className="w-full h-full object-cover"
+                      style={{ borderRadius: '24px' }}
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Santo Domingo</h3>
@@ -780,7 +788,8 @@ export default function ServicesPage() {
                       alt="Punta Cana"
                       width={400}
                       height={300}
-                      className="w-full h-full object-cover rounded-3xl"
+                      className="w-full h-full object-cover"
+                      style={{ borderRadius: '24px' }}
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Punta Cana</h3>
@@ -794,7 +803,8 @@ export default function ServicesPage() {
                       alt="DR Airports"
                       width={400}
                       height={300}
-                      className="w-full h-full object-cover rounded-3xl"
+                      className="w-full h-full object-cover"
+                      style={{ borderRadius: '24px' }}
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Airports</h3>
@@ -808,7 +818,8 @@ export default function ServicesPage() {
                       alt="Santiago"
                       width={400}
                       height={300}
-                      className="w-full h-full object-cover rounded-3xl"
+                      className="w-full h-full object-cover"
+                      style={{ borderRadius: '24px' }}
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Santiago</h3>
@@ -822,7 +833,8 @@ export default function ServicesPage() {
                       alt="Puerto Plata"
                       width={400}
                       height={300}
-                      className="w-full h-full object-cover rounded-3xl"
+                      className="w-full h-full object-cover"
+                      style={{ borderRadius: '24px' }}
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Puerto Plata</h3>
@@ -836,7 +848,8 @@ export default function ServicesPage() {
                       alt="La Romana"
                       width={400}
                       height={300}
-                      className="w-full h-full object-cover rounded-3xl"
+                      className="w-full h-full object-cover"
+                      style={{ borderRadius: '24px' }}
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">La Romana</h3>
