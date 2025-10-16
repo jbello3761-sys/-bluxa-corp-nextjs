@@ -77,15 +77,15 @@ export default function ServicesPage() {
         }
         
         .service-icon {
-          width: 180px;
-          height: 180px;
-          border-radius: 20px;
+          width: 300px;
+          height: 300px;
+          border-radius: 24px;
           display: flex;
           align-items: center;
           justify-content: center;
           margin: 0 auto 1rem;
           overflow: hidden;
-          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
         }
         
         .location-switcher {
@@ -196,8 +196,8 @@ export default function ServicesPage() {
                   <Image 
                     src="/images/airport-transfer-service.jpg" 
                     alt="Airport Transfer Service"
-                    width={180}
-                    height={180}
+                    width={300}
+                    height={300}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -233,8 +233,8 @@ export default function ServicesPage() {
                   <Image 
                     src="/images/business-travel-service.jpg" 
                     alt="Business Travel Service"
-                    width={180}
-                    height={180}
+                    width={300}
+                    height={300}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -270,8 +270,8 @@ export default function ServicesPage() {
                   <Image 
                     src="/images/special-events-service.jpg" 
                     alt="Special Events Service"
-                    width={180}
-                    height={180}
+                    width={300}
+                    height={300}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -307,8 +307,8 @@ export default function ServicesPage() {
                   <Image 
                     src="/images/city-tours-service.jpg" 
                     alt="City Tours Service"
-                    width={180}
-                    height={180}
+                    width={300}
+                    height={300}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -445,8 +445,8 @@ export default function ServicesPage() {
                     <Image 
                       src="/images/resort-transfer-service.jpg" 
                       alt="Resort Transfer Service"
-                      width={180}
-                      height={180}
+                      width={300}
+                      height={300}
                       className="w-full h-full object-cover"
                     />
                 </div>
@@ -544,8 +544,8 @@ export default function ServicesPage() {
                   <Image 
                     src="/images/wedding-events-service.jpg" 
                     alt="Wedding & Events Service"
-                    width={180}
-                    height={180}
+                    width={300}
+                    height={300}
                     className="w-full h-full object-cover"
                   />
                 </div>
