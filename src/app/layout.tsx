@@ -4,6 +4,7 @@ import './globals.css'
 import { AuthProvider } from '@/components/auth/AuthProvider'
 import { AuthHeader } from '@/components/auth/AuthHeader'
 import { ErrorBoundary, AuthErrorBoundary } from '@/components/ErrorBoundary'
+import { PhoneIcon, EmailIcon, LocationIcon, Clock24Icon } from '@/components/ProfessionalIcons'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -38,10 +39,22 @@ function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact</h4>
             <ul className="space-y-2 text-gray-300">
-              <li>📞 +1 (555) 123-4567</li>
-              <li>✉️ info@bluxatransportation.com</li>
-              <li>📍 New York City, NY</li>
-              <li>🕒 24/7 Available</li>
+              <li className="flex items-center">
+                <PhoneIcon size={16} className="mr-2 text-gray-400" />
+                +1 (555) 123-4567
+              </li>
+              <li className="flex items-center">
+                <EmailIcon size={16} className="mr-2 text-gray-400" />
+                info@bluxatransportation.com
+              </li>
+              <li className="flex items-center">
+                <LocationIcon size={16} className="mr-2 text-gray-400" />
+                New York City, NY
+              </li>
+              <li className="flex items-center">
+                <Clock24Icon size={16} className="mr-2 text-gray-400" />
+                24/7 Available
+              </li>
             </ul>
           </div>
         </div>

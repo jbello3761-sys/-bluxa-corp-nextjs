@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { PassengersIcon, LuggageIcon, ShieldIcon, StarIcon, CheckIcon, SparkleIcon, MobileIcon } from '@/components/ProfessionalIcons'
 
 export default function FleetPage() {
   const bookVehicle = (vehicleType: string) => {
@@ -152,11 +153,15 @@ export default function FleetPage() {
 
                 <div className="grid grid-cols-2 gap-6">
                   <div className="text-center p-4 bg-blue-50 rounded-lg">
-                    <div className="text-2xl mb-2">👥</div>
+                    <div className="text-2xl mb-2 text-blue-600">
+                      <PassengersIcon size={32} />
+                    </div>
                     <p className="text-sm font-medium text-blue-900">{vehicle.passengers} passengers</p>
                   </div>
                   <div className="text-center p-4 bg-red-50 rounded-lg">
-                    <div className="text-2xl mb-2">🧳</div>
+                    <div className="text-2xl mb-2 text-red-600">
+                      <LuggageIcon size={32} />
+                    </div>
                     <p className="text-sm font-medium text-red-900">{vehicle.bags} bags</p>
                   </div>
                 </div>
@@ -166,7 +171,7 @@ export default function FleetPage() {
                   <ul className="space-y-2">
                     {vehicle.features.map((feature, index) => (
                       <li key={index} className="flex items-center text-sm text-gray-600">
-                        <span className="text-green-500 mr-2">✓</span>
+                        <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                         {feature}
                       </li>
                     ))}
@@ -201,7 +206,7 @@ export default function FleetPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center">
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🛡️</span>
+                <ShieldIcon size={32} className="text-blue-600" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Safety First</h3>
               <p className="text-gray-600">Regular maintenance and safety inspections ensure your security</p>
@@ -209,7 +214,7 @@ export default function FleetPage() {
 
             <div className="text-center">
               <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">✨</span>
+                <StarIcon size={32} className="text-red-600" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Pristine Condition</h3>
               <p className="text-gray-600">Detailed cleaning and maintenance after every ride</p>
@@ -217,7 +222,7 @@ export default function FleetPage() {
 
             <div className="text-center">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">📱</span>
+                <MobileIcon size={32} className="text-green-600" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Modern Amenities</h3>
               <p className="text-gray-600">Wi-Fi, charging ports, and entertainment systems</p>
@@ -225,7 +230,7 @@ export default function FleetPage() {
 
             <div className="text-center">
               <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🌟</span>
+                <StarIcon size={32} className="text-yellow-600" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Luxury Experience</h3>
               <p className="text-gray-600">Premium materials and attention to every detail</p>

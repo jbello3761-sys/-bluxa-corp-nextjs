@@ -1,6 +1,25 @@
 'use client'
 
 import React, { useState } from 'react'
+import { 
+  AirportIcon, 
+  BusinessIcon, 
+  EventIcon, 
+  TourIcon, 
+  ClockIcon, 
+  RoadIcon,
+  BeachIcon,
+  BuildingIcon,
+  GroupIcon,
+  WeddingIcon,
+  CityIcon,
+  BridgeIcon,
+  HomeIcon,
+  WaterIcon,
+  MountainIcon,
+  IslandIcon,
+  CheckIcon
+} from '@/components/ProfessionalIcons'
 
 export default function ServicesPage() {
   const [activeLocation, setActiveLocation] = useState<'nyc' | 'dr'>('nyc')
@@ -146,13 +165,13 @@ export default function ServicesPage() {
             className={`location-btn ${activeLocation === 'nyc' ? 'active' : ''}`}
             onClick={() => setActiveLocation('nyc')}
           >
-            🇺🇸 New York City
+            <span className="text-lg font-bold">NYC</span> New York City
           </button>
           <button 
             className={`location-btn ${activeLocation === 'dr' ? 'active' : ''}`}
             onClick={() => setActiveLocation('dr')}
           >
-            🇩🇴 Dominican Republic
+            <span className="text-lg font-bold">DR</span> Dominican Republic
           </button>
         </div>
       </div>
@@ -176,9 +195,9 @@ export default function ServicesPage() {
             <>
               {/* NYC Airport Transfers */}
               <div className="card text-center relative">
-                <div className="location-badge">🇺🇸 NYC</div>
+                <div className="location-badge">NYC</div>
                 <div className="service-icon bg-blue-100 text-blue-600">
-                  ✈️
+                  <AirportIcon size={32} />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Airport Transfers</h3>
                 <p className="text-gray-600 mb-6">
@@ -187,15 +206,15 @@ export default function ServicesPage() {
                 </p>
                 <div className="space-y-2 mb-6">
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     JFK, LaGuardia, Newark
                   </div>
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Flight tracking
                   </div>
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Meet & greet service
                   </div>
                 </div>
@@ -207,9 +226,9 @@ export default function ServicesPage() {
 
               {/* NYC Corporate Travel */}
               <div className="card text-center relative">
-                <div className="location-badge">🇺🇸 NYC</div>
+                <div className="location-badge">NYC</div>
                 <div className="service-icon bg-red-100 text-red-600">
-                  💼
+                  <BusinessIcon size={32} />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Corporate Travel</h3>
                 <p className="text-gray-600 mb-6">
@@ -218,15 +237,15 @@ export default function ServicesPage() {
                 </p>
                 <div className="space-y-2 mb-6">
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Executive vehicles
                   </div>
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Professional chauffeurs
                   </div>
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Corporate accounts
                   </div>
                 </div>
@@ -238,9 +257,9 @@ export default function ServicesPage() {
 
               {/* NYC Special Events */}
               <div className="card text-center relative">
-                <div className="location-badge">🇺🇸 NYC</div>
+                <div className="location-badge">NYC</div>
                 <div className="service-icon bg-purple-100 text-purple-600">
-                  🎉
+                  <EventIcon size={32} />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Special Events</h3>
                 <p className="text-gray-600 mb-6">
@@ -249,15 +268,15 @@ export default function ServicesPage() {
                 </p>
                 <div className="space-y-2 mb-6">
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Weddings & proms
                   </div>
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Red carpet service
                   </div>
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Decorations available
                   </div>
                 </div>
@@ -269,9 +288,9 @@ export default function ServicesPage() {
 
               {/* NYC City Tours */}
               <div className="card text-center relative">
-                <div className="location-badge">🇺🇸 NYC</div>
+                <div className="location-badge">NYC</div>
                 <div className="service-icon bg-green-100 text-green-600">
-                  🗽
+                  <TourIcon size={32} />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">City Tours</h3>
                 <p className="text-gray-600 mb-6">
@@ -280,15 +299,15 @@ export default function ServicesPage() {
                 </p>
                 <div className="space-y-2 mb-6">
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Custom itineraries
                   </div>
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Knowledgeable guides
                   </div>
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Photo opportunities
                   </div>
                 </div>
@@ -300,9 +319,9 @@ export default function ServicesPage() {
 
               {/* NYC Hourly Service */}
               <div className="card text-center relative">
-                <div className="location-badge">🇺🇸 NYC</div>
+                <div className="location-badge">NYC</div>
                 <div className="service-icon bg-yellow-100 text-yellow-600">
-                  ⏰
+                  <ClockIcon size={32} />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Hourly Service</h3>
                 <p className="text-gray-600 mb-6">
@@ -311,15 +330,15 @@ export default function ServicesPage() {
                 </p>
                 <div className="space-y-2 mb-6">
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Minimum 2 hours
                   </div>
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Multiple stops
                   </div>
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Wait time included
                   </div>
                 </div>
@@ -331,9 +350,9 @@ export default function ServicesPage() {
 
               {/* NYC Long Distance */}
               <div className="card text-center relative">
-                <div className="location-badge">🇺🇸 NYC</div>
+                <div className="location-badge">NYC</div>
                 <div className="service-icon bg-indigo-100 text-indigo-600">
-                  🛣️
+                  <RoadIcon size={32} />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Long Distance</h3>
                 <p className="text-gray-600 mb-6">
@@ -342,15 +361,15 @@ export default function ServicesPage() {
                 </p>
                 <div className="space-y-2 mb-6">
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Tri-state area
                   </div>
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Comfortable seating
                   </div>
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Refreshments included
                   </div>
                 </div>
@@ -364,9 +383,9 @@ export default function ServicesPage() {
             <>
               {/* DR Airport Transfers */}
               <div className="card text-center relative">
-                <div className="location-badge">🇩🇴 DR</div>
+                <div className="location-badge">DR</div>
                 <div className="service-icon bg-blue-100 text-blue-600">
-                  ✈️
+                  <AirportIcon size={32} />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Airport Transfers</h3>
                 <p className="text-gray-600 mb-6">
@@ -375,15 +394,15 @@ export default function ServicesPage() {
                 </p>
                 <div className="space-y-2 mb-6">
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     SDQ to Punta Cana: $100 USD
                   </div>
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     SDQ to Santiago: $120 USD
                   </div>
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     SDQ to Puerto Plata: $170 USD
                   </div>
                 </div>
@@ -395,9 +414,9 @@ export default function ServicesPage() {
 
               {/* DR Resort Transfers */}
               <div className="card text-center relative">
-                <div className="location-badge">🇩🇴 DR</div>
+                <div className="location-badge">DR</div>
                 <div className="service-icon bg-orange-100 text-orange-600">
-                  🏖️
+                  <BeachIcon size={32} />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Resort Transfers</h3>
                 <p className="text-gray-600 mb-6">
@@ -406,15 +425,15 @@ export default function ServicesPage() {
                 </p>
                 <div className="space-y-2 mb-6">
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Punta Cana Resorts: $100-120 USD
                   </div>
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Bavaro Resorts: $110-120 USD
                   </div>
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Uvero Alto Resorts: $120-140 USD
                   </div>
                 </div>
@@ -426,9 +445,9 @@ export default function ServicesPage() {
 
               {/* DR City Tours */}
               <div className="card text-center relative">
-                <div className="location-badge">🇩🇴 DR</div>
+                <div className="location-badge">DR</div>
                 <div className="service-icon bg-green-100 text-green-600">
-                  🏛️
+                  <BuildingIcon size={32} />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">City Tours</h3>
                 <p className="text-gray-600 mb-6">
@@ -437,15 +456,15 @@ export default function ServicesPage() {
                 </p>
                 <div className="space-y-2 mb-6">
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Santo Domingo Colonial Zone
                   </div>
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Santiago city tours
                   </div>
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Cultural landmarks
                   </div>
                 </div>
@@ -457,9 +476,9 @@ export default function ServicesPage() {
 
               {/* DR Group Transportation */}
               <div className="card text-center relative">
-                <div className="location-badge">🇩🇴 DR</div>
+                <div className="location-badge">DR</div>
                 <div className="service-icon bg-yellow-100 text-yellow-600">
-                  👥
+                  <GroupIcon size={32} />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Group Transportation</h3>
                 <p className="text-gray-600 mb-6">
@@ -468,15 +487,15 @@ export default function ServicesPage() {
                 </p>
                 <div className="space-y-2 mb-6">
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Van 4+ passengers
                   </div>
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Van 8+ passengers
                   </div>
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Van 24+ passengers
                   </div>
                 </div>
@@ -488,9 +507,9 @@ export default function ServicesPage() {
 
               {/* DR Special Events */}
               <div className="card text-center relative">
-                <div className="location-badge">🇩🇴 DR</div>
+                <div className="location-badge">DR</div>
                 <div className="service-icon bg-purple-100 text-purple-600">
-                  💒
+                  <WeddingIcon size={32} />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Wedding & Events</h3>
                 <p className="text-gray-600 mb-6">
@@ -499,15 +518,15 @@ export default function ServicesPage() {
                 </p>
                 <div className="space-y-2 mb-6">
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Destination weddings
                   </div>
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Corporate events
                   </div>
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     VIP service
                   </div>
                 </div>
@@ -519,9 +538,9 @@ export default function ServicesPage() {
 
               {/* DR Hourly Service */}
               <div className="card text-center relative">
-                <div className="location-badge">🇩🇴 DR</div>
+                <div className="location-badge">DR</div>
                 <div className="service-icon bg-indigo-100 text-indigo-600">
-                  ⏰
+                  <ClockIcon size={32} />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Hourly Service</h3>
                 <p className="text-gray-600 mb-6">
@@ -530,15 +549,15 @@ export default function ServicesPage() {
                 </p>
                 <div className="space-y-2 mb-6">
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Minimum 2 hours
                   </div>
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Multiple stops
                   </div>
                   <div className="flex items-center justify-center text-sm text-gray-600">
-                    <span className="text-green-500 mr-2">✓</span>
+                    <span className="text-green-500 mr-2"><CheckIcon size={16} /></span>
                     Bilingual chauffeur
                   </div>
                 </div>
@@ -613,37 +632,49 @@ export default function ServicesPage() {
             {activeLocation === 'nyc' ? (
               <>
                 <div className="card text-center">
-                  <div className="text-4xl mb-4">🏙️</div>
+                  <div className="text-4xl mb-4 text-blue-600">
+                    <CityIcon size={48} />
+                  </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Manhattan</h3>
                   <p className="text-gray-600">All neighborhoods including Midtown, Financial District, Upper East/West Side</p>
                 </div>
 
                 <div className="card text-center">
-                  <div className="text-4xl mb-4">🌉</div>
+                  <div className="text-4xl mb-4 text-blue-600">
+                    <BridgeIcon size={48} />
+                  </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Outer Boroughs</h3>
                   <p className="text-gray-600">Brooklyn, Queens, Bronx, and Staten Island with full coverage</p>
                 </div>
 
                 <div className="card text-center">
-                  <div className="text-4xl mb-4">✈️</div>
+                  <div className="text-4xl mb-4 text-blue-600">
+                    <AirportIcon size={48} />
+                  </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Airports</h3>
                   <p className="text-gray-600">JFK, LaGuardia, Newark, and Westchester County Airport</p>
                 </div>
 
                 <div className="card text-center">
-                  <div className="text-4xl mb-4">🏢</div>
+                  <div className="text-4xl mb-4 text-blue-600">
+                    <BuildingIcon size={48} />
+                  </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">New Jersey</h3>
                   <p className="text-gray-600">Jersey City, Hoboken, and surrounding areas</p>
                 </div>
 
                 <div className="card text-center">
-                  <div className="text-4xl mb-4">🏡</div>
+                  <div className="text-4xl mb-4 text-blue-600">
+                    <HomeIcon size={48} />
+                  </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Westchester</h3>
                   <p className="text-gray-600">White Plains, Yonkers, and Westchester County</p>
                 </div>
 
                 <div className="card text-center">
-                  <div className="text-4xl mb-4">🌊</div>
+                  <div className="text-4xl mb-4 text-blue-600">
+                    <WaterIcon size={48} />
+                  </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Long Island</h3>
                   <p className="text-gray-600">Nassau and Suffolk counties including the Hamptons</p>
                 </div>
@@ -651,37 +682,49 @@ export default function ServicesPage() {
             ) : (
               <>
                 <div className="card text-center">
-                  <div className="text-4xl mb-4">🏛️</div>
+                  <div className="text-4xl mb-4 text-blue-600">
+                    <BuildingIcon size={48} />
+                  </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Santo Domingo</h3>
                   <p className="text-gray-600">Capital city including Colonial Zone, business districts, and residential areas</p>
                 </div>
 
                 <div className="card text-center">
-                  <div className="text-4xl mb-4">🏖️</div>
+                  <div className="text-4xl mb-4 text-blue-600">
+                    <BeachIcon size={48} />
+                  </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Punta Cana</h3>
                   <p className="text-gray-600">Resort area with luxury hotels, beaches, and entertainment venues</p>
                 </div>
 
                 <div className="card text-center">
-                  <div className="text-4xl mb-4">✈️</div>
+                  <div className="text-4xl mb-4 text-blue-600">
+                    <AirportIcon size={48} />
+                  </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Airports</h3>
                   <p className="text-gray-600">SDQ (Santo Domingo), PUJ (Punta Cana), STI (Santiago)</p>
                 </div>
 
                 <div className="card text-center">
-                  <div className="text-4xl mb-4">🏔️</div>
+                  <div className="text-4xl mb-4 text-blue-600">
+                    <MountainIcon size={48} />
+                  </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Santiago</h3>
                   <p className="text-gray-600">Second largest city with business districts and cultural attractions</p>
                 </div>
 
                 <div className="card text-center">
-                  <div className="text-4xl mb-4">🌊</div>
+                  <div className="text-4xl mb-4 text-blue-600">
+                    <WaterIcon size={48} />
+                  </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Puerto Plata</h3>
                   <p className="text-gray-600">Northern coast with resorts, beaches, and historical sites</p>
                 </div>
 
                 <div className="card text-center">
-                  <div className="text-4xl mb-4">🏝️</div>
+                  <div className="text-4xl mb-4 text-blue-600">
+                    <IslandIcon size={48} />
+                  </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">La Romana</h3>
                   <p className="text-gray-600">Southeastern region with luxury resorts and Casa de Campo</p>
                 </div>
