@@ -88,6 +88,10 @@ export default function ServicesPage() {
           box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
         }
         
+        .service-icon img {
+          border-radius: 24px;
+        }
+        
         .location-switcher {
           display: flex;
           background: white;
