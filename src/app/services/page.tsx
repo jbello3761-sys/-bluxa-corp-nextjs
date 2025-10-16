@@ -672,7 +672,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="w-32 h-24 mb-4 mx-auto">
                     <Image 
-                      src="/images/manhattan-area.jpg" 
+                      src="/images/manhattan-skyline-new.jpg" 
                       alt="Manhattan"
                       width={128}
                       height={96}
@@ -686,7 +686,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="w-32 h-24 mb-4 mx-auto">
                     <Image 
-                      src="/images/city.jpg" 
+                      src="/images/brooklyn-bridge-new.jpg" 
                       alt="Outer Boroughs"
                       width={128}
                       height={96}
@@ -714,7 +714,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="w-32 h-24 mb-4 mx-auto">
                     <Image 
-                      src="/images/downtownla.jpg" 
+                      src="/images/jersey-city-new.jpg" 
                       alt="New Jersey"
                       width={128}
                       height={96}
@@ -758,7 +758,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="w-32 h-24 mb-4 mx-auto">
                     <Image 
-                      src="/images/santo-domingo-area.jpg" 
+                      src="/images/santo-domingo-new.webp" 
                       alt="Santo Domingo"
                       width={128}
                       height={96}
@@ -772,7 +772,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="w-32 h-24 mb-4 mx-auto">
                     <Image 
-                      src="/images/miami-beach.jpg" 
+                      src="/images/punta-cana-new.webp" 
                       alt="Punta Cana"
                       width={128}
                       height={96}
@@ -800,7 +800,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="w-32 h-24 mb-4 mx-auto">
                     <Image 
-                      src="/images/city2.jpg" 
+                      src="/images/santiago-new.webp" 
                       alt="Santiago"
                       width={128}
                       height={96}
@@ -814,7 +814,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="w-32 h-24 mb-4 mx-auto">
                     <Image 
-                      src="/images/miami-beach.jpg" 
+                      src="/images/puerto-plata-new.jpg" 
                       alt="Puerto Plata"
                       width={128}
                       height={96}
@@ -828,7 +828,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="w-32 h-24 mb-4 mx-auto">
                     <Image 
-                      src="/images/miami-beach.jpg" 
+                      src="/images/la-romana-new.webp" 
                       alt="La Romana"
                       width={128}
                       height={96}
