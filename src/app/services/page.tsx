@@ -695,11 +695,9 @@ export default function ServicesPage() {
               <>
                 <div className="card text-center">
                   <div className="service-icon">
-                    <Image 
+                    <img 
                       src="/images/nyc.jpg" 
                       alt="Manhattan"
-                      width={414}
-                      height={322}
                       className="w-full h-full object-cover"
                       style={{ borderRadius: '24px' }}
                     />
@@ -710,11 +708,9 @@ export default function ServicesPage() {
 
                 <div className="card text-center">
                   <div className="service-icon">
-                    <Image 
+                    <img 
                       src="/images/city.jpg" 
                       alt="Outer Boroughs"
-                      width={414}
-                      height={322}
                       className="w-full h-full object-cover"
                       style={{ borderRadius: '24px' }}
                     />
@@ -725,11 +721,9 @@ export default function ServicesPage() {
 
                 <div className="card text-center">
                   <div className="service-icon">
-                    <Image 
+                    <img 
                       src="/images/airport-walking.jpg" 
                       alt="Airports"
-                      width={414}
-                      height={322}
                       className="w-full h-full object-cover"
                       style={{ borderRadius: '24px' }}
                     />
@@ -740,11 +734,9 @@ export default function ServicesPage() {
 
                 <div className="card text-center">
                   <div className="service-icon">
-                    <Image 
+                    <img 
                       src="/images/downtownla.jpg" 
                       alt="New Jersey"
-                      width={414}
-                      height={322}
                       className="w-full h-full object-cover"
                       style={{ borderRadius: '24px' }}
                     />
@@ -755,11 +747,9 @@ export default function ServicesPage() {
 
                 <div className="card text-center">
                   <div className="service-icon">
-                    <Image 
+                    <img 
                       src="/images/city2.jpg" 
                       alt="Westchester"
-                      width={414}
-                      height={322}
                       className="w-full h-full object-cover"
                       style={{ borderRadius: '24px' }}
                     />
@@ -770,11 +760,9 @@ export default function ServicesPage() {
 
                 <div className="card text-center">
                   <div className="service-icon">
-                    <Image 
+                    <img 
                       src="/images/miami-beach.jpg" 
                       alt="Long Island"
-                      width={414}
-                      height={322}
                       className="w-full h-full object-cover"
                       style={{ borderRadius: '24px' }}
                     />
