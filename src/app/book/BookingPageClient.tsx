@@ -131,7 +131,7 @@ export function BookingPageClient() {
         </div>
         
         <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-          <h4 className="font-medium text-blue-900 mb-2">💡 Booking Tips</h4>
+          <h4 className="font-medium text-blue-900 mb-2">Booking Tips</h4>
           <ul className="text-sm text-blue-800 space-y-1">
             <li>• Book at least 2 hours in advance for guaranteed availability</li>
             <li>• Airport transfers include 30 minutes of complimentary wait time</li>
