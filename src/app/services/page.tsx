@@ -203,6 +203,7 @@ export default function ServicesPage() {
                     width={400}
                     height={300}
                     className="w-full h-full object-cover"
+                    style={{ borderRadius: '24px' }}
                   />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Airport Transfers</h3>
@@ -240,6 +241,7 @@ export default function ServicesPage() {
                     width={400}
                     height={300}
                     className="w-full h-full object-cover"
+                    style={{ borderRadius: '24px' }}
                   />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Corporate Travel</h3>
@@ -277,6 +279,7 @@ export default function ServicesPage() {
                     width={400}
                     height={300}
                     className="w-full h-full object-cover"
+                    style={{ borderRadius: '24px' }}
                   />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Special Events</h3>
@@ -314,6 +317,7 @@ export default function ServicesPage() {
                     width={400}
                     height={300}
                     className="w-full h-full object-cover"
+                    style={{ borderRadius: '24px' }}
                   />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">City Tours</h3>
@@ -552,6 +556,7 @@ export default function ServicesPage() {
                     width={300}
                     height={300}
                     className="w-full h-full object-cover"
+                    style={{ borderRadius: '24px' }}
                   />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Wedding & Events</h3>
