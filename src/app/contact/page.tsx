@@ -299,7 +299,7 @@ export default function ContactPage() {
             <div className="card text-center">
               <div className="contact-icon bg-red-100 text-red-600">
                 <Image 
-                  src="/images/luxarysedan.jpg" 
+                  src="/images/luxury-sedan.jpg" 
                   alt="Email Contact"
                   width={48}
                   height={48}

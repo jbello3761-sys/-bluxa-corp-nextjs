@@ -77,7 +77,7 @@ export default function ServicesPage() {
         }
         
         .service-icon {
-          width: 300px;
+          width: 400px;
           height: 300px;
           border-radius: 24px;
           display: flex;
@@ -196,7 +196,7 @@ export default function ServicesPage() {
                   <Image 
                     src="/images/airport-transfer-service.jpg" 
                     alt="Airport Transfer Service"
-                    width={300}
+                    width={400}
                     height={300}
                     className="w-full h-full object-cover"
                   />
@@ -233,7 +233,7 @@ export default function ServicesPage() {
                   <Image 
                     src="/images/business-travel-service.jpg" 
                     alt="Business Travel Service"
-                    width={300}
+                    width={400}
                     height={300}
                     className="w-full h-full object-cover"
                   />
@@ -270,7 +270,7 @@ export default function ServicesPage() {
                   <Image 
                     src="/images/special-events-service.jpg" 
                     alt="Special Events Service"
-                    width={300}
+                    width={400}
                     height={300}
                     className="w-full h-full object-cover"
                   />
@@ -307,7 +307,7 @@ export default function ServicesPage() {
                   <Image 
                     src="/images/city-tours-service.jpg" 
                     alt="City Tours Service"
-                    width={300}
+                    width={400}
                     height={300}
                     className="w-full h-full object-cover"
                   />
@@ -445,7 +445,7 @@ export default function ServicesPage() {
                     <Image 
                       src="/images/resort-transfer-service.jpg" 
                       alt="Resort Transfer Service"
-                      width={300}
+                      width={400}
                       height={300}
                       className="w-full h-full object-cover"
                     />
@@ -700,7 +700,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="text-4xl mb-4 text-blue-600">
                     <Image 
-                      src="/images/airport walking.jpg" 
+                      src="/images/airport-walking.jpg" 
                       alt="Airports"
                       width={64}
                       height={64}
@@ -742,7 +742,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="text-4xl mb-4 text-blue-600">
                     <Image 
-                      src="/images/miami beach.jpg" 
+                      src="/images/miami-beach.jpg" 
                       alt="Long Island"
                       width={64}
                       height={64}
@@ -772,7 +772,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="text-4xl mb-4 text-blue-600">
                     <Image 
-                      src="/images/miami beach.jpg" 
+                      src="/images/miami-beach.jpg" 
                       alt="Punta Cana"
                       width={64}
                       height={64}
@@ -814,7 +814,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="text-4xl mb-4 text-blue-600">
                     <Image 
-                      src="/images/miami beach.jpg" 
+                      src="/images/miami-beach.jpg" 
                       alt="Puerto Plata"
                       width={64}
                       height={64}
@@ -828,7 +828,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="text-4xl mb-4 text-blue-600">
                     <Image 
-                      src="/images/miami beach.jpg" 
+                      src="/images/miami-beach.jpg" 
                       alt="La Romana"
                       width={64}
                       height={64}
