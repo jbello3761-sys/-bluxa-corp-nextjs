@@ -170,8 +170,13 @@ export const api = {
   },
 
   // Get pricing data (all amounts in cents)
-  async getPricing(): Promise<PricingData> {
-    return apiRequest('/pricing')
+  async getPricing(location: 'nyc' | 'dr' = 'nyc'): Promise<PricingData> {
+    return apiRequest(`/pricing?location=${location}`)
+  },
+
+  // Get DR route pricing
+  async getDRRoutePricing(): Promise<any> {
+    return apiRequest('/pricing/dr-routes')
   },
 
   // Create booking with exact field mapping

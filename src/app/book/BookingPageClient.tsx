@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { BookingForm } from '@/components/BookingForm'
 import { useSession } from '@/components/auth/AuthProvider'
 import { type BookingResponse } from '@/lib/api'
@@ -8,6 +8,18 @@ import { type BookingResponse } from '@/lib/api'
 export function BookingPageClient() {
   const { user } = useSession()
   const [currentBooking, setCurrentBooking] = useState<BookingResponse | null>(null)
+  const [urlParams, setUrlParams] = useState<{ location?: string; service?: string }>({})
+
+  // Parse URL parameters
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search)
+      setUrlParams({
+        location: params.get('location') || undefined,
+        service: params.get('service') || undefined,
+      })
+    }
+  }, [])
 
   const handleBookingSuccess = (booking: BookingResponse) => {
     setCurrentBooking(booking)
@@ -36,6 +48,8 @@ export function BookingPageClient() {
       <BookingForm 
         onBookingSuccess={handleBookingSuccess}
         className="max-w-none" // Remove max-width constraint for full-width form
+        initialLocation={urlParams.location as 'nyc' | 'dr' || 'nyc'}
+        initialService={urlParams.service}
       />
 
       {/* Current Booking Status */}

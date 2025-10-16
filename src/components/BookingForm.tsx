@@ -8,39 +8,54 @@ import { GoogleMapsAutocomplete, calculateDistance } from '@/components/GoogleMa
 
 // Form data interface (different from API interface)
 interface FormData {
+  location: 'nyc' | 'dr'
   pickup_address: string
   destination: string
   pickup_date: string
   pickup_time: string
-  vehicle_type: 'executive_sedan' | 'luxury_suv' | 'sprinter_van' | 'stretch_limo'
-  service_type?: 'hourly' | 'airport_transfer' | 'corporate' | 'special_events' | 'city_tours' | 'long_distance'
+  vehicle_type: 'executive_sedan' | 'luxury_suv' | 'sprinter_van' | 'stretch_limo' | 'van_4' | 'van_8' | 'van_24'
+  service_type?: 'hourly' | 'airport_transfer' | 'corporate' | 'special_events' | 'city_tours' | 'long_distance' | 'resort_transfer' | 'group_transport'
   customer_name: string
   customer_email: string
   customer_phone: string
   estimated_duration: number
   special_requests?: string
+  // DR-specific fields
+  departure_point?: 'aeropuerto_aila' | 'santo_domingo'
+  destination_type?: 'resort' | 'city' | 'airport' | 'tourist_area'
+  group_size?: number
+  round_trip?: boolean
 }
 
 interface BookingFormProps {
   onBookingSuccess?: (booking: BookingResponse) => void
   className?: string
+  initialLocation?: 'nyc' | 'dr'
+  initialService?: string
 }
 
-export function BookingForm({ onBookingSuccess, className = '' }: BookingFormProps) {
+export function BookingForm({ onBookingSuccess, className = '', initialLocation = 'nyc', initialService }: BookingFormProps) {
   const { user } = useSession()
   
   // Form state with exact field mapping
   const [formData, setFormData] = useState<FormData>({
+    location: initialLocation,
     pickup_address: '',           // Corrected from pickup_location
     destination: '',
     pickup_date: '',
     pickup_time: '',
-    vehicle_type: 'executive_sedan',
+    vehicle_type: initialLocation === 'dr' ? 'van_4' : 'executive_sedan',
+    service_type: initialService as any,
     customer_name: '',
     customer_email: user?.email || '',  // Pre-fill from JWT email only
     customer_phone: '',
     estimated_duration: 60,
     special_requests: '',         // Corrected from special_instructions
+    // DR-specific fields
+    departure_point: 'aeropuerto_aila',
+    destination_type: 'resort',
+    group_size: 4,
+    round_trip: false,
   })
   
   const [pricing, setPricing] = useState<PricingData | null>(null)
@@ -72,7 +87,7 @@ export function BookingForm({ onBookingSuccess, className = '' }: BookingFormPro
         
         try {
           // Add timeout to pricing API call
-          const pricingPromise = api.getPricing()
+          const pricingPromise = api.getPricing(formData.location)
           const timeoutPromise = new Promise((_, reject) => 
             setTimeout(() => reject(new Error('Pricing API timeout')), 5000)
           )
@@ -131,7 +146,7 @@ export function BookingForm({ onBookingSuccess, className = '' }: BookingFormPro
     
     // Load pricing in parallel with other operations
     loadPricing()
-  }, [])
+  }, [formData.location])
 
   // Auto-save form data to localStorage (debounced)
   useEffect(() => {
@@ -433,6 +448,40 @@ export function BookingForm({ onBookingSuccess, className = '' }: BookingFormPro
         {/* Trip Details */}
         <div>
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Trip Details</h3>
+          
+          {/* Location Switcher */}
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-700 mb-3">
+              Service Location *
+            </label>
+            <div className="flex bg-gray-100 rounded-lg p-1 max-w-md">
+              <button
+                type="button"
+                onClick={() => handleInputChange('location', 'nyc')}
+                className={`flex-1 px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+                  formData.location === 'nyc'
+                    ? 'bg-white text-blue-600 shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+                disabled={loading}
+              >
+                🇺🇸 New York City
+              </button>
+              <button
+                type="button"
+                onClick={() => handleInputChange('location', 'dr')}
+                className={`flex-1 px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+                  formData.location === 'dr'
+                    ? 'bg-white text-blue-600 shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+                disabled={loading}
+              >
+                🇩🇴 Dominican Republic
+              </button>
+            </div>
+          </div>
+          
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -553,14 +602,26 @@ export function BookingForm({ onBookingSuccess, className = '' }: BookingFormPro
               </label>
               <select
                 value={formData.vehicle_type}
-                onChange={(e) => handleInputChange('vehicle_type', e.target.value as BookingData['vehicle_type'])}
+                onChange={(e) => handleInputChange('vehicle_type', e.target.value as any)}
                 className={`input-field ${fieldErrors.vehicle_type ? 'border-red-500' : ''}`}
                 disabled={loading}
               >
-                <option value="executive_sedan">Executive Sedan</option>
-                <option value="luxury_suv">Luxury SUV</option>
-                <option value="sprinter_van">Sprinter Van</option>
-                <option value="stretch_limo">Stretch Limousine</option>
+                {formData.location === 'nyc' ? (
+                  <>
+                    <option value="executive_sedan">Executive Sedan</option>
+                    <option value="luxury_suv">Luxury SUV</option>
+                    <option value="sprinter_van">Sprinter Van</option>
+                    <option value="stretch_limo">Stretch Limousine</option>
+                  </>
+                ) : (
+                  <>
+                    <option value="van_4">Van 4+ Passengers</option>
+                    <option value="van_8">Van 8+ Passengers</option>
+                    <option value="van_24">Van 24+ Passengers</option>
+                    <option value="executive_sedan">Executive Sedan</option>
+                    <option value="luxury_suv">Luxury SUV</option>
+                  </>
+                )}
               </select>
               {fieldErrors.vehicle_type && (
                 <p className="text-sm text-red-600 mt-1">{fieldErrors.vehicle_type}</p>
@@ -583,6 +644,75 @@ export function BookingForm({ onBookingSuccess, className = '' }: BookingFormPro
               />
             </div>
           </div>
+          
+          {/* DR-Specific Fields */}
+          {formData.location === 'dr' && (
+            <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+              <h4 className="text-md font-semibold text-blue-900 mb-4">🇩🇴 Dominican Republic Details</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Departure Point *
+                  </label>
+                  <select
+                    value={formData.departure_point}
+                    onChange={(e) => handleInputChange('departure_point', e.target.value as any)}
+                    className="input-field"
+                    disabled={loading}
+                  >
+                    <option value="aeropuerto_aila">Aeropuerto AILA (SDQ)</option>
+                    <option value="santo_domingo">Santo Domingo</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Destination Type *
+                  </label>
+                  <select
+                    value={formData.destination_type}
+                    onChange={(e) => handleInputChange('destination_type', e.target.value as any)}
+                    className="input-field"
+                    disabled={loading}
+                  >
+                    <option value="resort">Resort</option>
+                    <option value="city">City</option>
+                    <option value="airport">Airport</option>
+                    <option value="tourist_area">Tourist Area</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Group Size *
+                  </label>
+                  <input
+                    type="number"
+                    value={formData.group_size}
+                    onChange={(e) => handleInputChange('group_size', parseInt(e.target.value) || 4)}
+                    className="input-field"
+                    min="1"
+                    max="24"
+                    disabled={loading}
+                  />
+                </div>
+                
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="round_trip"
+                    checked={formData.round_trip}
+                    onChange={(e) => handleInputChange('round_trip', e.target.checked)}
+                    className="mr-2"
+                    disabled={loading}
+                  />
+                  <label htmlFor="round_trip" className="text-sm font-medium text-gray-700">
+                    Round Trip Service
+                  </label>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Customer Information */}
