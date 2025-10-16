@@ -501,7 +501,7 @@ export default function DriverPortalPage() {
                     <td className="px-4 py-3 text-sm text-gray-600">JFK → Manhattan</td>
                     <td className="px-4 py-3 text-sm text-gray-600">Executive Sedan</td>
                     <td className="px-4 py-3 text-sm font-semibold text-green-600">$85.00</td>
-                    <td className="px-4 py-3 text-sm text-yellow-600">⭐ 5.0</td>
+                    <td className="px-4 py-3 text-sm text-yellow-600">5.0</td>
                   </tr>
                   <tr>
                     <td className="px-4 py-3 text-sm text-gray-900">Jan 19, 2025</td>
@@ -509,7 +509,7 @@ export default function DriverPortalPage() {
                     <td className="px-4 py-3 text-sm text-gray-600">Manhattan → Newark</td>
                     <td className="px-4 py-3 text-sm text-gray-600">Luxury SUV</td>
                     <td className="px-4 py-3 text-sm font-semibold text-green-600">$105.00</td>
-                    <td className="px-4 py-3 text-sm text-yellow-600">⭐ 4.8</td>
+                    <td className="px-4 py-3 text-sm text-yellow-600">4.8</td>
                   </tr>
                   <tr>
                     <td className="px-4 py-3 text-sm text-gray-900">Jan 19, 2025</td>
@@ -517,7 +517,7 @@ export default function DriverPortalPage() {
                     <td className="px-4 py-3 text-sm text-gray-600">Hotel → Conference</td>
                     <td className="px-4 py-3 text-sm text-gray-600">Sprinter Van</td>
                     <td className="px-4 py-3 text-sm font-semibold text-green-600">$120.00</td>
-                    <td className="px-4 py-3 text-sm text-yellow-600">⭐ 5.0</td>
+                    <td className="px-4 py-3 text-sm text-yellow-600">5.0</td>
                   </tr>
                 </tbody>
               </table>
