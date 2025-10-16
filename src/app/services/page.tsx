@@ -77,8 +77,8 @@ export default function ServicesPage() {
         }
         
         .service-icon {
-          width: 400px;
-          height: 300px;
+          width: 414px;
+          height: 322px;
           border-radius: 24px;
           display: flex;
           align-items: center;
@@ -197,14 +197,14 @@ export default function ServicesPage() {
               <div className="card text-center relative">
                 <div className="location-badge">NYC</div>
                 <div className="service-icon bg-blue-100 text-blue-600">
-                  <Image 
-                    src="/images/airport-transfer-service.jpg" 
-                    alt="Airport Transfer Service"
-                    width={400}
-                    height={300}
-                    className="w-full h-full object-cover"
-                    style={{ borderRadius: '24px' }}
-                  />
+                <Image 
+                  src="/images/airport-transfer-service.jpg" 
+                  alt="Airport Transfer Service"
+                  width={414}
+                  height={322}
+                  className="w-full h-full object-cover"
+                  style={{ borderRadius: '24px' }}
+                />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Airport Transfers</h3>
                 <p className="text-gray-600 mb-6">
@@ -235,14 +235,14 @@ export default function ServicesPage() {
               <div className="card text-center relative">
                 <div className="location-badge">NYC</div>
                 <div className="service-icon bg-red-100 text-red-600">
-                  <Image 
-                    src="/images/business-travel-service.jpg" 
-                    alt="Business Travel Service"
-                    width={400}
-                    height={300}
-                    className="w-full h-full object-cover"
-                    style={{ borderRadius: '24px' }}
-                  />
+                <Image 
+                  src="/images/business-travel-service.jpg" 
+                  alt="Business Travel Service"
+                  width={414}
+                  height={322}
+                  className="w-full h-full object-cover"
+                  style={{ borderRadius: '24px' }}
+                />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Corporate Travel</h3>
                 <p className="text-gray-600 mb-6">
@@ -273,14 +273,14 @@ export default function ServicesPage() {
               <div className="card text-center relative">
                 <div className="location-badge">NYC</div>
                 <div className="service-icon bg-purple-100 text-purple-600">
-                  <Image 
-                    src="/images/special-events-service.jpg" 
-                    alt="Special Events Service"
-                    width={400}
-                    height={300}
-                    className="w-full h-full object-cover"
-                    style={{ borderRadius: '24px' }}
-                  />
+                <Image 
+                  src="/images/special-events-service.jpg" 
+                  alt="Special Events Service"
+                  width={414}
+                  height={322}
+                  className="w-full h-full object-cover"
+                  style={{ borderRadius: '24px' }}
+                />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Special Events</h3>
                 <p className="text-gray-600 mb-6">
@@ -311,14 +311,14 @@ export default function ServicesPage() {
               <div className="card text-center relative">
                 <div className="location-badge">NYC</div>
                 <div className="service-icon bg-green-100 text-green-600">
-                  <Image 
-                    src="/images/city-tours-service.jpg" 
-                    alt="City Tours Service"
-                    width={400}
-                    height={300}
-                    className="w-full h-full object-cover"
-                    style={{ borderRadius: '24px' }}
-                  />
+                <Image 
+                  src="/images/city-tours-service.jpg" 
+                  alt="City Tours Service"
+                  width={414}
+                  height={322}
+                  className="w-full h-full object-cover"
+                  style={{ borderRadius: '24px' }}
+                />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">City Tours</h3>
                 <p className="text-gray-600 mb-6">
@@ -349,7 +349,14 @@ export default function ServicesPage() {
               <div className="card text-center relative">
                 <div className="location-badge">NYC</div>
                 <div className="service-icon bg-yellow-100 text-yellow-600">
-                  <ClockIcon size={32} />
+                <Image 
+                  src="/images/resort-transfer-service.jpg" 
+                  alt="Hourly Service"
+                  width={414}
+                  height={322}
+                  className="w-full h-full object-cover"
+                  style={{ borderRadius: '24px' }}
+                />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Hourly Service</h3>
                 <p className="text-gray-600 mb-6">
@@ -380,7 +387,14 @@ export default function ServicesPage() {
               <div className="card text-center relative">
                 <div className="location-badge">NYC</div>
                 <div className="service-icon bg-indigo-100 text-indigo-600">
-                  <RoadIcon size={32} />
+                <Image 
+                  src="/images/wedding-events-service.jpg" 
+                  alt="Long Distance Service"
+                  width={414}
+                  height={322}
+                  className="w-full h-full object-cover"
+                  style={{ borderRadius: '24px' }}
+                />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Long Distance</h3>
                 <p className="text-gray-600 mb-6">
@@ -453,8 +467,8 @@ export default function ServicesPage() {
                     <Image 
                       src="/images/resort-transfer-service.jpg" 
                       alt="Resort Transfer Service"
-                      width={400}
-                      height={300}
+                      width={414}
+                      height={322}
                       className="w-full h-full object-cover"
                       style={{ borderRadius: '24px' }}
                     />
@@ -684,8 +698,8 @@ export default function ServicesPage() {
                     <Image 
                       src="/images/manhattan-skyline-new.jpg" 
                       alt="Manhattan"
-                      width={400}
-                      height={300}
+                      width={414}
+                      height={322}
                       className="w-full h-full object-cover"
                       style={{ borderRadius: '24px' }}
                     />
@@ -699,8 +713,8 @@ export default function ServicesPage() {
                     <Image 
                       src="/images/brooklyn-bridge-new.jpg" 
                       alt="Outer Boroughs"
-                      width={400}
-                      height={300}
+                      width={414}
+                      height={322}
                       className="w-full h-full object-cover"
                       style={{ borderRadius: '24px' }}
                     />
@@ -714,8 +728,8 @@ export default function ServicesPage() {
                     <Image 
                       src="/images/airport-walking.jpg" 
                       alt="Airports"
-                      width={400}
-                      height={300}
+                      width={414}
+                      height={322}
                       className="w-full h-full object-cover"
                       style={{ borderRadius: '24px' }}
                     />
@@ -729,8 +743,8 @@ export default function ServicesPage() {
                     <Image 
                       src="/images/jersey-city-new.jpg" 
                       alt="New Jersey"
-                      width={400}
-                      height={300}
+                      width={414}
+                      height={322}
                       className="w-full h-full object-cover"
                       style={{ borderRadius: '24px' }}
                     />
@@ -744,8 +758,8 @@ export default function ServicesPage() {
                     <Image 
                       src="/images/city2.jpg" 
                       alt="Westchester"
-                      width={400}
-                      height={300}
+                      width={414}
+                      height={322}
                       className="w-full h-full object-cover"
                       style={{ borderRadius: '24px' }}
                     />
@@ -759,8 +773,8 @@ export default function ServicesPage() {
                     <Image 
                       src="/images/miami-beach.jpg" 
                       alt="Long Island"
-                      width={400}
-                      height={300}
+                      width={414}
+                      height={322}
                       className="w-full h-full object-cover"
                       style={{ borderRadius: '24px' }}
                     />
@@ -776,8 +790,8 @@ export default function ServicesPage() {
                     <Image 
                       src="/images/santo-domingo-new.webp" 
                       alt="Santo Domingo"
-                      width={400}
-                      height={300}
+                      width={414}
+                      height={322}
                       className="w-full h-full object-cover"
                       style={{ borderRadius: '24px' }}
                     />
@@ -791,8 +805,8 @@ export default function ServicesPage() {
                     <Image 
                       src="/images/punta-cana-new.webp" 
                       alt="Punta Cana"
-                      width={400}
-                      height={300}
+                      width={414}
+                      height={322}
                       className="w-full h-full object-cover"
                       style={{ borderRadius: '24px' }}
                     />
@@ -806,8 +820,8 @@ export default function ServicesPage() {
                     <Image 
                       src="/images/terminal.jpg" 
                       alt="DR Airports"
-                      width={400}
-                      height={300}
+                      width={414}
+                      height={322}
                       className="w-full h-full object-cover"
                       style={{ borderRadius: '24px' }}
                     />
@@ -821,8 +835,8 @@ export default function ServicesPage() {
                     <Image 
                       src="/images/santiago-new.webp" 
                       alt="Santiago"
-                      width={400}
-                      height={300}
+                      width={414}
+                      height={322}
                       className="w-full h-full object-cover"
                       style={{ borderRadius: '24px' }}
                     />
@@ -836,8 +850,8 @@ export default function ServicesPage() {
                     <Image 
                       src="/images/puerto-plata-new.jpg" 
                       alt="Puerto Plata"
-                      width={400}
-                      height={300}
+                      width={414}
+                      height={322}
                       className="w-full h-full object-cover"
                       style={{ borderRadius: '24px' }}
                     />
@@ -851,8 +865,8 @@ export default function ServicesPage() {
                     <Image 
                       src="/images/la-romana-new.webp" 
                       alt="La Romana"
-                      width={400}
-                      height={300}
+                      width={414}
+                      height={322}
                       className="w-full h-full object-cover"
                       style={{ borderRadius: '24px' }}
                     />
