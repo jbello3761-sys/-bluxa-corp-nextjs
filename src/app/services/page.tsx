@@ -77,8 +77,8 @@ export default function ServicesPage() {
         }
         
         .service-icon {
-          width: 414px;
-          height: 322px;
+          width: 100%;
+          height: 16rem;
           border-radius: 24px;
           display: flex;
           align-items: center;
@@ -91,7 +91,7 @@ export default function ServicesPage() {
         .service-icon img {
           width: 100%;
           height: 100%;
-          object-fit: contain;
+          object-fit: cover;
           border-radius: 24px;
         }
         
