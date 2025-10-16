@@ -91,7 +91,7 @@ export default function ServicesPage() {
         .service-icon img {
           width: 100%;
           height: 100%;
-          object-fit: cover;
+          object-fit: contain;
           border-radius: 24px;
         }
         
@@ -700,7 +700,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="service-icon">
                     <img 
-                      src="/images/executive-sedan.jpg" 
+                      src="/images/nyc.jpg" 
                       alt="Manhattan"
                     />
                   </div>
@@ -711,7 +711,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="service-icon">
                     <img 
-                      src="/images/luxury-suv.jpg" 
+                      src="/images/city.jpg" 
                       alt="Outer Boroughs"
                     />
                   </div>
@@ -722,7 +722,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="service-icon">
                     <img 
-                      src="/images/sprinter-van.jpg" 
+                      src="/images/airport-walking.jpg" 
                       alt="Airports"
                     />
                   </div>
@@ -733,7 +733,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="service-icon">
                     <img 
-                      src="/images/stretch-limo.jpg" 
+                      src="/images/downtownla.jpg" 
                       alt="New Jersey"
                     />
                   </div>
@@ -744,7 +744,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="service-icon">
                     <img 
-                      src="/images/executive-sedan.jpg" 
+                      src="/images/city2.jpg" 
                       alt="Westchester"
                     />
                   </div>
@@ -755,7 +755,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="service-icon">
                     <img 
-                      src="/images/luxury-suv.jpg" 
+                      src="/images/miami-beach.jpg" 
                       alt="Long Island"
                     />
                   </div>
