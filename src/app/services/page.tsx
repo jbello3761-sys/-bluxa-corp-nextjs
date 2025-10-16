@@ -768,7 +768,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="service-icon">
                     <img 
-                      src="/images/santo-domingo-new.webp" 
+                      src="/images/santo-domingo-new.jpg" 
                       alt="Santo Domingo"
                     />
                   </div>
@@ -779,7 +779,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="service-icon">
                     <img 
-                      src="/images/punta-cana-new.webp" 
+                      src="/images/nyc.jpg" 
                       alt="Punta Cana"
                     />
                   </div>
@@ -805,7 +805,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="service-icon">
                     <img 
-                      src="/images/santiago-new.webp" 
+                      src="/images/city.jpg" 
                       alt="Santiago"
                     />
                   </div>
@@ -827,7 +827,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="service-icon">
                     <img 
-                      src="/images/la-romana-new.webp" 
+                      src="/images/miami-beach.jpg" 
                       alt="La Romana"
                     />
                   </div>
