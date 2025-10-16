@@ -670,13 +670,13 @@ export default function ServicesPage() {
             {activeLocation === 'nyc' ? (
               <>
                 <div className="card text-center">
-                  <div className="text-4xl mb-4 text-blue-600">
+                  <div className="w-32 h-24 mb-4 mx-auto">
                     <Image 
                       src="/images/manhattan-area.jpg" 
                       alt="Manhattan"
-                      width={80}
-                      height={80}
-                      className="rounded-lg object-cover"
+                      width={128}
+                      height={96}
+                      className="w-full h-full rounded-lg object-cover"
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Manhattan</h3>
@@ -684,13 +684,13 @@ export default function ServicesPage() {
                 </div>
 
                 <div className="card text-center">
-                  <div className="text-4xl mb-4 text-blue-600">
+                  <div className="w-32 h-24 mb-4 mx-auto">
                     <Image 
                       src="/images/city.jpg" 
                       alt="Outer Boroughs"
-                      width={64}
-                      height={64}
-                      className="rounded-lg object-cover"
+                      width={128}
+                      height={96}
+                      className="w-full h-full rounded-lg object-cover"
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Outer Boroughs</h3>
@@ -698,13 +698,13 @@ export default function ServicesPage() {
                 </div>
 
                 <div className="card text-center">
-                  <div className="text-4xl mb-4 text-blue-600">
+                  <div className="w-32 h-24 mb-4 mx-auto">
                     <Image 
                       src="/images/airport-walking.jpg" 
                       alt="Airports"
-                      width={64}
-                      height={64}
-                      className="rounded-lg object-cover"
+                      width={128}
+                      height={96}
+                      className="w-full h-full rounded-lg object-cover"
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Airports</h3>
@@ -712,13 +712,13 @@ export default function ServicesPage() {
                 </div>
 
                 <div className="card text-center">
-                  <div className="text-4xl mb-4 text-blue-600">
+                  <div className="w-32 h-24 mb-4 mx-auto">
                     <Image 
                       src="/images/downtownla.jpg" 
                       alt="New Jersey"
-                      width={64}
-                      height={64}
-                      className="rounded-lg object-cover"
+                      width={128}
+                      height={96}
+                      className="w-full h-full rounded-lg object-cover"
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">New Jersey</h3>
@@ -726,13 +726,13 @@ export default function ServicesPage() {
                 </div>
 
                 <div className="card text-center">
-                  <div className="text-4xl mb-4 text-blue-600">
+                  <div className="w-32 h-24 mb-4 mx-auto">
                     <Image 
                       src="/images/city2.jpg" 
                       alt="Westchester"
-                      width={64}
-                      height={64}
-                      className="rounded-lg object-cover"
+                      width={128}
+                      height={96}
+                      className="w-full h-full rounded-lg object-cover"
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Westchester</h3>
@@ -740,13 +740,13 @@ export default function ServicesPage() {
                 </div>
 
                 <div className="card text-center">
-                  <div className="text-4xl mb-4 text-blue-600">
+                  <div className="w-32 h-24 mb-4 mx-auto">
                     <Image 
                       src="/images/miami-beach.jpg" 
                       alt="Long Island"
-                      width={64}
-                      height={64}
-                      className="rounded-lg object-cover"
+                      width={128}
+                      height={96}
+                      className="w-full h-full rounded-lg object-cover"
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Long Island</h3>
@@ -756,13 +756,13 @@ export default function ServicesPage() {
             ) : (
               <>
                 <div className="card text-center">
-                  <div className="text-4xl mb-4 text-blue-600">
+                  <div className="w-32 h-24 mb-4 mx-auto">
                     <Image 
                       src="/images/santo-domingo-area.jpg" 
                       alt="Santo Domingo"
-                      width={80}
-                      height={80}
-                      className="rounded-lg object-cover"
+                      width={128}
+                      height={96}
+                      className="w-full h-full rounded-lg object-cover"
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Santo Domingo</h3>
@@ -770,13 +770,13 @@ export default function ServicesPage() {
                 </div>
 
                 <div className="card text-center">
-                  <div className="text-4xl mb-4 text-blue-600">
+                  <div className="w-32 h-24 mb-4 mx-auto">
                     <Image 
                       src="/images/miami-beach.jpg" 
                       alt="Punta Cana"
-                      width={64}
-                      height={64}
-                      className="rounded-lg object-cover"
+                      width={128}
+                      height={96}
+                      className="w-full h-full rounded-lg object-cover"
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Punta Cana</h3>
@@ -784,13 +784,13 @@ export default function ServicesPage() {
                 </div>
 
                 <div className="card text-center">
-                  <div className="text-4xl mb-4 text-blue-600">
+                  <div className="w-32 h-24 mb-4 mx-auto">
                     <Image 
                       src="/images/terminal.jpg" 
                       alt="DR Airports"
-                      width={64}
-                      height={64}
-                      className="rounded-lg object-cover"
+                      width={128}
+                      height={96}
+                      className="w-full h-full rounded-lg object-cover"
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Airports</h3>
@@ -798,13 +798,13 @@ export default function ServicesPage() {
                 </div>
 
                 <div className="card text-center">
-                  <div className="text-4xl mb-4 text-blue-600">
+                  <div className="w-32 h-24 mb-4 mx-auto">
                     <Image 
                       src="/images/city2.jpg" 
                       alt="Santiago"
-                      width={64}
-                      height={64}
-                      className="rounded-lg object-cover"
+                      width={128}
+                      height={96}
+                      className="w-full h-full rounded-lg object-cover"
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Santiago</h3>
@@ -812,13 +812,13 @@ export default function ServicesPage() {
                 </div>
 
                 <div className="card text-center">
-                  <div className="text-4xl mb-4 text-blue-600">
+                  <div className="w-32 h-24 mb-4 mx-auto">
                     <Image 
                       src="/images/miami-beach.jpg" 
                       alt="Puerto Plata"
-                      width={64}
-                      height={64}
-                      className="rounded-lg object-cover"
+                      width={128}
+                      height={96}
+                      className="w-full h-full rounded-lg object-cover"
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Puerto Plata</h3>
@@ -826,13 +826,13 @@ export default function ServicesPage() {
                 </div>
 
                 <div className="card text-center">
-                  <div className="text-4xl mb-4 text-blue-600">
+                  <div className="w-32 h-24 mb-4 mx-auto">
                     <Image 
                       src="/images/miami-beach.jpg" 
                       alt="La Romana"
-                      width={64}
-                      height={64}
-                      className="rounded-lg object-cover"
+                      width={128}
+                      height={96}
+                      className="w-full h-full rounded-lg object-cover"
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">La Romana</h3>
