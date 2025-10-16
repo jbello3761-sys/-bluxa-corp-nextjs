@@ -1,8 +1,10 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 
 export default function FleetPage() {
+  const [selectedLocation, setSelectedLocation] = useState<'all' | 'nyc' | 'dr'>('all')
+
   const bookVehicle = (vehicleType: string) => {
     window.location.href = `/book?vehicle=${vehicleType}`
   }
@@ -51,6 +53,79 @@ export default function FleetPage() {
       features: ['Premium bar', 'LED lighting', 'Sound system', 'Privacy partition'],
       price: '$150/hour',
       popular: false
+    },
+    // DR Fleet Vehicles
+    {
+      id: 'hyundai_staria_2024',
+      name: 'Hyundai Staria 2024',
+      description: 'Modern luxury van with premium amenities',
+      image: '/images/sprinter-van.jpg', // Using existing image as placeholder
+      passengers: '1-11',
+      bags: '8-10',
+      features: ['Modern design', 'Premium seats', 'Climate control', 'Wi-Fi'],
+      price: '$120/hour',
+      popular: false,
+      location: 'DR'
+    },
+    {
+      id: 'hyundai_starex_2020',
+      name: 'Hyundai Starex 2020',
+      description: 'Reliable and comfortable group transportation',
+      image: '/images/sprinter-van.jpg', // Using existing image as placeholder
+      passengers: '1-12',
+      bags: '8-10',
+      features: ['Spacious interior', 'Comfortable seating', 'Air conditioning', 'Storage space'],
+      price: '$100/hour',
+      popular: false,
+      location: 'DR'
+    },
+    {
+      id: 'hyundai_starex_2019',
+      name: 'Hyundai Starex 2019',
+      description: 'Proven reliability for group travel',
+      image: '/images/sprinter-van.jpg', // Using existing image as placeholder
+      passengers: '1-12',
+      bags: '8-10',
+      features: ['Reliable performance', 'Comfortable ride', 'Air conditioning', 'Ample space'],
+      price: '$90/hour',
+      popular: false,
+      location: 'DR'
+    },
+    {
+      id: 'toyota_coaster_2024',
+      name: 'Toyota Coaster 2024',
+      description: 'Premium bus for large groups and events',
+      image: '/images/sprinter-van.jpg', // Using existing image as placeholder
+      passengers: '1-24',
+      bags: '15+',
+      features: ['Large capacity', 'Premium comfort', 'Entertainment system', 'Professional driver'],
+      price: '$150/hour',
+      popular: true,
+      location: 'DR'
+    },
+    {
+      id: 'higer_2020',
+      name: 'Higer 2020',
+      description: 'Modern bus with excellent fuel efficiency',
+      image: '/images/sprinter-van.jpg', // Using existing image as placeholder
+      passengers: '1-15',
+      bags: '10-12',
+      features: ['Fuel efficient', 'Modern design', 'Comfortable seating', 'Climate control'],
+      price: '$110/hour',
+      popular: false,
+      location: 'DR'
+    },
+    {
+      id: 'suburban_2019',
+      name: 'Suburban 2019',
+      description: 'Spacious SUV perfect for families and small groups',
+      image: '/images/luxury-suv.jpg', // Using existing image as placeholder
+      passengers: '1-8',
+      bags: '6-8',
+      features: ['Spacious interior', 'Premium comfort', 'All-wheel drive', 'Entertainment system'],
+      price: '$80/hour',
+      popular: false,
+      location: 'DR'
     }
   ]
 
@@ -122,16 +197,65 @@ export default function FleetPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Vehicles</h2>
-          <p className="text-xl text-gray-600">Choose the perfect vehicle for your needs</p>
+          <p className="text-xl text-gray-600 mb-8">Choose the perfect vehicle for your needs</p>
+          
+          {/* Location Filter */}
+          <div className="flex justify-center space-x-4 mb-8">
+            <button
+              onClick={() => setSelectedLocation('all')}
+              className={`px-6 py-3 rounded-lg font-medium transition-all ${
+                selectedLocation === 'all'
+                  ? 'bg-blue-600 text-white shadow-lg'
+                  : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+              }`}
+            >
+              All Vehicles
+            </button>
+            <button
+              onClick={() => setSelectedLocation('nyc')}
+              className={`px-6 py-3 rounded-lg font-medium transition-all ${
+                selectedLocation === 'nyc'
+                  ? 'bg-blue-600 text-white shadow-lg'
+                  : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+              }`}
+            >
+              NYC Fleet
+            </button>
+            <button
+              onClick={() => setSelectedLocation('dr')}
+              className={`px-6 py-3 rounded-lg font-medium transition-all ${
+                selectedLocation === 'dr'
+                  ? 'bg-blue-600 text-white shadow-lg'
+                  : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+              }`}
+            >
+              DR Fleet
+            </button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-12">
-          {vehicles.map((vehicle) => (
+          {vehicles
+            .filter(vehicle => {
+              if (selectedLocation === 'all') return true
+              if (selectedLocation === 'nyc') return !vehicle.location || vehicle.location === 'nyc'
+              if (selectedLocation === 'dr') return vehicle.location === 'dr'
+              return true
+            })
+            .map((vehicle) => (
             <div key={vehicle.id} className={`card ${vehicle.popular ? 'ring-2 ring-blue-500 transform scale-105 relative' : ''}`}>
               {vehicle.popular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                   <span className="bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-medium">
                     Most Popular
+                  </span>
+                </div>
+              )}
+              
+              {vehicle.location === 'DR' && (
+                <div className="absolute -top-4 right-4">
+                  <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                    DR Fleet
                   </span>
                 </div>
               )}

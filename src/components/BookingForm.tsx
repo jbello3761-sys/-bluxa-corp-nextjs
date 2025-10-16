@@ -13,7 +13,7 @@ interface FormData {
   destination: string
   pickup_date: string
   pickup_time: string
-  vehicle_type: 'executive_sedan' | 'luxury_suv' | 'sprinter_van' | 'stretch_limo' | 'van_4' | 'van_8' | 'van_24'
+  vehicle_type: 'executive_sedan' | 'luxury_suv' | 'sprinter_van' | 'stretch_limo' | 'van_4' | 'van_8' | 'van_24' | 'hyundai_staria_2024' | 'hyundai_starex_2020' | 'hyundai_starex_2019' | 'toyota_coaster_2024' | 'higer_2020' | 'suburban_2019'
   service_type?: 'hourly' | 'airport_transfer' | 'corporate' | 'special_events' | 'city_tours' | 'long_distance' | 'resort_transfer' | 'group_transport'
   customer_name: string
   customer_email: string
@@ -128,7 +128,7 @@ export function BookingForm({ onBookingSuccess, className = '', initialLocation 
         return !value ? 'Phone number is required' : 
                !validation.isValidPhone(value) ? 'Please enter a valid phone number' : ''
       case 'vehicle_type':
-        return !['executive_sedan', 'luxury_suv', 'sprinter_van', 'stretch_limo'].includes(value) ? 'Please select a valid vehicle type' : ''
+        return !['executive_sedan', 'luxury_suv', 'sprinter_van', 'stretch_limo', 'van_4', 'van_8', 'van_24', 'hyundai_staria_2024', 'hyundai_starex_2020', 'hyundai_starex_2019', 'toyota_coaster_2024', 'higer_2020', 'suburban_2019'].includes(value) ? 'Please select a valid vehicle type' : ''
       default:
         return ''
     }
@@ -471,6 +471,12 @@ export function BookingForm({ onBookingSuccess, className = '', initialLocation 
                     <option value="van_24">Van 24+ Passengers</option>
                     <option value="executive_sedan">Executive Sedan</option>
                     <option value="luxury_suv">Luxury SUV</option>
+                    <option value="hyundai_staria_2024">Hyundai Staria 2024</option>
+                    <option value="hyundai_starex_2020">Hyundai Starex 2020</option>
+                    <option value="hyundai_starex_2019">Hyundai Starex 2019</option>
+                    <option value="toyota_coaster_2024">Toyota Coaster 2024</option>
+                    <option value="higer_2020">Higer 2020</option>
+                    <option value="suburban_2019">Suburban 2019</option>
                   </>
                 )}
               </select>
