@@ -696,7 +696,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="service-icon">
                     <Image 
-                      src="/images/manhattan-skyline-new.jpg" 
+                      src="/images/nyc.jpg" 
                       alt="Manhattan"
                       width={414}
                       height={322}
@@ -711,7 +711,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="service-icon">
                     <Image 
-                      src="/images/brooklyn-bridge-new.jpg" 
+                      src="/images/city.jpg" 
                       alt="Outer Boroughs"
                       width={414}
                       height={322}
@@ -741,7 +741,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="service-icon">
                     <Image 
-                      src="/images/jersey-city-new.jpg" 
+                      src="/images/downtownla.jpg" 
                       alt="New Jersey"
                       width={414}
                       height={322}
