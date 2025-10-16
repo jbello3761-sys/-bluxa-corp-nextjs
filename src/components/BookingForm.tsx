@@ -1,9 +1,9 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { api, amountUtils, validation, getErrorMessage, type BookingData, type BookingResponse, type PricingData } from '@/lib/api'
+import { api, validation, getErrorMessage, type BookingData, type BookingResponse } from '@/lib/api'
 import { useSession } from '@/components/auth/AuthProvider'
-import { SkeletonBookingForm, LoadingButton } from '@/components/LoadingStates'
+import { LoadingButton } from '@/components/LoadingStates'
 import { GoogleMapsAutocomplete, calculateDistance } from '@/components/GoogleMapsAutocompleteOptimized'
 
 // Form data interface (different from API interface)
@@ -58,95 +58,12 @@ export function BookingForm({ onBookingSuccess, className = '', initialLocation 
     round_trip: false,
   })
   
-  const [pricing, setPricing] = useState<PricingData | null>(null)
-  const [estimatedPrice, setEstimatedPrice] = useState<number>(0)
   const [loading, setLoading] = useState(false)
-  const [pricingLoading, setPricingLoading] = useState(true)
   const [success, setSuccess] = useState<BookingResponse | null>(null)
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({})
 
-  // Load pricing data on component mount with caching and fallback
-  useEffect(() => {
-    const loadPricing = async () => {
-      try {
-        setPricingLoading(true)
-        
-        // Check if pricing is already cached in localStorage
-        const cachedPricing = localStorage.getItem('bluxa-pricing-cache')
-        const cacheTimestamp = localStorage.getItem('bluxa-pricing-cache-timestamp')
-        const now = Date.now()
-        const cacheAge = cacheTimestamp ? now - parseInt(cacheTimestamp) : Infinity
-        const CACHE_DURATION = 5 * 60 * 1000 // 5 minutes
-        
-        if (cachedPricing && cacheAge < CACHE_DURATION) {
-          setPricing(JSON.parse(cachedPricing))
-          setPricingLoading(false)
-          return
-        }
-        
-        try {
-          // Add timeout to pricing API call
-          const pricingPromise = api.getPricing(formData.location)
-          const timeoutPromise = new Promise((_, reject) => 
-            setTimeout(() => reject(new Error('Pricing API timeout')), 5000)
-          )
-          
-          const pricingData = await Promise.race([pricingPromise, timeoutPromise]) as PricingData
-          setPricing(pricingData)
-          
-          // Cache the pricing data
-          localStorage.setItem('bluxa-pricing-cache', JSON.stringify(pricingData))
-          localStorage.setItem('bluxa-pricing-cache-timestamp', now.toString())
-        } catch (apiError) {
-          console.error('API pricing failed, using fallback:', apiError)
-          
-          // Fallback pricing data
-          const fallbackPricing = {
-            pricing: {
-              executive_sedan: {
-                base_rate: 2500, // $25.00 in cents
-                per_hour_rate: 6500, // $65.00 in cents
-                minimum_charge: 5000, // $50.00 in cents
-                airport_transfer_rate: 7500 // $75.00 in cents
-              },
-              luxury_suv: {
-                base_rate: 3500, // $35.00 in cents
-                per_hour_rate: 9500, // $95.00 in cents
-                minimum_charge: 7000, // $70.00 in cents
-                airport_transfer_rate: 10500 // $105.00 in cents
-              },
-              sprinter_van: {
-                base_rate: 5000, // $50.00 in cents
-                per_hour_rate: 12000, // $120.00 in cents
-                minimum_charge: 10000, // $100.00 in cents
-                airport_transfer_rate: 15000 // $150.00 in cents
-              },
-              stretch_limo: {
-                base_rate: 6000, // $60.00 in cents
-                per_hour_rate: 15000, // $150.00 in cents
-                minimum_charge: 12000, // $120.00 in cents
-                airport_transfer_rate: 18000 // $180.00 in cents
-              }
-            },
-            currency: 'USD'
-          }
-          
-          setPricing(fallbackPricing)
-          setErrors({ pricing: 'Using offline pricing - rates may not be current' })
-        }
-        
-      } catch (error) {
-        console.error('Failed to load pricing:', error)
-        setErrors({ pricing: 'Failed to load pricing information' })
-      } finally {
-        setPricingLoading(false)
-      }
-    }
-    
-    // Load pricing in parallel with other operations
-    loadPricing()
-  }, [formData.location])
+  // Remove frontend price calculation - pricing is now handled entirely by backend
 
   // Auto-save form data to localStorage (debounced)
   useEffect(() => {
@@ -177,40 +94,7 @@ export function BookingForm({ onBookingSuccess, className = '', initialLocation 
     }
   }, []) // Remove user?.email dependency to prevent re-loading
 
-  // Calculate estimated price when form data changes (debounced)
-  useEffect(() => {
-    if (!pricing || !formData.vehicle_type || !formData.estimated_duration) return
-    
-    const timeoutId = setTimeout(() => {
-      const vehiclePricing = pricing.pricing[formData.vehicle_type]
-      if (vehiclePricing) {
-        const isAirportTransfer = 
-          formData.pickup_address.toLowerCase().includes('airport') ||
-          formData.destination.toLowerCase().includes('airport') ||
-          formData.pickup_address.toLowerCase().includes('jfk') ||
-          formData.pickup_address.toLowerCase().includes('lga') ||
-          formData.pickup_address.toLowerCase().includes('ewr')
-        
-        // Temporary fix: Ensure pricing values are in cents
-        const correctedPricing = {
-          ...vehiclePricing,
-          base_rate: vehiclePricing.base_rate < 100 ? vehiclePricing.base_rate * 100 : vehiclePricing.base_rate,
-          per_hour_rate: vehiclePricing.per_hour_rate < 100 ? vehiclePricing.per_hour_rate * 100 : vehiclePricing.per_hour_rate,
-          minimum_charge: vehiclePricing.minimum_charge < 100 ? vehiclePricing.minimum_charge * 100 : vehiclePricing.minimum_charge,
-          airport_transfer_rate: vehiclePricing.airport_transfer_rate < 100 ? vehiclePricing.airport_transfer_rate * 100 : vehiclePricing.airport_transfer_rate,
-        }
-        
-        const price = amountUtils.calculatePrice(
-          correctedPricing,
-          formData.estimated_duration,
-          isAirportTransfer
-        )
-        setEstimatedPrice(price)
-      }
-    }, 300) // Debounce price calculation to avoid excessive recalculations
-    
-    return () => clearTimeout(timeoutId)
-  }, [pricing, formData.vehicle_type, formData.estimated_duration, formData.pickup_address, formData.destination])
+  // Remove frontend price calculation - pricing is now handled entirely by backend
 
   // Handle input changes
   const handleInputChange = (field: keyof BookingData, value: string | number) => {
@@ -398,44 +282,11 @@ export function BookingForm({ onBookingSuccess, className = '', initialLocation 
     )
   }
 
-  // Show skeleton loader while pricing is loading
-  if (pricingLoading) {
-    return (
-      <div className={`space-y-6 ${className}`}>
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading booking form...</p>
-        </div>
-        <SkeletonBookingForm />
-      </div>
-    )
-  }
 
   return (
     <div className={`card ${className}`}>
       <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">Book Your Luxury Ride</h2>
       
-      {/* Pricing Display */}
-      {pricing && (
-        <div className="mb-6 p-4 bg-blue-50 rounded-lg">
-          <h3 className="font-semibold text-blue-900 mb-2">Current Pricing</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-            {Object.entries(pricing.pricing).map(([type, rates]) => {
-              // Temporary fix: Convert backend decimal values to cents if they're still in dollars
-              const minimumCharge = rates.minimum_charge < 100 ? rates.minimum_charge * 100 : rates.minimum_charge;
-              const perHourRate = rates.per_hour_rate < 100 ? rates.per_hour_rate * 100 : rates.per_hour_rate;
-              
-              return (
-                <div key={type} className="text-blue-800">
-                  <p className="font-medium capitalize">{type.replace('_', ' ')}</p>
-                  <p>From {amountUtils.formatCents(minimumCharge)}</p>
-                  <p className="text-xs">{amountUtils.formatCents(perHourRate)}/hour</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
 
       {/* Error Display */}
       {errors.form && (
@@ -786,45 +637,33 @@ export function BookingForm({ onBookingSuccess, className = '', initialLocation 
           </div>
         </div>
 
-        {/* Price Estimate */}
-        {estimatedPrice > 0 && (
-          <div className="bg-gradient-to-r from-blue-50 to-green-50 border border-blue-200 rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Booking Summary</h3>
-            
-            {/* Pricing Breakdown */}
-            <div className="space-y-3 mb-4">
-              <div className="flex justify-between items-center">
-                <span className="text-gray-700">Base Rate:</span>
-                <span className="font-medium">{amountUtils.formatCents(pricing?.pricing[formData.vehicle_type]?.base_rate || 0)}</span>
-              </div>
-              
-              <div className="flex justify-between items-center">
-                <span className="text-gray-700">Duration ({formData.estimated_duration} min):</span>
-                <span className="font-medium">{amountUtils.formatCents(Math.ceil((formData.estimated_duration / 60) * (pricing?.pricing[formData.vehicle_type]?.per_hour_rate || 0)))}</span>
-              </div>
-              
-              <div className="flex justify-between items-center">
-                <span className="text-gray-700">Vehicle:</span>
-                <span className="font-medium capitalize">{formData.vehicle_type.replace('_', ' ')}</span>
-              </div>
-              
-              <div className="border-t border-gray-300 pt-2">
-                <div className="flex justify-between items-center">
-                  <span className="text-lg font-semibold text-gray-900">Estimated Total:</span>
-                  <span className="text-2xl font-bold text-green-600">
-                    {amountUtils.formatCents(estimatedPrice)}
-                  </span>
-                </div>
-              </div>
+        {/* Pricing Notice */}
+        <div className="bg-gradient-to-r from-blue-50 to-green-50 border border-blue-200 rounded-lg p-6">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Booking Summary</h3>
+          
+          <div className="space-y-3 mb-4">
+            <div className="flex justify-between items-center">
+              <span className="text-gray-700">Vehicle:</span>
+              <span className="font-medium capitalize">{formData.vehicle_type.replace('_', ' ')}</span>
             </div>
             
-            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
-              <p className="text-sm text-yellow-800">
-                <span className="font-medium">Note:</span> Final price may vary based on actual duration, route, and any additional services requested.
-              </p>
+            <div className="flex justify-between items-center">
+              <span className="text-gray-700">Estimated Duration:</span>
+              <span className="font-medium">{formData.estimated_duration} minutes</span>
+            </div>
+            
+            <div className="flex justify-between items-center">
+              <span className="text-gray-700">Service Type:</span>
+              <span className="font-medium capitalize">{formData.service_type?.replace('_', ' ') || 'Hourly Service'}</span>
             </div>
           </div>
-        )}
+          
+          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
+            <p className="text-sm text-yellow-800">
+              <span className="font-medium">Note:</span> Final pricing will be calculated by our system based on your specific route, duration, and vehicle selection. You'll receive the exact price before confirming your booking.
+            </p>
+          </div>
+        </div>
 
         {/* Payment Method Selection */}
         <div className="bg-white border border-gray-200 rounded-lg p-6">
