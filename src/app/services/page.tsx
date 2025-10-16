@@ -77,14 +77,15 @@ export default function ServicesPage() {
         }
         
         .service-icon {
-          width: 80px;
-          height: 80px;
-          border-radius: 50%;
+          width: 120px;
+          height: 120px;
+          border-radius: 16px;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 2rem;
           margin: 0 auto 1rem;
+          overflow: hidden;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         
         .location-switcher {
@@ -195,9 +196,9 @@ export default function ServicesPage() {
                   <Image 
                     src="/images/airport-transfer-service.jpg" 
                     alt="Airport Transfer Service"
-                    width={64}
-                    height={64}
-                    className="rounded-lg object-cover"
+                    width={120}
+                    height={120}
+                    className="w-full h-full object-cover"
                   />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Airport Transfers</h3>
@@ -232,9 +233,9 @@ export default function ServicesPage() {
                   <Image 
                     src="/images/business-travel-service.jpg" 
                     alt="Business Travel Service"
-                    width={64}
-                    height={64}
-                    className="rounded-lg object-cover"
+                    width={120}
+                    height={120}
+                    className="w-full h-full object-cover"
                   />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Corporate Travel</h3>
@@ -269,9 +270,9 @@ export default function ServicesPage() {
                   <Image 
                     src="/images/special-events-service.jpg" 
                     alt="Special Events Service"
-                    width={64}
-                    height={64}
-                    className="rounded-lg object-cover"
+                    width={120}
+                    height={120}
+                    className="w-full h-full object-cover"
                   />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Special Events</h3>
@@ -306,9 +307,9 @@ export default function ServicesPage() {
                   <Image 
                     src="/images/city-tours-service.jpg" 
                     alt="City Tours Service"
-                    width={64}
-                    height={64}
-                    className="rounded-lg object-cover"
+                    width={120}
+                    height={120}
+                    className="w-full h-full object-cover"
                   />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">City Tours</h3>
@@ -444,9 +445,9 @@ export default function ServicesPage() {
                     <Image 
                       src="/images/resort-transfer-service.jpg" 
                       alt="Resort Transfer Service"
-                      width={64}
-                      height={64}
-                      className="rounded-lg object-cover"
+                      width={120}
+                      height={120}
+                      className="w-full h-full object-cover"
                     />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Resort Transfers</h3>
@@ -543,9 +544,9 @@ export default function ServicesPage() {
                   <Image 
                     src="/images/wedding-events-service.jpg" 
                     alt="Wedding & Events Service"
-                    width={64}
-                    height={64}
-                    className="rounded-lg object-cover"
+                    width={120}
+                    height={120}
+                    className="w-full h-full object-cover"
                   />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Wedding & Events</h3>
@@ -673,8 +674,8 @@ export default function ServicesPage() {
                     <Image 
                       src="/images/manhattan-area.jpg" 
                       alt="Manhattan"
-                      width={64}
-                      height={64}
+                      width={80}
+                      height={80}
                       className="rounded-lg object-cover"
                     />
                   </div>
@@ -759,8 +760,8 @@ export default function ServicesPage() {
                     <Image 
                       src="/images/santo-domingo-area.jpg" 
                       alt="Santo Domingo"
-                      width={64}
-                      height={64}
+                      width={80}
+                      height={80}
                       className="rounded-lg object-cover"
                     />
                   </div>
