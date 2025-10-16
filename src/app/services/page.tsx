@@ -193,7 +193,7 @@ export default function ServicesPage() {
                 <div className="location-badge">NYC</div>
                 <div className="service-icon bg-blue-100 text-blue-600">
                   <Image 
-                    src="/images/airport walking.jpg" 
+                    src="/images/airport-walking.jpg" 
                     alt="Airport Transfer Service"
                     width={64}
                     height={64}
@@ -230,7 +230,7 @@ export default function ServicesPage() {
                 <div className="location-badge">NYC</div>
                 <div className="service-icon bg-red-100 text-red-600">
                   <Image 
-                    src="/images/luxarysedan.jpg" 
+                    src="/images/luxury-sedan.jpg" 
                     alt="Business Travel Service"
                     width={64}
                     height={64}
@@ -267,7 +267,7 @@ export default function ServicesPage() {
                 <div className="location-badge">NYC</div>
                 <div className="service-icon bg-purple-100 text-purple-600">
                   <Image 
-                    src="/images/strech limo.jpg" 
+                    src="/images/stretch-limo.jpg" 
                     alt="Special Events Service"
                     width={64}
                     height={64}
@@ -441,13 +441,13 @@ export default function ServicesPage() {
               <div className="card text-center relative">
                 <div className="location-badge">DR</div>
                 <div className="service-icon bg-orange-100 text-orange-600">
-                  <Image 
-                    src="/images/miami beach.jpg" 
-                    alt="Resort Transfer Service"
-                    width={64}
-                    height={64}
-                    className="rounded-lg object-cover"
-                  />
+                    <Image 
+                      src="/images/miami-beach.jpg" 
+                      alt="Resort Transfer Service"
+                      width={64}
+                      height={64}
+                      className="rounded-lg object-cover"
+                    />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Resort Transfers</h3>
                 <p className="text-gray-600 mb-6">
@@ -671,7 +671,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="text-4xl mb-4 text-blue-600">
                     <Image 
-                      src="/images/nyc 2.jpg" 
+                      src="/images/nyc-2.jpg" 
                       alt="Manhattan"
                       width={64}
                       height={64}

@@ -365,7 +365,7 @@ export default function ContactPage() {
             <div className="text-center p-6 bg-gray-50 rounded-lg">
               <div className="text-4xl mb-4">
                 <Image 
-                  src="/images/nyc 2.jpg" 
+                  src="/images/nyc-2.jpg" 
                   alt="Manhattan"
                   width={64}
                   height={64}
@@ -393,7 +393,7 @@ export default function ContactPage() {
             <div className="text-center p-6 bg-gray-50 rounded-lg">
               <div className="text-4xl mb-4">
                 <Image 
-                  src="/images/airport walking.jpg" 
+                  src="/images/airport-walking.jpg" 
                   alt="Airports"
                   width={64}
                   height={64}
@@ -435,7 +435,7 @@ export default function ContactPage() {
             <div className="text-center p-6 bg-gray-50 rounded-lg">
               <div className="text-4xl mb-4">
                 <Image 
-                  src="/images/miami beach.jpg" 
+                  src="/images/miami-beach.jpg" 
                   alt="Long Island"
                   width={64}
                   height={64}
