@@ -700,7 +700,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="service-icon">
                     <img 
-                      src="/images/nyc.jpg" 
+                      src="/images/airport-transfer-service.jpg" 
                       alt="Manhattan"
                     />
                   </div>
@@ -711,7 +711,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="service-icon">
                     <img 
-                      src="/images/city.jpg" 
+                      src="/images/business-travel-service.jpg" 
                       alt="Outer Boroughs"
                     />
                   </div>
@@ -722,7 +722,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="service-icon">
                     <img 
-                      src="/images/airport-walking.jpg" 
+                      src="/images/special-events-service.jpg" 
                       alt="Airports"
                     />
                   </div>
@@ -733,7 +733,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="service-icon">
                     <img 
-                      src="/images/downtownla.jpg" 
+                      src="/images/city-tours-service.jpg" 
                       alt="New Jersey"
                     />
                   </div>
@@ -744,7 +744,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="service-icon">
                     <img 
-                      src="/images/city2.jpg" 
+                      src="/images/resort-transfer-service.jpg" 
                       alt="Westchester"
                     />
                   </div>
@@ -755,7 +755,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="service-icon">
                     <img 
-                      src="/images/miami-beach.jpg" 
+                      src="/images/wedding-events-service.jpg" 
                       alt="Long Island"
                     />
                   </div>
