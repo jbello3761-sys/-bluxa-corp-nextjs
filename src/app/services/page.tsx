@@ -193,7 +193,7 @@ export default function ServicesPage() {
                 <div className="location-badge">NYC</div>
                 <div className="service-icon bg-blue-100 text-blue-600">
                   <Image 
-                    src="/images/airport-walking.jpg" 
+                    src="/images/airport-transfer-service.jpg" 
                     alt="Airport Transfer Service"
                     width={64}
                     height={64}
@@ -230,7 +230,7 @@ export default function ServicesPage() {
                 <div className="location-badge">NYC</div>
                 <div className="service-icon bg-red-100 text-red-600">
                   <Image 
-                    src="/images/luxury-sedan.jpg" 
+                    src="/images/business-travel-service.jpg" 
                     alt="Business Travel Service"
                     width={64}
                     height={64}
@@ -267,7 +267,7 @@ export default function ServicesPage() {
                 <div className="location-badge">NYC</div>
                 <div className="service-icon bg-purple-100 text-purple-600">
                   <Image 
-                    src="/images/stretch-limo.jpg" 
+                    src="/images/special-events-service.jpg" 
                     alt="Special Events Service"
                     width={64}
                     height={64}
@@ -304,7 +304,7 @@ export default function ServicesPage() {
                 <div className="location-badge">NYC</div>
                 <div className="service-icon bg-green-100 text-green-600">
                   <Image 
-                    src="/images/nyc.jpg" 
+                    src="/images/city-tours-service.jpg" 
                     alt="City Tours Service"
                     width={64}
                     height={64}
@@ -442,7 +442,7 @@ export default function ServicesPage() {
                 <div className="location-badge">DR</div>
                 <div className="service-icon bg-orange-100 text-orange-600">
                     <Image 
-                      src="/images/miami-beach.jpg" 
+                      src="/images/resort-transfer-service.jpg" 
                       alt="Resort Transfer Service"
                       width={64}
                       height={64}
@@ -541,7 +541,7 @@ export default function ServicesPage() {
                 <div className="location-badge">DR</div>
                 <div className="service-icon bg-purple-100 text-purple-600">
                   <Image 
-                    src="/images/strech limo.jpg" 
+                    src="/images/wedding-events-service.jpg" 
                     alt="Wedding & Events Service"
                     width={64}
                     height={64}
@@ -671,7 +671,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="text-4xl mb-4 text-blue-600">
                     <Image 
-                      src="/images/nyc-2.jpg" 
+                      src="/images/manhattan-area.jpg" 
                       alt="Manhattan"
                       width={64}
                       height={64}
@@ -757,7 +757,7 @@ export default function ServicesPage() {
                 <div className="card text-center">
                   <div className="text-4xl mb-4 text-blue-600">
                     <Image 
-                      src="/images/lasvegas.jpg" 
+                      src="/images/santo-domingo-area.jpg" 
                       alt="Santo Domingo"
                       width={64}
                       height={64}
