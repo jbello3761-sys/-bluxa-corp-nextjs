@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState } from 'react'
-import { DRPricingTable } from '@/components/DRPricingTable'
 
 export default function ServicesPage() {
   const [activeLocation, setActiveLocation] = useState<'nyc' | 'dr'>('nyc')
@@ -552,13 +551,6 @@ export default function ServicesPage() {
           )}
         </div>
       </div>
-
-      {/* Dominican Republic Pricing Table */}
-      {activeLocation === 'dr' && (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <DRPricingTable />
-        </div>
-      )}
 
       {/* How It Works Section */}
       <div className="bg-white py-16">
