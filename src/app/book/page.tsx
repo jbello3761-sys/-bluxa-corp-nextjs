@@ -75,7 +75,7 @@ export default function BookPage() {
               <p className="text-gray-600 mb-4">
                 Perfect for business meetings and airport transfers. Comfortable seating for up to 3 passengers.
               </p>
-              <div className="text-blue-600 font-semibold">Starting at $65/hour</div>
+              <div className="text-blue-600 font-semibold">Dynamic pricing based on distance & route</div>
             </div>
             
             <div className="feature-card">
@@ -95,7 +95,7 @@ export default function BookPage() {
               <p className="text-gray-600 mb-4">
                 Spacious and elegant for special events and group travel. Seating for up to 6 passengers.
               </p>
-              <div className="text-green-600 font-semibold">Starting at $95/hour</div>
+              <div className="text-green-600 font-semibold">Dynamic pricing based on distance & route</div>
             </div>
             
             <div className="feature-card">
@@ -115,7 +115,7 @@ export default function BookPage() {
               <p className="text-gray-600 mb-4">
                 Perfect for large groups and corporate events. Comfortable seating for up to 14 passengers.
               </p>
-              <div className="text-yellow-600 font-semibold">Starting at $120/hour</div>
+              <div className="text-yellow-600 font-semibold">Dynamic pricing based on distance & route</div>
             </div>
             
             <div className="feature-card">
@@ -135,7 +135,7 @@ export default function BookPage() {
               <p className="text-gray-600 mb-4">
                 Ultimate luxury experience for special occasions. Premium bar and entertainment for up to 8 passengers.
               </p>
-              <div className="text-purple-600 font-semibold">Starting at $150/hour</div>
+              <div className="text-purple-600 font-semibold">Dynamic pricing based on distance & route</div>
             </div>
           </div>
         </div>

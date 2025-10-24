@@ -127,9 +127,9 @@ export default function PricingPage() {
             </div>
 
             <div className="text-center mb-8">
-              <div className="text-5xl font-bold text-gray-900 mb-2">$65</div>
-              <div className="text-gray-600">per hour</div>
-              <div className="text-sm text-gray-500 mt-1">2-hour minimum</div>
+              <div className="text-5xl font-bold text-gray-900 mb-2">Dynamic</div>
+              <div className="text-gray-600">pricing based on distance & route</div>
+              <div className="text-sm text-gray-500 mt-1">Transparent calculation</div>
             </div>
 
             <div className="space-y-4 mb-8">
@@ -158,8 +158,8 @@ export default function PricingPage() {
             <div className="border-t pt-6">
               <div className="text-center mb-4">
                 <div className="text-lg font-semibold text-gray-900">Airport Transfer</div>
-                <div className="text-2xl font-bold text-blue-600">$75</div>
-                <div className="text-sm text-gray-500">flat rate</div>
+                <div className="text-2xl font-bold text-blue-600">From $75</div>
+                <div className="text-sm text-gray-500">calculated by distance</div>
               </div>
               <button className="btn-primary w-full" onClick={() => bookVehicle('executive_sedan')}>
                 Book Executive Sedan
@@ -182,9 +182,9 @@ export default function PricingPage() {
             </div>
 
             <div className="text-center mb-8">
-              <div className="text-5xl font-bold text-gray-900 mb-2">$95</div>
-              <div className="text-gray-600">per hour</div>
-              <div className="text-sm text-gray-500 mt-1">2-hour minimum</div>
+              <div className="text-5xl font-bold text-gray-900 mb-2">Dynamic</div>
+              <div className="text-gray-600">pricing based on distance & route</div>
+              <div className="text-sm text-gray-500 mt-1">Transparent calculation</div>
             </div>
 
             <div className="space-y-4 mb-8">
@@ -213,8 +213,8 @@ export default function PricingPage() {
             <div className="border-t pt-6">
               <div className="text-center mb-4">
                 <div className="text-lg font-semibold text-gray-900">Airport Transfer</div>
-                <div className="text-2xl font-bold text-blue-600">$105</div>
-                <div className="text-sm text-gray-500">flat rate</div>
+                <div className="text-2xl font-bold text-blue-600">From $105</div>
+                <div className="text-sm text-gray-500">calculated by distance</div>
               </div>
               <button className="btn-primary w-full" onClick={() => bookVehicle('luxury_suv')}>
                 Book Luxury SUV
@@ -237,9 +237,9 @@ export default function PricingPage() {
             </div>
 
             <div className="text-center mb-8">
-              <div className="text-5xl font-bold text-gray-900 mb-2">$120</div>
-              <div className="text-gray-600">per hour</div>
-              <div className="text-sm text-gray-500 mt-1">3-hour minimum</div>
+              <div className="text-5xl font-bold text-gray-900 mb-2">Dynamic</div>
+              <div className="text-gray-600">pricing based on distance & route</div>
+              <div className="text-sm text-gray-500 mt-1">Transparent calculation</div>
             </div>
 
             <div className="space-y-4 mb-8">
@@ -268,8 +268,8 @@ export default function PricingPage() {
             <div className="border-t pt-6">
               <div className="text-center mb-4">
                 <div className="text-lg font-semibold text-gray-900">Airport Transfer</div>
-                <div className="text-2xl font-bold text-blue-600">$130</div>
-                <div className="text-sm text-gray-500">flat rate</div>
+                <div className="text-2xl font-bold text-blue-600">From $130</div>
+                <div className="text-sm text-gray-500">calculated by distance</div>
               </div>
               <button className="btn-primary w-full" onClick={() => bookVehicle('sprinter_van')}>
                 Book Sprinter Van

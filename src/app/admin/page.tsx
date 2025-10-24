@@ -421,7 +421,7 @@ export default function AdminPortalPage() {
                 </div>
                 <div className="bg-orange-50 p-2 rounded">
                   <div className="flex justify-between">
-                    <span className="text-orange-700">Resort:</span>
+                    <span className="text-orange-700">Hourly:</span>
                     <span className="font-semibold text-orange-800">$5,030</span>
                   </div>
                   <div className="text-xs text-orange-600">11%</div>
@@ -739,26 +739,24 @@ export default function AdminPortalPage() {
               <div className="card">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Pricing Configuration</h3>
                 <div className="space-y-4">
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                    <div className="flex items-center mb-2">
-                      <svg className="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      <span className="font-semibold text-blue-800">Dynamic Pricing System</span>
-                    </div>
-                    <p className="text-sm text-blue-700 mb-3">
-                      Pricing is now managed through the advanced pricing matrix system. 
-                      All rates are calculated dynamically based on distance, vehicle class, 
-                      time modifiers, and country-specific settings.
-                    </p>
-                    <div className="text-xs text-blue-600">
-                      <strong>Features:</strong> Distance-based pricing • Peak/non-peak modifiers • 
-                      US/DR country toggle • Add-on services • Real-time calculation
-                    </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Executive Sedan (per hour)</label>
+                    <input type="number" className="input-field" defaultValue="65" id="sedanRate" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Luxury SUV (per hour)</label>
+                    <input type="number" className="input-field" defaultValue="95" id="suvRate" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Sprinter Van (per hour)</label>
+                    <input type="number" className="input-field" defaultValue="120" id="vanRate" />
                   </div>
                   <button className="btn-primary" onClick={() => {
-                    alert('Pricing matrix is managed through the Pricing tab. All rates are calculated dynamically!');
-                  }}>View Pricing Matrix</button>
+                    const sedanRate = (document.getElementById('sedanRate') as HTMLInputElement)?.value;
+                    const suvRate = (document.getElementById('suvRate') as HTMLInputElement)?.value;
+                    const vanRate = (document.getElementById('vanRate') as HTMLInputElement)?.value;
+                    alert(`Pricing saved: Sedan $${sedanRate}, SUV $${suvRate}, Van $${vanRate}`);
+                  }}>Save Pricing</button>
                 </div>
               </div>
 
