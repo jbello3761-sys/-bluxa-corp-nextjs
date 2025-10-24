@@ -6,6 +6,10 @@ import PricingManagement from '@/components/PricingManagement'
 export default function AdminPortalPage() {
   const [driverModal, setDriverModal] = useState<{isOpen: boolean, driver: any}>({isOpen: false, driver: null})
   const [driverDetailsModal, setDriverDetailsModal] = useState<{isOpen: boolean, driver: any}>({isOpen: false, driver: null})
+  const [bookingModal, setBookingModal] = useState<{isOpen: boolean, booking: any}>({isOpen: false, booking: null})
+  const [vehicleModal, setVehicleModal] = useState<{isOpen: boolean, vehicle: any}>({isOpen: false, vehicle: null})
+  const [addDriverModal, setAddDriverModal] = useState(false)
+  const [addVehicleModal, setAddVehicleModal] = useState(false)
 
   const openDriverModal = (id: string, name: string, status: string, rating: string, rides: string, vehicle: string) => {
     setDriverModal({
@@ -27,6 +31,28 @@ export default function AdminPortalPage() {
 
   const closeDriverDetailsModal = () => {
     setDriverDetailsModal({isOpen: false, driver: null})
+  }
+
+  const openBookingModal = (id: string, customer: string, route: string, vehicle: string, driver: string, status: string, amount: string) => {
+    setBookingModal({
+      isOpen: true,
+      booking: { id, customer, route, vehicle, driver, status, amount }
+    })
+  }
+
+  const closeBookingModal = () => {
+    setBookingModal({isOpen: false, booking: null})
+  }
+
+  const openVehicleModal = (id: string, make: string, license: string, type: string, status: string, driver: string) => {
+    setVehicleModal({
+      isOpen: true,
+      vehicle: { id, make, license, type, status, driver }
+    })
+  }
+
+  const closeVehicleModal = () => {
+    setVehicleModal({isOpen: false, vehicle: null})
   }
   return (
     <div>
@@ -394,7 +420,7 @@ export default function AdminPortalPage() {
                     <td className="px-4 py-3"><span className="status-badge status-confirmed">Confirmed</span></td>
                     <td className="px-4 py-3 text-sm font-semibold text-green-600">$85.00</td>
                     <td className="px-4 py-3">
-                      <button className="btn-secondary mr-2" onClick={() => alert('Viewing booking BLX-2025-00125')}>View</button>
+                      <button className="btn-secondary mr-2" onClick={() => openBookingModal('BLX-2025-00125', 'John Smith', 'JFK → Manhattan', 'Executive Sedan', 'Mike Johnson', 'Confirmed', '$85.00')}>View</button>
                       <button className="btn-success" onClick={() => {
                         const driver = prompt('Enter driver ID to assign:');
                         if (driver) alert(`Driver ${driver} assigned to booking BLX-2025-00125`);
@@ -410,7 +436,7 @@ export default function AdminPortalPage() {
                     <td className="px-4 py-3"><span className="status-badge status-in-progress">In Progress</span></td>
                     <td className="px-4 py-3 text-sm font-semibold text-green-600">$95.00</td>
                     <td className="px-4 py-3">
-                      <button className="btn-secondary mr-2" onClick={() => alert('Viewing booking BLX-2025-00124')}>View</button>
+                      <button className="btn-secondary mr-2" onClick={() => openBookingModal('BLX-2025-00124', 'Jane Doe', 'Manhattan → LGA', 'Luxury SUV', 'Sarah Wilson', 'In Progress', '$95.00')}>View</button>
                       <button className="btn-secondary" onClick={() => alert('Opening real-time tracking for BLX-2025-00124')}>Track</button>
                     </td>
                   </tr>
@@ -423,7 +449,7 @@ export default function AdminPortalPage() {
                     <td className="px-4 py-3"><span className="status-badge status-completed">Completed</span></td>
                     <td className="px-4 py-3 text-sm font-semibold text-green-600">$120.00</td>
                     <td className="px-4 py-3">
-                      <button className="btn-secondary mr-2" onClick={() => alert('Viewing booking BLX-2025-00123')}>View</button>
+                      <button className="btn-secondary mr-2" onClick={() => openBookingModal('BLX-2025-00123', 'Corporate Group', 'Hotel → Conference', 'Sprinter Van', 'David Brown', 'Completed', '$120.00')}>View</button>
                       <button className="btn-secondary" onClick={() => alert('Generating invoice for BLX-2025-00123')}>Invoice</button>
                     </td>
                   </tr>
@@ -436,7 +462,7 @@ export default function AdminPortalPage() {
           <div id="drivers-tab" className="tab-content p-6">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold text-gray-900">Driver Management</h2>
-              <button className="btn-primary" onClick={() => alert('Opening add driver form...')}>Add New Driver</button>
+              <button className="btn-primary" onClick={() => setAddDriverModal(true)}>Add New Driver</button>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -545,7 +571,7 @@ export default function AdminPortalPage() {
           <div id="vehicles-tab" className="tab-content p-6">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold text-gray-900">Vehicle Management</h2>
-              <button className="btn-primary" onClick={() => alert('Opening add vehicle form...')}>Add New Vehicle</button>
+              <button className="btn-primary" onClick={() => setAddVehicleModal(true)}>Add New Vehicle</button>
             </div>
 
             <div className="overflow-x-auto">
@@ -570,7 +596,7 @@ export default function AdminPortalPage() {
                     <td className="px-4 py-3"><span className="status-badge status-confirmed">Active</span></td>
                     <td className="px-4 py-3 text-sm text-gray-600">Mike Johnson</td>
                     <td className="px-4 py-3">
-                      <button className="btn-secondary mr-2" onClick={() => alert('Editing vehicle VEH-001')}>Edit</button>
+                      <button className="btn-secondary mr-2" onClick={() => openVehicleModal('VEH-001', '2024 Mercedes S-Class', 'NYC-LUX-001', 'Executive Sedan', 'Active', 'Mike Johnson')}>Edit</button>
                       <button className="btn-secondary" onClick={() => alert('Viewing maintenance records for VEH-001')}>Maintenance</button>
                     </td>
                   </tr>
@@ -582,7 +608,7 @@ export default function AdminPortalPage() {
                     <td className="px-4 py-3"><span className="status-badge status-in-progress">In Use</span></td>
                     <td className="px-4 py-3 text-sm text-gray-600">Sarah Wilson</td>
                     <td className="px-4 py-3">
-                      <button className="btn-secondary mr-2" onClick={() => alert('Editing vehicle VEH-002')}>Edit</button>
+                      <button className="btn-secondary mr-2" onClick={() => openVehicleModal('VEH-002', '2024 BMW X7', 'NYC-LUX-002', 'Luxury SUV', 'In Use', 'Sarah Wilson')}>Edit</button>
                       <button className="btn-secondary" onClick={() => alert('Viewing maintenance records for VEH-002')}>Maintenance</button>
                     </td>
                   </tr>
@@ -594,7 +620,7 @@ export default function AdminPortalPage() {
                     <td className="px-4 py-3"><span className="status-badge status-completed">Available</span></td>
                     <td className="px-4 py-3 text-sm text-gray-600">David Brown</td>
                     <td className="px-4 py-3">
-                      <button className="btn-secondary mr-2" onClick={() => alert('Editing vehicle VEH-003')}>Edit</button>
+                      <button className="btn-secondary mr-2" onClick={() => openVehicleModal('VEH-003', '2024 Mercedes Sprinter', 'NYC-LUX-003', 'Sprinter Van', 'Available', 'David Brown')}>Edit</button>
                       <button className="btn-secondary" onClick={() => alert('Viewing maintenance records for VEH-003')}>Maintenance</button>
                     </td>
                   </tr>
@@ -936,6 +962,301 @@ export default function AdminPortalPage() {
                 </button>
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Booking Details Modal */}
+      {bookingModal.isOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-lg mx-4">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold">Booking Details</h3>
+              <button onClick={closeBookingModal} className="text-gray-500 hover:text-gray-700">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            <div className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-500">Booking ID</label>
+                  <p className="text-lg font-semibold">{bookingModal.booking?.id}</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-500">Customer</label>
+                  <p className="text-lg font-semibold">{bookingModal.booking?.customer}</p>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-500">Route</label>
+                  <p className="text-lg font-semibold">{bookingModal.booking?.route}</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-500">Vehicle</label>
+                  <p className="text-lg font-semibold">{bookingModal.booking?.vehicle}</p>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-500">Driver</label>
+                  <p className="text-lg font-semibold">{bookingModal.booking?.driver}</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-500">Status</label>
+                  <span className={`inline-block px-2 py-1 rounded-full text-sm font-medium ${
+                    bookingModal.booking?.status === 'Confirmed' ? 'bg-green-100 text-green-800' :
+                    bookingModal.booking?.status === 'In Progress' ? 'bg-yellow-100 text-yellow-800' :
+                    'bg-gray-100 text-gray-800'
+                  }`}>
+                    {bookingModal.booking?.status}
+                  </span>
+                </div>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-500">Amount</label>
+                <p className="text-2xl font-bold text-green-600">{bookingModal.booking?.amount}</p>
+              </div>
+              
+              <div className="pt-4">
+                <button 
+                  onClick={closeBookingModal}
+                  className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Vehicle Edit Modal */}
+      {vehicleModal.isOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold">Edit Vehicle</h3>
+              <button onClick={closeVehicleModal} className="text-gray-500 hover:text-gray-700">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            <form className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Vehicle ID</label>
+                <input 
+                  type="text" 
+                  value={vehicleModal.vehicle?.id || ''} 
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  readOnly
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Make/Model</label>
+                <input 
+                  type="text" 
+                  defaultValue={vehicleModal.vehicle?.make || ''} 
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">License Plate</label>
+                <input 
+                  type="text" 
+                  defaultValue={vehicleModal.vehicle?.license || ''} 
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                  <option value="Active" selected={vehicleModal.vehicle?.status === 'Active'}>Active</option>
+                  <option value="In Use" selected={vehicleModal.vehicle?.status === 'In Use'}>In Use</option>
+                  <option value="Available" selected={vehicleModal.vehicle?.status === 'Available'}>Available</option>
+                  <option value="Maintenance">Maintenance</option>
+                </select>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Assigned Driver</label>
+                <input 
+                  type="text" 
+                  defaultValue={vehicleModal.vehicle?.driver || ''} 
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              
+              <div className="flex space-x-3 pt-4">
+                <button 
+                  type="button" 
+                  onClick={closeVehicleModal}
+                  className="flex-1 px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+                >
+                  Cancel
+                </button>
+                <button 
+                  type="submit" 
+                  className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                >
+                  Save Changes
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Add Driver Modal */}
+      {addDriverModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold">Add New Driver</h3>
+              <button onClick={() => setAddDriverModal(false)} className="text-gray-500 hover:text-gray-700">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            <form className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                <input 
+                  type="text" 
+                  placeholder="Enter driver's full name"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                <input 
+                  type="email" 
+                  placeholder="driver@bluxacorp.com"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+                <input 
+                  type="tel" 
+                  placeholder="+1 (555) 123-4567"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">License Number</label>
+                <input 
+                  type="text" 
+                  placeholder="Enter driver's license number"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              
+              <div className="flex space-x-3 pt-4">
+                <button 
+                  type="button" 
+                  onClick={() => setAddDriverModal(false)}
+                  className="flex-1 px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+                >
+                  Cancel
+                </button>
+                <button 
+                  type="submit" 
+                  className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                >
+                  Add Driver
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Add Vehicle Modal */}
+      {addVehicleModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold">Add New Vehicle</h3>
+              <button onClick={() => setAddVehicleModal(false)} className="text-gray-500 hover:text-gray-700">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            <form className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Make/Model</label>
+                <input 
+                  type="text" 
+                  placeholder="2024 Mercedes S-Class"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">License Plate</label>
+                <input 
+                  type="text" 
+                  placeholder="NYC-LUX-004"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Vehicle Type</label>
+                <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                  <option value="">Select vehicle type</option>
+                  <option value="Executive Sedan">Executive Sedan</option>
+                  <option value="Luxury SUV">Luxury SUV</option>
+                  <option value="Sprinter Van">Sprinter Van</option>
+                </select>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Year</label>
+                <input 
+                  type="number" 
+                  placeholder="2024"
+                  min="2020"
+                  max="2025"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              
+              <div className="flex space-x-3 pt-4">
+                <button 
+                  type="button" 
+                  onClick={() => setAddVehicleModal(false)}
+                  className="flex-1 px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+                >
+                  Cancel
+                </button>
+                <button 
+                  type="submit" 
+                  className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                >
+                  Add Vehicle
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}
