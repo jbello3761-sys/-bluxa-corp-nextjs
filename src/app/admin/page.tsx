@@ -15,6 +15,7 @@ export default function AdminPortalPage() {
   const [maintenanceModal, setMaintenanceModal] = useState<{isOpen: boolean, vehicle: any}>({isOpen: false, vehicle: null})
   const [exportModal, setExportModal] = useState<{isOpen: boolean, type: string}>({isOpen: false, type: ''})
   const [systemCheckModal, setSystemCheckModal] = useState(false)
+  const [assignDriverModal, setAssignDriverModal] = useState<{isOpen: boolean, booking: any}>({isOpen: false, booking: null})
 
   const openDriverModal = (id: string, name: string, status: string, rating: string, rides: string, vehicle: string) => {
     setDriverModal({
@@ -99,6 +100,17 @@ export default function AdminPortalPage() {
 
   const closeExportModal = () => {
     setExportModal({isOpen: false, type: ''})
+  }
+
+  const openAssignDriverModal = (id: string, customer: string, route: string, vehicle: string) => {
+    setAssignDriverModal({
+      isOpen: true,
+      booking: { id, customer, route, vehicle }
+    })
+  }
+
+  const closeAssignDriverModal = () => {
+    setAssignDriverModal({isOpen: false, booking: null})
   }
   return (
     <div>
@@ -467,10 +479,7 @@ export default function AdminPortalPage() {
                     <td className="px-4 py-3 text-sm font-semibold text-green-600">$85.00</td>
                     <td className="px-4 py-3">
                       <button className="btn-secondary mr-2" onClick={() => openBookingModal('BLX-2025-00125', 'John Smith', 'JFK → Manhattan', 'Executive Sedan', 'Mike Johnson', 'Confirmed', '$85.00')}>View</button>
-                      <button className="btn-success" onClick={() => {
-                        const driver = prompt('Enter driver ID to assign:');
-                        if (driver) alert(`Driver ${driver} assigned to booking BLX-2025-00125`);
-                      }}>Assign</button>
+                      <button className="btn-success" onClick={() => openAssignDriverModal('BLX-2025-00125', 'John Smith', 'JFK → Manhattan', 'Executive Sedan')}>Assign</button>
                     </td>
                   </tr>
                   <tr>
@@ -1651,6 +1660,151 @@ export default function AdminPortalPage() {
         </div>
       )}
 
+      {/* Assign Driver Modal */}
+      {assignDriverModal.isOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-lg mx-4">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold">Assign Driver</h3>
+              <button onClick={closeAssignDriverModal} className="text-gray-500 hover:text-gray-700">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            <div className="space-y-4">
+              <div className="bg-blue-50 p-4 rounded-lg">
+                <h4 className="font-semibold mb-2">Booking Details</h4>
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <span className="text-gray-500">Booking ID:</span>
+                    <p className="font-semibold">{assignDriverModal.booking?.id}</p>
+                  </div>
+                  <div>
+                    <span className="text-gray-500">Customer:</span>
+                    <p className="font-semibold">{assignDriverModal.booking?.customer}</p>
+                  </div>
+                  <div>
+                    <span className="text-gray-500">Route:</span>
+                    <p className="font-semibold">{assignDriverModal.booking?.route}</p>
+                  </div>
+                  <div>
+                    <span className="text-gray-500">Vehicle:</span>
+                    <p className="font-semibold">{assignDriverModal.booking?.vehicle}</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div>
+                <h4 className="font-semibold mb-3">Available Drivers</h4>
+                <div className="space-y-3 max-h-64 overflow-y-auto">
+                  <div className="border border-gray-200 rounded-lg p-3 hover:bg-gray-50 cursor-pointer" onClick={() => {
+                    alert('Driver Mike Johnson assigned to booking BLX-2025-00125!');
+                    closeAssignDriverModal();
+                  }}>
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center">
+                        <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                          <span className="text-blue-600 font-semibold">MJ</span>
+                        </div>
+                        <div>
+                          <p className="font-semibold">Mike Johnson</p>
+                          <p className="text-sm text-gray-500">DRV-001 • Mercedes S-Class</p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="flex items-center mb-1">
+                          <span className="text-yellow-500 mr-1">⭐</span>
+                          <span className="font-semibold">4.9</span>
+                        </div>
+                        <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">Available</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="border border-gray-200 rounded-lg p-3 hover:bg-gray-50 cursor-pointer" onClick={() => {
+                    alert('Driver Sarah Wilson assigned to booking BLX-2025-00125!');
+                    closeAssignDriverModal();
+                  }}>
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center">
+                        <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                          <span className="text-green-600 font-semibold">SW</span>
+                        </div>
+                        <div>
+                          <p className="font-semibold">Sarah Wilson</p>
+                          <p className="text-sm text-gray-500">DRV-002 • BMW X7</p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="flex items-center mb-1">
+                          <span className="text-yellow-500 mr-1">⭐</span>
+                          <span className="font-semibold">4.8</span>
+                        </div>
+                        <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">On Duty</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="border border-gray-200 rounded-lg p-3 hover:bg-gray-50 cursor-pointer" onClick={() => {
+                    alert('Driver David Brown assigned to booking BLX-2025-00125!');
+                    closeAssignDriverModal();
+                  }}>
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center">
+                        <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mr-3">
+                          <span className="text-purple-600 font-semibold">DB</span>
+                        </div>
+                        <div>
+                          <p className="font-semibold">David Brown</p>
+                          <p className="text-sm text-gray-500">DRV-003 • Mercedes Sprinter</p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="flex items-center mb-1">
+                          <span className="text-yellow-500 mr-1">⭐</span>
+                          <span className="font-semibold">5.0</span>
+                        </div>
+                        <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">Available</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="border border-gray-200 rounded-lg p-3 opacity-50 cursor-not-allowed">
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center">
+                        <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                          <span className="text-gray-400 font-semibold">AL</span>
+                        </div>
+                        <div>
+                          <p className="font-semibold">Alex Lee</p>
+                          <p className="text-sm text-gray-500">DRV-004 • Audi A8</p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="flex items-center mb-1">
+                          <span className="text-yellow-500 mr-1">⭐</span>
+                          <span className="font-semibold">4.7</span>
+                        </div>
+                        <span className="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full">Off Duty</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="pt-4">
+                <button 
+                  onClick={closeAssignDriverModal}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
-  )
-}
