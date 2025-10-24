@@ -669,7 +669,6 @@ function PreviewModeTab({
   const [calculation, setCalculation] = useState<PricingCalculation | null>(null)
   const [loading, setLoading] = useState(false)
 
-  const supabase = createClient()
 
   const calculatePricing = async () => {
     if (!previewData.country || !previewData.vehicleClass) return
