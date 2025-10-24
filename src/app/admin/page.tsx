@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import PricingManagement from '@/components/PricingManagement'
 
 export default function AdminPortalPage() {
   return (
@@ -319,6 +320,12 @@ export default function AdminPortalPage() {
                 document.getElementById('reports-tab')?.classList.add('active');
                 e.currentTarget.classList.add('active');
               }}>Reports</button>
+              <button className="tab-button" onClick={(e) => {
+                document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+                document.querySelectorAll('.tab-button').forEach(button => button.classList.remove('active'));
+                document.getElementById('pricing-tab')?.classList.add('active');
+                e.currentTarget.classList.add('active');
+              }}>Pricing</button>
             </nav>
           </div>
 
@@ -719,6 +726,11 @@ export default function AdminPortalPage() {
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Pricing Tab */}
+          <div id="pricing-tab" className="tab-content p-6">
+            <PricingManagement />
           </div>
         </div>
       </div>
