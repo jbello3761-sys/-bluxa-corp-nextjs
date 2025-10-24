@@ -388,9 +388,52 @@ export default function AdminPortalPage() {
             <div className="metric-value text-purple-600" id="totalVehicles">8</div>
             <div className="metric-label">Total Vehicles</div>
           </div>
-          <div className="metric-card">
-            <div className="metric-value text-yellow-600" id="monthlyRevenue">$45,230</div>
-            <div className="metric-label">Monthly Revenue</div>
+          <div className="metric-card col-span-2">
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <div className="metric-value text-yellow-600" id="monthlyRevenue">$45,230</div>
+                <div className="metric-label">Monthly Revenue</div>
+              </div>
+              <span className="text-sm text-gray-500">January 2025</span>
+            </div>
+            <div className="space-y-3">
+              <div className="grid grid-cols-2 gap-3 text-sm">
+                <div className="bg-blue-50 p-2 rounded">
+                  <div className="flex justify-between">
+                    <span className="text-blue-700">Airport:</span>
+                    <span className="font-semibold text-blue-800">$18,500</span>
+                  </div>
+                  <div className="text-xs text-blue-600">41%</div>
+                </div>
+                <div className="bg-purple-50 p-2 rounded">
+                  <div className="flex justify-between">
+                    <span className="text-purple-700">Corporate:</span>
+                    <span className="font-semibold text-purple-800">$12,800</span>
+                  </div>
+                  <div className="text-xs text-purple-600">28%</div>
+                </div>
+                <div className="bg-green-50 p-2 rounded">
+                  <div className="flex justify-between">
+                    <span className="text-green-700">Events:</span>
+                    <span className="font-semibold text-green-800">$8,900</span>
+                  </div>
+                  <div className="text-xs text-green-600">20%</div>
+                </div>
+                <div className="bg-orange-50 p-2 rounded">
+                  <div className="flex justify-between">
+                    <span className="text-orange-700">Hourly:</span>
+                    <span className="font-semibold text-orange-800">$5,030</span>
+                  </div>
+                  <div className="text-xs text-orange-600">11%</div>
+                </div>
+              </div>
+              <div className="border-t pt-2 text-xs text-gray-600">
+                <div className="flex justify-between">
+                  <span>Avg per booking:</span>
+                  <span className="font-semibold">$290</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -450,7 +493,7 @@ export default function AdminPortalPage() {
                   <option value="completed">Completed</option>
                   <option value="cancelled">Cancelled</option>
                 </select>
-                <button className="btn-primary" onClick={() => openExportModal('bookings')}>Export</button>
+                <button className="btn-secondary" onClick={() => openExportModal('bookings')}>Export</button>
               </div>
             </div>
 
@@ -636,6 +679,7 @@ export default function AdminPortalPage() {
                     <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">Vehicle ID</th>
                     <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">Make/Model</th>
                     <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">License</th>
+                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">VIN</th>
                     <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">Type</th>
                     <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">Status</th>
                     <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">Assigned Driver</th>
@@ -647,6 +691,7 @@ export default function AdminPortalPage() {
                     <td className="px-4 py-3 text-sm font-medium text-gray-900">VEH-001</td>
                     <td className="px-4 py-3 text-sm text-gray-600">2024 Mercedes S-Class</td>
                     <td className="px-4 py-3 text-sm text-gray-600">NYC-LUX-001</td>
+                    <td className="px-4 py-3 text-sm text-gray-600 font-mono">WDDHF8JB5MA123456</td>
                     <td className="px-4 py-3 text-sm text-gray-600">Executive Sedan</td>
                     <td className="px-4 py-3"><span className="status-badge status-confirmed">Active</span></td>
                     <td className="px-4 py-3 text-sm text-gray-600">Mike Johnson</td>
@@ -659,6 +704,7 @@ export default function AdminPortalPage() {
                     <td className="px-4 py-3 text-sm font-medium text-gray-900">VEH-002</td>
                     <td className="px-4 py-3 text-sm text-gray-600">2024 BMW X7</td>
                     <td className="px-4 py-3 text-sm text-gray-600">NYC-LUX-002</td>
+                    <td className="px-4 py-3 text-sm text-gray-600 font-mono">WBAFR7C50LC789012</td>
                     <td className="px-4 py-3 text-sm text-gray-600">Luxury SUV</td>
                     <td className="px-4 py-3"><span className="status-badge status-in-progress">In Use</span></td>
                     <td className="px-4 py-3 text-sm text-gray-600">Sarah Wilson</td>
@@ -671,6 +717,7 @@ export default function AdminPortalPage() {
                     <td className="px-4 py-3 text-sm font-medium text-gray-900">VEH-003</td>
                     <td className="px-4 py-3 text-sm text-gray-600">2024 Mercedes Sprinter</td>
                     <td className="px-4 py-3 text-sm text-gray-600">NYC-LUX-003</td>
+                    <td className="px-4 py-3 text-sm text-gray-600 font-mono">WDB9066331L345678</td>
                     <td className="px-4 py-3 text-sm text-gray-600">Sprinter Van</td>
                     <td className="px-4 py-3"><span className="status-badge status-completed">Available</span></td>
                     <td className="px-4 py-3 text-sm text-gray-600">David Brown</td>
@@ -1282,6 +1329,15 @@ export default function AdminPortalPage() {
                   type="text" 
                   placeholder="NYC-LUX-004"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">VIN Number</label>
+                <input 
+                  type="text" 
+                  placeholder="WDDHF8JB5MA123456"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono"
                 />
               </div>
               
