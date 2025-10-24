@@ -1,9 +1,33 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import PricingManagement from '@/components/PricingManagement'
 
 export default function AdminPortalPage() {
+  const [driverModal, setDriverModal] = useState<{isOpen: boolean, driver: any}>({isOpen: false, driver: null})
+  const [driverDetailsModal, setDriverDetailsModal] = useState<{isOpen: boolean, driver: any}>({isOpen: false, driver: null})
+
+  const openDriverModal = (id: string, name: string, status: string, rating: string, rides: string, vehicle: string) => {
+    setDriverModal({
+      isOpen: true,
+      driver: { id, name, status, rating, rides, vehicle }
+    })
+  }
+
+  const openDriverDetailsModal = (id: string, name: string, status: string, rating: string, rides: string, vehicle: string) => {
+    setDriverDetailsModal({
+      isOpen: true,
+      driver: { id, name, status, rating, rides, vehicle }
+    })
+  }
+
+  const closeDriverModal = () => {
+    setDriverModal({isOpen: false, driver: null})
+  }
+
+  const closeDriverDetailsModal = () => {
+    setDriverDetailsModal({isOpen: false, driver: null})
+  }
   return (
     <div>
       <style jsx>{`
@@ -444,8 +468,8 @@ export default function AdminPortalPage() {
                   </div>
                 </div>
                 <div className="mt-4 flex space-x-2">
-                  <button className="btn-secondary flex-1" onClick={() => alert('Editing driver DRV-001')}>Edit</button>
-                  <button className="btn-secondary flex-1" onClick={() => alert('Viewing details for driver DRV-001')}>Details</button>
+                  <button className="btn-secondary flex-1" onClick={() => openDriverModal('DRV-001', 'Mike Johnson', 'ACTIVE', '4.9', '245', 'Mercedes S-Class')}>Edit</button>
+                  <button className="btn-secondary flex-1" onClick={() => openDriverDetailsModal('DRV-001', 'Mike Johnson', 'ACTIVE', '4.9', '245', 'Mercedes S-Class')}>Details</button>
                 </div>
               </div>
 
@@ -477,8 +501,8 @@ export default function AdminPortalPage() {
                   </div>
                 </div>
                 <div className="mt-4 flex space-x-2">
-                  <button className="btn-secondary flex-1" onClick={() => alert('Editing driver DRV-002')}>Edit</button>
-                  <button className="btn-secondary flex-1" onClick={() => alert('Viewing details for driver DRV-002')}>Details</button>
+                  <button className="btn-secondary flex-1" onClick={() => openDriverModal('DRV-002', 'Sarah Wilson', 'ON DUTY', '4.8', '189', 'BMW X7')}>Edit</button>
+                  <button className="btn-secondary flex-1" onClick={() => openDriverDetailsModal('DRV-002', 'Sarah Wilson', 'ON DUTY', '4.8', '189', 'BMW X7')}>Details</button>
                 </div>
               </div>
 
@@ -510,8 +534,8 @@ export default function AdminPortalPage() {
                   </div>
                 </div>
                 <div className="mt-4 flex space-x-2">
-                  <button className="btn-secondary flex-1" onClick={() => alert('Editing driver DRV-003')}>Edit</button>
-                  <button className="btn-secondary flex-1" onClick={() => alert('Viewing details for driver DRV-003')}>Details</button>
+                  <button className="btn-secondary flex-1" onClick={() => openDriverModal('DRV-003', 'David Brown', 'OFF DUTY', '5.0', '312', 'Mercedes Sprinter')}>Edit</button>
+                  <button className="btn-secondary flex-1" onClick={() => openDriverDetailsModal('DRV-003', 'David Brown', 'OFF DUTY', '5.0', '312', 'Mercedes Sprinter')}>Details</button>
                 </div>
               </div>
             </div>
@@ -758,6 +782,164 @@ export default function AdminPortalPage() {
           }
         `
       }} />
+      {/* Driver Edit Modal */}
+      {driverModal.isOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold">Edit Driver</h3>
+              <button onClick={closeDriverModal} className="text-gray-500 hover:text-gray-700">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            <form className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Driver ID</label>
+                <input 
+                  type="text" 
+                  value={driverModal.driver?.id || ''} 
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  readOnly
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                <input 
+                  type="text" 
+                  defaultValue={driverModal.driver?.name || ''} 
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                  <option value="ACTIVE" selected={driverModal.driver?.status === 'ACTIVE'}>Active</option>
+                  <option value="ON DUTY" selected={driverModal.driver?.status === 'ON DUTY'}>On Duty</option>
+                  <option value="OFF DUTY" selected={driverModal.driver?.status === 'OFF DUTY'}>Off Duty</option>
+                  <option value="SUSPENDED">Suspended</option>
+                </select>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Vehicle Assignment</label>
+                <input 
+                  type="text" 
+                  defaultValue={driverModal.driver?.vehicle || ''} 
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              
+              <div className="flex space-x-3 pt-4">
+                <button 
+                  type="button" 
+                  onClick={closeDriverModal}
+                  className="flex-1 px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+                >
+                  Cancel
+                </button>
+                <button 
+                  type="submit" 
+                  className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                >
+                  Save Changes
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Driver Details Modal */}
+      {driverDetailsModal.isOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-lg mx-4">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold">Driver Details</h3>
+              <button onClick={closeDriverDetailsModal} className="text-gray-500 hover:text-gray-700">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            <div className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-500">Driver ID</label>
+                  <p className="text-lg font-semibold">{driverDetailsModal.driver?.id}</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-500">Name</label>
+                  <p className="text-lg font-semibold">{driverDetailsModal.driver?.name}</p>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-500">Status</label>
+                  <span className={`inline-block px-2 py-1 rounded-full text-sm font-medium ${
+                    driverDetailsModal.driver?.status === 'ACTIVE' ? 'bg-green-100 text-green-800' :
+                    driverDetailsModal.driver?.status === 'ON DUTY' ? 'bg-yellow-100 text-yellow-800' :
+                    'bg-gray-100 text-gray-800'
+                  }`}>
+                    {driverDetailsModal.driver?.status}
+                  </span>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-500">Rating</label>
+                  <p className="text-lg font-semibold flex items-center">
+                    ⭐ {driverDetailsModal.driver?.rating}
+                  </p>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-500">Total Rides</label>
+                  <p className="text-lg font-semibold">{driverDetailsModal.driver?.rides}</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-500">Assigned Vehicle</label>
+                  <p className="text-lg font-semibold">{driverDetailsModal.driver?.vehicle}</p>
+                </div>
+              </div>
+              
+              <div className="pt-4 border-t">
+                <h4 className="font-semibold mb-2">Recent Activity</h4>
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between">
+                    <span>Last ride completed</span>
+                    <span className="text-gray-600">2 hours ago</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Current location</span>
+                    <span className="text-gray-600">Manhattan, NY</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Next scheduled ride</span>
+                    <span className="text-gray-600">Tomorrow 9:00 AM</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="pt-4">
+                <button 
+                  onClick={closeDriverDetailsModal}
+                  className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   )
 }
