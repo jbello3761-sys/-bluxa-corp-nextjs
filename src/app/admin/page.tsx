@@ -10,6 +10,11 @@ export default function AdminPortalPage() {
   const [vehicleModal, setVehicleModal] = useState<{isOpen: boolean, vehicle: any}>({isOpen: false, vehicle: null})
   const [addDriverModal, setAddDriverModal] = useState(false)
   const [addVehicleModal, setAddVehicleModal] = useState(false)
+  const [trackingModal, setTrackingModal] = useState<{isOpen: boolean, booking: any}>({isOpen: false, booking: null})
+  const [invoiceModal, setInvoiceModal] = useState<{isOpen: boolean, booking: any}>({isOpen: false, booking: null})
+  const [maintenanceModal, setMaintenanceModal] = useState<{isOpen: boolean, vehicle: any}>({isOpen: false, vehicle: null})
+  const [exportModal, setExportModal] = useState<{isOpen: boolean, type: string}>({isOpen: false, type: ''})
+  const [systemCheckModal, setSystemCheckModal] = useState(false)
 
   const openDriverModal = (id: string, name: string, status: string, rating: string, rides: string, vehicle: string) => {
     setDriverModal({
@@ -53,6 +58,47 @@ export default function AdminPortalPage() {
 
   const closeVehicleModal = () => {
     setVehicleModal({isOpen: false, vehicle: null})
+  }
+
+  const openTrackingModal = (id: string, customer: string, route: string, driver: string) => {
+    setTrackingModal({
+      isOpen: true,
+      booking: { id, customer, route, driver }
+    })
+  }
+
+  const closeTrackingModal = () => {
+    setTrackingModal({isOpen: false, booking: null})
+  }
+
+  const openInvoiceModal = (id: string, customer: string, route: string, amount: string) => {
+    setInvoiceModal({
+      isOpen: true,
+      booking: { id, customer, route, amount }
+    })
+  }
+
+  const closeInvoiceModal = () => {
+    setInvoiceModal({isOpen: false, booking: null})
+  }
+
+  const openMaintenanceModal = (id: string, make: string, license: string) => {
+    setMaintenanceModal({
+      isOpen: true,
+      vehicle: { id, make, license }
+    })
+  }
+
+  const closeMaintenanceModal = () => {
+    setMaintenanceModal({isOpen: false, vehicle: null})
+  }
+
+  const openExportModal = (type: string) => {
+    setExportModal({isOpen: true, type})
+  }
+
+  const closeExportModal = () => {
+    setExportModal({isOpen: false, type: ''})
   }
   return (
     <div>
@@ -392,7 +438,7 @@ export default function AdminPortalPage() {
                   <option value="completed">Completed</option>
                   <option value="cancelled">Cancelled</option>
                 </select>
-                <button className="btn-primary" onClick={() => alert('Exporting bookings to CSV...')}>Export</button>
+                <button className="btn-primary" onClick={() => openExportModal('bookings')}>Export</button>
               </div>
             </div>
 
@@ -437,7 +483,7 @@ export default function AdminPortalPage() {
                     <td className="px-4 py-3 text-sm font-semibold text-green-600">$95.00</td>
                     <td className="px-4 py-3">
                       <button className="btn-secondary mr-2" onClick={() => openBookingModal('BLX-2025-00124', 'Jane Doe', 'Manhattan → LGA', 'Luxury SUV', 'Sarah Wilson', 'In Progress', '$95.00')}>View</button>
-                      <button className="btn-secondary" onClick={() => alert('Opening real-time tracking for BLX-2025-00124')}>Track</button>
+                      <button className="btn-secondary" onClick={() => openTrackingModal('BLX-2025-00124', 'Jane Doe', 'Manhattan → LGA', 'Sarah Wilson')}>Track</button>
                     </td>
                   </tr>
                   <tr>
@@ -450,7 +496,7 @@ export default function AdminPortalPage() {
                     <td className="px-4 py-3 text-sm font-semibold text-green-600">$120.00</td>
                     <td className="px-4 py-3">
                       <button className="btn-secondary mr-2" onClick={() => openBookingModal('BLX-2025-00123', 'Corporate Group', 'Hotel → Conference', 'Sprinter Van', 'David Brown', 'Completed', '$120.00')}>View</button>
-                      <button className="btn-secondary" onClick={() => alert('Generating invoice for BLX-2025-00123')}>Invoice</button>
+                      <button className="btn-secondary" onClick={() => openInvoiceModal('BLX-2025-00123', 'Corporate Group', 'Hotel → Conference', '$120.00')}>Invoice</button>
                     </td>
                   </tr>
                 </tbody>
@@ -597,7 +643,7 @@ export default function AdminPortalPage() {
                     <td className="px-4 py-3 text-sm text-gray-600">Mike Johnson</td>
                     <td className="px-4 py-3">
                       <button className="btn-secondary mr-2" onClick={() => openVehicleModal('VEH-001', '2024 Mercedes S-Class', 'NYC-LUX-001', 'Executive Sedan', 'Active', 'Mike Johnson')}>Edit</button>
-                      <button className="btn-secondary" onClick={() => alert('Viewing maintenance records for VEH-001')}>Maintenance</button>
+                      <button className="btn-secondary" onClick={() => openMaintenanceModal('VEH-001', '2024 Mercedes S-Class', 'NYC-LUX-001')}>Maintenance</button>
                     </td>
                   </tr>
                   <tr>
@@ -609,7 +655,7 @@ export default function AdminPortalPage() {
                     <td className="px-4 py-3 text-sm text-gray-600">Sarah Wilson</td>
                     <td className="px-4 py-3">
                       <button className="btn-secondary mr-2" onClick={() => openVehicleModal('VEH-002', '2024 BMW X7', 'NYC-LUX-002', 'Luxury SUV', 'In Use', 'Sarah Wilson')}>Edit</button>
-                      <button className="btn-secondary" onClick={() => alert('Viewing maintenance records for VEH-002')}>Maintenance</button>
+                      <button className="btn-secondary" onClick={() => openMaintenanceModal('VEH-002', '2024 BMW X7', 'NYC-LUX-002')}>Maintenance</button>
                     </td>
                   </tr>
                   <tr>
@@ -621,7 +667,7 @@ export default function AdminPortalPage() {
                     <td className="px-4 py-3 text-sm text-gray-600">David Brown</td>
                     <td className="px-4 py-3">
                       <button className="btn-secondary mr-2" onClick={() => openVehicleModal('VEH-003', '2024 Mercedes Sprinter', 'NYC-LUX-003', 'Sprinter Van', 'Available', 'David Brown')}>Edit</button>
-                      <button className="btn-secondary" onClick={() => alert('Viewing maintenance records for VEH-003')}>Maintenance</button>
+                      <button className="btn-secondary" onClick={() => openMaintenanceModal('VEH-003', '2024 Mercedes Sprinter', 'NYC-LUX-003')}>Maintenance</button>
                     </td>
                   </tr>
                 </tbody>
@@ -677,7 +723,12 @@ export default function AdminPortalPage() {
                     <label className="block text-sm font-medium text-gray-700 mb-2">WhatsApp Integration</label>
                     <input type="url" className="input-field" placeholder="https://make.com/webhook/..." />
                   </div>
-                  <button className="btn-primary" onClick={() => alert('API configuration saved successfully!')}>Save Configuration</button>
+                  <button className="btn-primary" onClick={() => {
+                    const webhookUrl = (document.getElementById('webhookUrl') as HTMLInputElement)?.value;
+                    const emailProvider = (document.getElementById('emailProvider') as HTMLSelectElement)?.value;
+                    const whatsappUrl = (document.getElementById('whatsappUrl') as HTMLInputElement)?.value;
+                    alert(`API configuration saved successfully!\nWebhook: ${webhookUrl}\nEmail Provider: ${emailProvider}\nWhatsApp: ${whatsappUrl}`);
+                  }}>Save Configuration</button>
                 </div>
               </div>
 
@@ -696,7 +747,12 @@ export default function AdminPortalPage() {
                     <label className="block text-sm font-medium text-gray-700 mb-2">Service Area</label>
                     <input type="text" className="input-field" defaultValue="New York Metropolitan Area" />
                   </div>
-                  <button className="btn-primary" onClick={() => alert('Business settings saved successfully!')}>Save Settings</button>
+                  <button className="btn-primary" onClick={() => {
+                    const companyName = (document.getElementById('companyName') as HTMLInputElement)?.value;
+                    const contactPhone = (document.getElementById('contactPhone') as HTMLInputElement)?.value;
+                    const serviceArea = (document.getElementById('serviceArea') as HTMLInputElement)?.value;
+                    alert(`Business settings saved successfully!\nCompany: ${companyName}\nPhone: ${contactPhone}\nService Area: ${serviceArea}`);
+                  }}>Save Settings</button>
                 </div>
               </div>
 
@@ -719,7 +775,7 @@ export default function AdminPortalPage() {
                     <span className="text-gray-700">WhatsApp Service:</span>
                     <span className="status-badge status-confirmed">Connected</span>
                   </div>
-                  <button className="btn-secondary w-full" onClick={() => alert('Running system check... All systems operational!')}>Run System Check</button>
+                  <button className="btn-secondary w-full" onClick={() => setSystemCheckModal(true)}>Run System Check</button>
                 </div>
               </div>
             </div>
@@ -749,7 +805,7 @@ export default function AdminPortalPage() {
                     <span className="text-gray-700">This Year:</span>
                     <span className="font-semibold text-green-600">$425,680</span>
                   </div>
-                  <button className="btn-secondary w-full" onClick={() => alert('Exporting revenue report to PDF...')}>Export Revenue Report</button>
+                  <button className="btn-secondary w-full" onClick={() => openExportModal('revenue')}>Export Revenue Report</button>
                 </div>
               </div>
 
@@ -772,7 +828,7 @@ export default function AdminPortalPage() {
                     <span className="text-gray-700">Customer Retention:</span>
                     <span className="font-semibold text-blue-600">87%</span>
                   </div>
-                  <button className="btn-secondary w-full" onClick={() => alert('Exporting performance metrics to Excel...')}>Export Metrics Report</button>
+                  <button className="btn-secondary w-full" onClick={() => openExportModal('metrics')}>Export Metrics Report</button>
                 </div>
               </div>
             </div>
@@ -1261,6 +1317,338 @@ export default function AdminPortalPage() {
         </div>
       )}
 
+      {/* Real-time Tracking Modal */}
+      {trackingModal.isOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-lg mx-4">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold">Real-time Tracking</h3>
+              <button onClick={closeTrackingModal} className="text-gray-500 hover:text-gray-700">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            <div className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-500">Booking ID</label>
+                  <p className="text-lg font-semibold">{trackingModal.booking?.id}</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-500">Customer</label>
+                  <p className="text-lg font-semibold">{trackingModal.booking?.customer}</p>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-500">Route</label>
+                  <p className="text-lg font-semibold">{trackingModal.booking?.route}</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-500">Driver</label>
+                  <p className="text-lg font-semibold">{trackingModal.booking?.driver}</p>
+                </div>
+              </div>
+              
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <h4 className="font-semibold mb-2">Live Location</h4>
+                <div className="text-center py-8">
+                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                  </div>
+                  <p className="text-gray-600">Driver is currently on route</p>
+                  <p className="text-sm text-gray-500 mt-2">ETA: 15 minutes</p>
+                </div>
+              </div>
+              
+              <div className="pt-4">
+                <button 
+                  onClick={closeTrackingModal}
+                  className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                >
+                  Close Tracking
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Invoice Modal */}
+      {invoiceModal.isOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-lg mx-4">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold">Generate Invoice</h3>
+              <button onClick={closeInvoiceModal} className="text-gray-500 hover:text-gray-700">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            <div className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-500">Booking ID</label>
+                  <p className="text-lg font-semibold">{invoiceModal.booking?.id}</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-500">Customer</label>
+                  <p className="text-lg font-semibold">{invoiceModal.booking?.customer}</p>
+                </div>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-500">Route</label>
+                <p className="text-lg font-semibold">{invoiceModal.booking?.route}</p>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-500">Amount</label>
+                <p className="text-2xl font-bold text-green-600">{invoiceModal.booking?.amount}</p>
+              </div>
+              
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <h4 className="font-semibold mb-2">Invoice Details</h4>
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between">
+                    <span>Service Fee:</span>
+                    <span>{invoiceModal.booking?.amount}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Tax (8.25%):</span>
+                    <span>$9.90</span>
+                  </div>
+                  <div className="flex justify-between font-semibold border-t pt-2">
+                    <span>Total:</span>
+                    <span>$129.90</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex space-x-3 pt-4">
+                <button 
+                  onClick={closeInvoiceModal}
+                  className="flex-1 px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+                >
+                  Cancel
+                </button>
+                <button 
+                  onClick={() => {
+                    alert('Invoice generated and sent to customer!');
+                    closeInvoiceModal();
+                  }}
+                  className="flex-1 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+                >
+                  Generate & Send
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Maintenance Modal */}
+      {maintenanceModal.isOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-lg mx-4">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold">Vehicle Maintenance</h3>
+              <button onClick={closeMaintenanceModal} className="text-gray-500 hover:text-gray-700">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            <div className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-500">Vehicle ID</label>
+                  <p className="text-lg font-semibold">{maintenanceModal.vehicle?.id}</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-500">Make/Model</label>
+                  <p className="text-lg font-semibold">{maintenanceModal.vehicle?.make}</p>
+                </div>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-500">License Plate</label>
+                <p className="text-lg font-semibold">{maintenanceModal.vehicle?.license}</p>
+              </div>
+              
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <h4 className="font-semibold mb-3">Maintenance History</h4>
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center p-2 bg-white rounded">
+                    <div>
+                      <p className="font-medium">Oil Change</p>
+                      <p className="text-sm text-gray-500">Jan 15, 2024</p>
+                    </div>
+                    <span className="text-green-600 font-semibold">Completed</span>
+                  </div>
+                  <div className="flex justify-between items-center p-2 bg-white rounded">
+                    <div>
+                      <p className="font-medium">Brake Inspection</p>
+                      <p className="text-sm text-gray-500">Dec 20, 2023</p>
+                    </div>
+                    <span className="text-green-600 font-semibold">Completed</span>
+                  </div>
+                  <div className="flex justify-between items-center p-2 bg-white rounded">
+                    <div>
+                      <p className="font-medium">Tire Rotation</p>
+                      <p className="text-sm text-gray-500">Nov 10, 2023</p>
+                    </div>
+                    <span className="text-green-600 font-semibold">Completed</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="pt-4">
+                <button 
+                  onClick={() => {
+                    alert('New maintenance record added!');
+                    closeMaintenanceModal();
+                  }}
+                  className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                >
+                  Add Maintenance Record
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Export Modal */}
+      {exportModal.isOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold">Export {exportModal.type === 'bookings' ? 'Bookings' : exportModal.type === 'revenue' ? 'Revenue Report' : 'Metrics Report'}</h3>
+              <button onClick={closeExportModal} className="text-gray-500 hover:text-gray-700">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Export Format</label>
+                <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                  <option value="csv">CSV</option>
+                  <option value="pdf">PDF</option>
+                  <option value="excel">Excel</option>
+                </select>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Date Range</label>
+                <div className="grid grid-cols-2 gap-2">
+                  <input type="date" className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                  <input type="date" className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
+              </div>
+              
+              <div className="flex space-x-3 pt-4">
+                <button 
+                  onClick={closeExportModal}
+                  className="flex-1 px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+                >
+                  Cancel
+                </button>
+                <button 
+                  onClick={() => {
+                    alert(`Exporting ${exportModal.type} data... Download will start shortly!`);
+                    closeExportModal();
+                  }}
+                  className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                >
+                  Export
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* System Check Modal */}
+      {systemCheckModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold">System Check</h3>
+              <button onClick={() => setSystemCheckModal(false)} className="text-gray-500 hover:text-gray-700">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            <div className="space-y-4">
+              <div className="space-y-3">
+                <div className="flex justify-between items-center p-3 bg-green-50 rounded-lg">
+                  <div className="flex items-center">
+                    <div className="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                    <span className="font-medium">Database Connection</span>
+                  </div>
+                  <span className="text-green-600 font-semibold">✓ Connected</span>
+                </div>
+                
+                <div className="flex justify-between items-center p-3 bg-green-50 rounded-lg">
+                  <div className="flex items-center">
+                    <div className="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                    <span className="font-medium">Stripe Integration</span>
+                  </div>
+                  <span className="text-green-600 font-semibold">✓ Active</span>
+                </div>
+                
+                <div className="flex justify-between items-center p-3 bg-green-50 rounded-lg">
+                  <div className="flex items-center">
+                    <div className="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                    <span className="font-medium">Email Service</span>
+                  </div>
+                  <span className="text-green-600 font-semibold">✓ Active</span>
+                </div>
+                
+                <div className="flex justify-between items-center p-3 bg-green-50 rounded-lg">
+                  <div className="flex items-center">
+                    <div className="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                    <span className="font-medium">WhatsApp Service</span>
+                  </div>
+                  <span className="text-green-600 font-semibold">✓ Connected</span>
+                </div>
+              </div>
+              
+              <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                <div className="flex items-center">
+                  <svg className="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span className="font-semibold text-green-800">All systems operational!</span>
+                </div>
+              </div>
+              
+              <div className="pt-4">
+                <button 
+                  onClick={() => setSystemCheckModal(false)}
+                  className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
-  )
-}
